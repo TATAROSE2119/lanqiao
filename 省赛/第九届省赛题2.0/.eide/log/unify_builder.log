@@ -1,0 +1,487 @@
+[2022-03-22 14:06:24]	[done]
+	build successfully !
+
+[2022-04-03 10:45:22]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 72 OF .\MAIN.C: syntax error near '}'
+*** ERROR C141 IN LINE 120 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 121 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 127 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 127 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 128 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 159 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 160 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 166 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 166 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 167 OF .\MAIN.C: syntax error near '{'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  11 ERROR(S)
+
+[2022-04-03 10:45:29]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C275 IN LINE 71 OF .\MAIN.C: expression with possibly no effect
+*** ERROR C141 IN LINE 120 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 121 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 127 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 127 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 128 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 159 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 160 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 166 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 166 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 167 OF .\MAIN.C: syntax error near '{'
+C51 COMPILATION COMPLETE.  1 WARNING(S),  10 ERROR(S)
+
+[2022-04-03 10:45:43]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C275 IN LINE 71 OF .\MAIN.C: expression with possibly no effect
+*** ERROR C141 IN LINE 159 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 160 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 166 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 166 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 167 OF .\MAIN.C: syntax error near '{'
+C51 COMPILATION COMPLETE.  1 WARNING(S),  5 ERROR(S)
+
+[2022-04-03 10:46:02]	[done]
+	build successfully !
+
+[2022-04-03 10:46:12]	[done]
+	build successfully !
+
+[2022-04-06 15:58:07]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 44 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 45 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 48 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 319 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 320 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 358 OF .\MAIN.C: syntax error near 'else'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  6 ERROR(S)
+
+[2022-04-06 15:58:34]	[done]
+	build successfully !
+
+[2022-04-06 16:02:16]	[done]
+	build successfully !
+
+[2022-04-06 16:09:32]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01a98] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\build\Target 1\第九届省赛题2.0.lnp" 
+".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第九届省赛题2.0"
+PRINT(".\build\Target 1\第九届省赛题2.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 10002AEH
+Program Size: data=42.0 xdata=0 const=0 code=832
+LX51 RUN COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+
+[2022-04-06 16:09:57]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01a98] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\build\Target 1\第九届省赛题2.0.lnp" 
+".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第九届省赛题2.0"
+PRINT(".\build\Target 1\第九届省赛题2.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 10002AEH
+Program Size: data=42.0 xdata=0 const=0 code=832
+LX51 RUN COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+
+[2022-04-06 16:10:25]	[done]
+	build successfully !
+
+[2022-04-06 16:11:23]	[done]
+	build successfully !
+
+[2022-04-06 16:15:20]	[done]
+	build successfully !
+
+[2022-04-06 16:16:39]	[done]
+	build successfully !
+
+[2022-04-06 16:17:01]	[done]
+	build successfully !
+
+[2022-04-06 16:27:39]	[done]
+	build successfully !
+
+[2022-04-06 16:28:45]	[done]
+	build successfully !
+
+[2022-04-06 16:29:13]	[done]
+	build successfully !
+
+[2022-04-06 16:30:06]	[done]
+	build successfully !
+
+[2022-04-06 16:30:32]	[done]
+	build successfully !
+
+[2022-04-06 16:30:59]	[done]
+	build successfully !
+
+[2022-04-06 16:31:35]	[done]
+	build successfully !
+
+[2022-04-06 16:32:16]	[done]
+	build successfully !
+
+[2022-04-06 16:33:22]	[done]
+	build successfully !
+
+[2022-04-06 16:33:28]	[done]
+	build successfully !
+
+[2022-04-06 16:33:52]	[done]
+	build successfully !
+
+[2022-04-06 16:34:16]	[done]
+	build successfully !
+
+[2022-04-06 16:34:36]	[done]
+	build successfully !
+
+[2022-04-06 16:34:57]	[done]
+	build successfully !
+
+[2022-04-06 16:36:40]	[done]
+	build successfully !
+
+[2022-04-06 16:37:53]	[done]
+	build successfully !
+
+[2022-04-06 16:38:29]	[done]
+	build successfully !
+
+[2022-04-06 16:39:40]	[done]
+	build successfully !
+
+[2022-04-06 16:47:17]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 91 OF .\MAIN.C: syntax error near '}'
+*** ERROR C141 IN LINE 96 OF .\MAIN.C: syntax error near '}'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+[2022-04-06 16:47:23]	[done]
+	build successfully !
+
+[2022-04-06 16:54:27]	[done]
+	build successfully !
+
+[2022-04-06 16:56:29]	[done]
+	build successfully !
+
+[2022-04-06 16:57:38]	[done]
+	build successfully !
+
+[2022-04-06 16:58:06]	[done]
+	build successfully !
+
+[2022-04-06 17:02:38]	[done]
+	build successfully !
+
+[2022-04-06 17:03:59]	[done]
+	build successfully !
+
+[2022-04-06 17:04:50]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 114 OF .\MAIN.C: syntax error near 'for'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-04-06 17:05:03]	[done]
+	build successfully !
+
+[2022-04-06 17:06:54]	[done]
+	build successfully !
+
+[2022-04-06 17:09:44]	[done]
+	build successfully !
+
+[2022-04-06 17:10:53]	[done]
+	build successfully !
+
+[2022-04-06 17:12:02]	[done]
+	build successfully !
+
+[2022-04-06 17:13:15]	[done]
+	build successfully !
+
+[2022-04-06 17:13:28]	[done]
+	build successfully !
+
+[2022-04-06 17:15:29]	[done]
+	build successfully !
+
+[2022-04-06 17:19:22]	[done]
+	build successfully !
+
+[2022-04-06 17:20:36]	[done]
+	build successfully !
+
+[2022-04-06 17:22:16]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 143 OF .\MAIN.C: 'p2': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-04-06 17:22:29]	[done]
+	build successfully !
+
+[2022-04-06 17:29:53]	[done]
+	build successfully !
+
+[2022-04-06 17:30:21]	[done]
+	build successfully !
+
+[2022-04-06 17:31:54]	[done]
+	build successfully !
+
+[2022-04-06 17:32:32]	[done]
+	build successfully !
+
+[2022-04-06 17:34:49]	[done]
+	build successfully !
+
+[2022-04-06 17:37:04]	[done]
+	build successfully !
+
+[2022-04-06 17:42:55]	[done]
+	build successfully !
+
+[2022-04-06 17:43:31]	[done]
+	build successfully !
+
+[2022-04-06 17:45:53]	[done]
+	build successfully !
+
+[2022-04-06 17:46:40]	[done]
+	build successfully !
+
+[2022-04-06 17:48:37]	[done]
+	build successfully !
+
+[2022-04-06 17:51:00]	[done]
+	build successfully !
+
+[2022-04-06 17:51:30]	[done]
+	build successfully !
+
+[2022-04-06 17:52:49]	[done]
+	build successfully !
+
+[2022-04-06 17:54:27]	[done]
+	build successfully !
+
+[2022-04-06 17:54:52]	[done]
+	build successfully !
+
+[2022-04-06 17:55:13]	[done]
+	build successfully !
+
+[2022-04-06 17:56:05]	[done]
+	build successfully !
+
+[2022-04-06 17:57:22]	[done]
+	build successfully !
+
+[2022-04-06 17:57:39]	[done]
+	build successfully !
+
+[2022-04-06 18:01:19]	[done]
+	build successfully !
+
+[2022-04-06 18:02:35]	[done]
+	build successfully !
+
+[2022-04-06 18:04:39]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 49 OF .\MAIN.C: syntax error near 'void'
+*** ERROR C141 IN LINE 50 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 67 OF .\MAIN.C: syntax error near 'void'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
+
+[2022-04-06 18:04:56]	[done]
+	build successfully !
+
+[2022-04-06 18:05:49]	[done]
+	build successfully !
+
+[2022-04-06 18:06:55]	[done]
+	build successfully !
+
+[2022-04-06 18:07:26]	[done]
+	build successfully !
+
+[2022-04-06 18:08:48]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 114 OF .\MAIN.C: 'LED_TT': undefined identifier
+*** ERROR C202 IN LINE 115 OF .\MAIN.C: 'SET_TT': undefined identifier
+*** ERROR C202 IN LINE 116 OF .\MAIN.C: 'AD_TT': undefined identifier
+*** ERROR C202 IN LINE 117 OF .\MAIN.C: 'LED_FLOW': undefined identifier
+*** ERROR C202 IN LINE 119 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 124 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 127 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 132 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 135 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 140 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 141 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 142 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 143 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 146 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 149 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 150 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 151 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 152 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 156 OF .\MAIN.C: 'LED_TT': undefined identifier
+*** ERROR C202 IN LINE 160 OF .\MAIN.C: 'LED_TT': undefined identifier
+*** ERROR C202 IN LINE 162 OF .\MAIN.C: 'LED_TT': undefined identifier
+*** ERROR C202 IN LINE 163 OF .\MAIN.C: 'LED_T': undefined identifier
+*** ERROR C202 IN LINE 164 OF .\MAIN.C: 'LED_T': undefined identifier
+*** ERROR C202 IN LINE 166 OF .\MAIN.C: 'LED_T': undefined identifier
+*** ERROR C202 IN LINE 167 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 169 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 169 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 169 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 171 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 173 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 173 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 173 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 175 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 177 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 177 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 177 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 179 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 181 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 181 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 181 OF .\MAIN.C: 'LED_NUM': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  40 ERROR(S)
+
+[2022-04-06 18:09:39]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 123 OF .\MAIN.C: 'LED_FLOW': undefined identifier
+*** ERROR C202 IN LINE 125 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 130 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 133 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 138 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 141 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 146 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 147 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 148 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 149 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 152 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 155 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 156 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 157 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 158 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 162 OF .\MAIN.C: 'LIGHT': undefined identifier
+*** ERROR C202 IN LINE 169 OF .\MAIN.C: 'LED_T': undefined identifier
+*** ERROR C202 IN LINE 170 OF .\MAIN.C: 'LED_T': undefined identifier
+*** ERROR C202 IN LINE 172 OF .\MAIN.C: 'LED_T': undefined identifier
+*** ERROR C202 IN LINE 173 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 175 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 175 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 175 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 177 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 179 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 179 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 179 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 181 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 183 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 183 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 183 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 185 OF .\MAIN.C: 'WORK_MODE': undefined identifier
+*** ERROR C202 IN LINE 187 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 187 OF .\MAIN.C: 'LED_NUM': undefined identifier
+*** ERROR C202 IN LINE 187 OF .\MAIN.C: 'LED_NUM': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  35 ERROR(S)
+
+[2022-04-06 18:10:02]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C279 IN LINE 32 OF .\MAIN.C: 'LED_TT': multiple initialization
+*** ERROR C279 IN LINE 32 OF .\MAIN.C: 'SET_TT': multiple initialization
+*** ERROR C279 IN LINE 32 OF .\MAIN.C: 'AD_TT': multiple initialization
+*** ERROR C279 IN LINE 38 OF .\MAIN.C: 'AD': multiple initialization
+C51 COMPILATION COMPLETE.  0 WARNING(S),  4 ERROR(S)
+
+[2022-04-06 18:10:13]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C279 IN LINE 35 OF .\MAIN.C: 'AD': multiple initialization
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-04-06 18:10:22]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01a98] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届省赛题2.0\build\Target 1\第九届省赛题2.0.lnp" 
+".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第九届省赛题2.0"
+PRINT(".\build\Target 1\第九届省赛题2.0.map") REMOVEUNUSED
+*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
+    SYMBOL:  Light
+    MODULE:  .\build\Target 1\main.o (MAIN)
+   DEFINED:  .\build\Target 1\main.o (MAIN)
+Program Size: data=75.1 xdata=0 const=0 code=1201
+LX51 RUN COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+
+[2022-04-06 18:11:42]	[done]
+	build successfully !
+
+[2022-04-06 18:12:43]	[done]
+	build successfully !
+
+[2022-04-06 18:14:30]	[done]
+	build successfully !
+
+[2022-04-06 18:14:58]	[done]
+	build successfully !
+

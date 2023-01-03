@@ -1,0 +1,360 @@
+LX51 LINKER/LOCATER V4.66.41.0                                                          03/22/2022  10:05:17  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.66.41.0, INVOKED BY:
+D:\KEIL51\C51\BIN\LX51.EXE .\build\Target 1\DS1302.o, .\build\Target 1\main.o, .\build\Target 1\onewire.o TO .\build\Tar
+>> get 1\kEILPROJECT PRINT (.\build\Target 1\kEILPROJECT.map) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\build\Target 1\DS1302.o (DS1302)
+         COMMENT TYPE 0: C51 V9.54
+  .\build\Target 1\main.o (MAIN)
+         COMMENT TYPE 0: C51 V9.54
+  .\build\Target 1\onewire.o (ONEWIRE)
+         COMMENT TYPE 0: C51 V9.54
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C?UIDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_INIT)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\build\Target 1\kEILPROJECT (DS1302)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   000763H   CODE
+I:000000H   I:000000H   I:00007FH   000038H   DATA
+I:000020H.0 I:000020H.0 I:00002FH.7 000000H.6 BIT
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+
+
+MEMORY MAP OF MODULE:  .\build\Target 1\kEILPROJECT (DS1302)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H   00000EH   000007H   BYTE   UNIT     DATA           ?DT?DS1302
+00000FH.0 00001FH.7 000011H.0 ---    ---      **GAP**
+000020H.0 000020H.4 000000H.5 BIT    UNIT     BIT            ?BI?MAIN
+000020H.5 000020H.5 000000H.1 BIT    UNIT     BIT            _BIT_GROUP_
+000020H.6 000020H   000000H.2 ---    ---      **GAP**
+000021H   000049H   000029H   BYTE   UNIT     DATA           ?DT?MAIN
+00004AH   00004AH   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   000057H   000055H   BYTE   UNIT     CODE           ?C?LIB_CODE
+000058H   000062H   00000BH   ---    ---      **GAP**
+000063H   000065H   000003H   BYTE   OFFS..   CODE           ?MAIN?00063
+000066H   0002A0H   00023BH   BYTE   UNIT     CODE           ?PR?MAIN?MAIN
+0002A1H   00043CH   00019CH   BYTE   UNIT     CODE           ?PR?KEYSCAN?MAIN
+00043DH   0004D5H   000099H   BYTE   UNIT     CODE           ?PR?T2INT?MAIN
+0004D6H   000561H   00008CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+000562H   0005B0H   00004FH   BYTE   UNIT     CODE           ?C_INITSEG
+0005B1H   0005F4H   000044H   BYTE   UNIT     CODE           ?PR?_READ_DS1302?DS1302
+0005F5H   000629H   000035H   BYTE   UNIT     CODE           ?PR?TEMPER_GET?ONEWIRE
+00062AH   000650H   000027H   BYTE   UNIT     CODE           ?PR?INIT_DS18B20?ONEWIRE
+000651H   000675H   000025H   BYTE   UNIT     CODE           ?PR?_WRITE_DS1302?DS1302
+000676H   000698H   000023H   BYTE   UNIT     CODE           ?PR?DS1302_INIT?DS1302
+000699H   0006BBH   000023H   BYTE   UNIT     CODE           ?PR?DS1302_GET?DS1302
+LX51 LINKER/LOCATER V4.66.41.0                                                        03/22/2022  10:05:17  PAGE 2
+
+
+0006BCH   0006DDH   000022H   BYTE   UNIT     CODE           ?PR?ALLINIT?MAIN
+0006DEH   0006FBH   00001EH   BYTE   UNIT     CODE           ?PR?_WRITE_DS18B20?ONEWIRE
+0006FCH   000715H   00001AH   BYTE   UNIT     CODE           ?PR?_DELAY_ONEWIRE?ONEWIRE
+000716H   00072FH   00001AH   BYTE   UNIT     CODE           ?PR?READ_DS18B20?ONEWIRE
+000730H   000748H   000019H   BYTE   UNIT     CODE           ?PR?_DELAY_MS?MAIN
+000749H   00075BH   000013H   BYTE   UNIT     CODE           ?PR?_WRITE_DS1302_BYTE?DS1302
+00075CH   00076DH   000012H   BYTE   UNIT     CODE           ?PR?TIMER2INIT?MAIN
+
+* * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
+   *DEL*:           000064H   BYTE   UNIT     CODE           ?PR?DIGBUF_DISPLAY?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\build\Target 1\kEILPROJECT (DS1302)
+
+
+FUNCTION/MODULE                 BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE     START  STOP  START  STOP
+=======================================================
+T2INT/MAIN                     ----- -----  ----- -----
+
+*** NEW ROOT *****************
+
+?C_C51STARTUP                  ----- -----  ----- -----
+  +--> MAIN/MAIN
+  +--> ?C_INITSEG
+
+MAIN/MAIN                      ----- -----  ----- -----
+  +--> ALLINIT/MAIN
+  +--> TIMER2INIT/MAIN
+  +--> DS1302_INIT/DS1302
+  +--> TEMPER_GET/ONEWIRE
+  +--> DS1302_GET/DS1302
+  +--> KEYSCAN/MAIN
+
+ALLINIT/MAIN                   ----- -----  ----- -----
+
+TIMER2INIT/MAIN                ----- -----  ----- -----
+
+DS1302_INIT/DS1302             ----- -----  ----- -----
+  +--> _WRITE_DS1302/DS1302
+
+_WRITE_DS1302/DS1302           ----- -----  ----- -----
+  +--> _WRITE_DS1302_BYTE/DS1302
+
+_WRITE_DS1302_BYTE/DS1302      ----- -----  ----- -----
+
+TEMPER_GET/ONEWIRE             ----- -----  ----- -----
+  +--> INIT_DS18B20/ONEWIRE
+  +--> _WRITE_DS18B20/ONEWIRE
+  +--> _DELAY_ONEWIRE/ONEWIRE
+  +--> READ_DS18B20/ONEWIRE
+
+INIT_DS18B20/ONEWIRE           20H.5 20H.5  ----- -----
+  +--> _DELAY_ONEWIRE/ONEWIRE
+
+_DELAY_ONEWIRE/ONEWIRE         ----- -----  ----- -----
+
+_WRITE_DS18B20/ONEWIRE         ----- -----  ----- -----
+  +--> _DELAY_ONEWIRE/ONEWIRE
+
+READ_DS18B20/ONEWIRE           ----- -----  ----- -----
+  +--> _DELAY_ONEWIRE/ONEWIRE
+
+DS1302_GET/DS1302              ----- -----  ----- -----
+LX51 LINKER/LOCATER V4.66.41.0                                                        03/22/2022  10:05:17  PAGE 3
+
+
+  +--> _WRITE_DS1302/DS1302
+  +--> _READ_DS1302/DS1302
+
+_READ_DS1302/DS1302            ----- -----  ----- -----
+  +--> _WRITE_DS1302_BYTE/DS1302
+
+KEYSCAN/MAIN                   ----- -----  ----- -----
+  +--> _DELAY_MS/MAIN
+  +--> DS1302_INIT/DS1302
+
+_DELAY_MS/MAIN                 ----- -----  ----- -----
+
+?C_INITSEG                     ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\build\Target 1\kEILPROJECT (DS1302)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+      00000000H   NUMBER   ---       ?C?CODESEG
+      01000003H   CODE     ---       ?C?UIDIV
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      0100051DH   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+      01000734H   CODE     ---       _Delay_ms
+      01000700H   CODE     ---       _Delay_OneWire
+      010005B1H   CODE     ---       _Read_Ds1302
+      01000651H   CODE     ---       _Write_Ds1302
+      01000749H   CODE     ---       _Write_Ds1302_Byte
+      010006DEH   CODE     ---       _Write_DS18B20
+      00000021H   DATA     ---       Alarm_Num
+      00000020H.4 BIT      BIT       Alarm_ON
+      00000049H   DATA     BYTE      Alarm_Set
+      010006BCH   CODE     ---       allinit
+      00000020H.0 BIT      BIT       Any_Button_Down
+      0000003FH   DATA     ---       Digbuf
+*DEL*:00000000H   CODE     ---       Digbuf_Display
+      00000047H   DATA     BYTE      Digcom
+      00000020H.3 BIT      BIT       Display_Mode
+      01000699H   CODE     ---       DS1302_Get
+      01000676H   CODE     ---       DS1302_Init
+      00000020H.2 BIT      BIT       fla
+      0100062AH   CODE     ---       init_ds18b20
+      010002A1H   CODE     ---       keyscan
+      0000003EH   DATA     BYTE      LED_Bits
+      00000025H   DATA     WORD      LED_tt
+      01000066H   CODE     ---       main
+      01000716H   CODE     ---       Read_DS18B20
+      00000020H.1 BIT      BIT       s4
+      00000008H   DATA     ---       shijian
+      00000048H   DATA     BYTE      Shijian_Set
+      0100043DH   CODE     ---       t2int
+      00000027H   DATA     ---       tab
+      010005F5H   CODE     ---       Temper_Get
+      00000024H   DATA     BYTE      Temperature
+      0100075CH   CODE     ---       Timer2Init
+
+
+
+SYMBOL TABLE OF MODULE:  .\build\Target 1\kEILPROJECT (DS1302)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+LX51 LINKER/LOCATER V4.66.41.0                                                        03/22/2022  10:05:17  PAGE 4
+
+
+      ---         MODULE    ---      ---       DS1302
+      00000008H   PUBLIC    DATA     ---       shijian
+      01000699H   PUBLIC    CODE     ---       DS1302_Get
+      01000676H   PUBLIC    CODE     ---       DS1302_Init
+      010005B1H   PUBLIC    CODE     ---       _Read_Ds1302
+      01000651H   PUBLIC    CODE     ---       _Write_Ds1302
+      01000749H   PUBLIC    CODE     ---       _Write_Ds1302_Byte
+
+      01000749H   BLOCK     CODE     ---       LVL=0
+      01000749H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000006H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000651H   BLOCK     CODE     ---       LVL=0
+      01000651H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000007H   SYMBOL    DATA     VOID      dat1
+      00000006H   SYMBOL    DATA     VOID      dat2
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010005B1H   BLOCK     CODE     ---       LVL=0
+      010005B1H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000007H   SYMBOL    DATA     VOID      i
+      00000005H   SYMBOL    DATA     VOID      temp
+      00000007H   SYMBOL    DATA     VOID      dat1
+      00000006H   SYMBOL    DATA     VOID      dat2
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000676H   BLOCK     CODE     ---       LVL=0
+      01000676H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000003H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      add
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000699H   BLOCK     CODE     ---       LVL=0
+      01000699H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000003H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      add
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       MAIN
+      00000049H   PUBLIC    DATA     BYTE      Alarm_Set
+      00000020H.4 PUBLIC    BIT      BIT       Alarm_ON
+      00000048H   PUBLIC    DATA     BYTE      Shijian_Set
+      00000047H   PUBLIC    DATA     BYTE      Digcom
+      0000003FH   PUBLIC    DATA     ---       Digbuf
+      0000003EH   PUBLIC    DATA     BYTE      LED_Bits
+      00000020H.3 PUBLIC    BIT      BIT       Display_Mode
+      00000027H   PUBLIC    DATA     ---       tab
+      00000020H.2 PUBLIC    BIT      BIT       fla
+      00000020H.1 PUBLIC    BIT      BIT       s4
+      00000025H   PUBLIC    DATA     WORD      LED_tt
+      00000024H   PUBLIC    DATA     BYTE      Temperature
+      00000020H.0 PUBLIC    BIT      BIT       Any_Button_Down
+      00000021H   PUBLIC    DATA     ---       Alarm_Num
+      01000734H   PUBLIC    CODE     ---       _Delay_ms
+      0100043DH   PUBLIC    CODE     ---       t2int
+      0100075CH   PUBLIC    CODE     ---       Timer2Init
+      010006BCH   PUBLIC    CODE     ---       allinit
+      010002A1H   PUBLIC    CODE     ---       keyscan
+      01000066H   PUBLIC    CODE     ---       main
+LX51 LINKER/LOCATER V4.66.41.0                                                        03/22/2022  10:05:17  PAGE 5
+
+
+
+      01000066H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010002A1H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010006BCH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100075CH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100043DH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000730H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000734H   BLOCK     CODE     ---       LVL=0
+      01000734H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000004H   SYMBOL    DATA     VOID      i
+      00000003H   SYMBOL    DATA     VOID      j
+      00000005H   SYMBOL    DATA     VOID      k
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ONEWIRE
+      010005F5H   PUBLIC    CODE     ---       Temper_Get
+      0100062AH   PUBLIC    CODE     ---       init_ds18b20
+      01000716H   PUBLIC    CODE     ---       Read_DS18B20
+      010006DEH   PUBLIC    CODE     ---       _Write_DS18B20
+      01000700H   PUBLIC    CODE     ---       _Delay_OneWire
+
+      010006FCH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000700H   BLOCK     CODE     ---       LVL=0
+      01000700H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000005H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010006DEH   BLOCK     CODE     ---       LVL=0
+      010006E0H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000003H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000716H   BLOCK     CODE     ---       LVL=0
+      01000716H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000003H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      dat
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100062AH   BLOCK     CODE     ---       LVL=0
+      0100062AH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000020H.5 SYMBOL    BIT      VOID      initflag
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010005F5H   BLOCK     CODE     ---       LVL=0
+      010005F5H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000001H   SYMBOL    DATA     VOID      low
+LX51 LINKER/LOCATER V4.66.41.0                                                        03/22/2022  10:05:17  PAGE 6
+
+
+      00000007H   SYMBOL    DATA     VOID      high
+      00000007H   SYMBOL    DATA     VOID      temp
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+      ---         MODULE    ---      ---       ?C?UIDIV
+      01000003H   PUBLIC    CODE     ---       ?C?UIDIV
+
+      ---         MODULE    ---      ---       ?C_INIT
+      0100051DH   PUBLIC    CODE     ---       ?C_START
+
+Program Size: data=57.6 xdata=0 const=0 code=1891
+LX51 RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

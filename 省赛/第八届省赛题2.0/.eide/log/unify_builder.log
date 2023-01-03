@@ -1,0 +1,49 @@
+[2022-03-22 09:27:42]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 331 OF .\MAIN.C: syntax error near 'void'
+*** ERROR C141 IN LINE 332 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 357 OF .\MAIN.C: syntax error near 'void'
+*** ERROR C141 IN LINE 358 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 377 OF .\MAIN.C: syntax error near 'void'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  5 ERROR(S)
+
+[2022-03-22 09:28:34]	[done]
+	build successfully !
+
+[2022-03-22 09:40:34]	[done]
+	build successfully !
+
+[2022-03-22 10:01:09]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C276 IN LINE 203 OF .\MAIN.C: constant in condition expression
+*** ERROR C141 IN LINE 325 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 326 OF .\MAIN.C: syntax error near '{'
+*** ERROR C187 IN LINE 334 OF .\MAIN.C: not an lvalue
+*** ERROR C187 IN LINE 341 OF .\MAIN.C: not an lvalue
+*** ERROR C187 IN LINE 348 OF .\MAIN.C: not an lvalue
+*** ERROR C187 IN LINE 355 OF .\MAIN.C: not an lvalue
+*** ERROR C187 IN LINE 360 OF .\MAIN.C: not an lvalue
+*** ERROR C187 IN LINE 365 OF .\MAIN.C: not an lvalue
+C51 COMPILATION COMPLETE.  1 WARNING(S),  8 ERROR(S)
+
+[2022-03-22 10:01:19]	[done]
+	build successfully !
+
+[2022-03-22 10:01:39]	[done]
+	build successfully !
+
+[2022-03-22 10:01:45]	[done]
+	build successfully !
+
+[2022-03-22 10:03:21]	[done]
+	build successfully !
+
+[2022-03-22 10:05:18]	[done]
+	build successfully !
+

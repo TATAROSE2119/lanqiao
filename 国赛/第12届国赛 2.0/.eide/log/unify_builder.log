@@ -1,0 +1,333 @@
+[2022-05-22 14:57:27]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C193 IN LINE 64 OF .\MAIN.C: '<<': bad operand type
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-22 14:57:40]	[done]
+	build successfully !
+
+[2022-05-22 15:03:54]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 34 OF .\MAIN.C: 'tmep': undefined identifier
+*** ERROR C202 IN LINE 38 OF .\MAIN.C: 'tmep': undefined identifier
+*** ERROR C202 IN LINE 64 OF .\MAIN.C: 'tmep': undefined identifier
+*** ERROR C202 IN LINE 68 OF .\MAIN.C: 'tmep': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  4 ERROR(S)
+
+[2022-05-22 15:04:06]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 38 OF .\MAIN.C: 'tmep': undefined identifier
+*** ERROR C202 IN LINE 68 OF .\MAIN.C: 'tmep': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+[2022-05-22 15:04:13]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 68 OF .\MAIN.C: 'tmep': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-22 15:04:19]	[done]
+	build successfully !
+
+[2022-05-22 15:04:54]	[done]
+	build successfully !
+
+[2022-05-22 15:05:58]	[done]
+	build successfully !
+
+[2022-05-22 15:15:44]	[done]
+	build successfully !
+
+[2022-05-22 15:16:12]	[done]
+	build successfully !
+
+[2022-05-22 15:25:27]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\iic.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 121 OF .\IIC.C: syntax error near 'char', expected ')'
+*** ERROR C202 IN LINE 128 OF .\IIC.C: 'add': undefined identifier
+*** ERROR C141 IN LINE 148 OF .\IIC.C: syntax error near 'IIC_SendByte'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
+
+[2022-05-22 15:25:46]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\iic.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 148 OF .\IIC.C: syntax error near 'IIC_SendByte'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-22 15:25:53]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 12 OF iic.h: syntax error near 'char', expected ')'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-22 15:25:56]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 12 OF iic.h: syntax error near 'char', expected ')'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-22 15:26:06]	[done]
+	build successfully !
+
+[2022-05-22 15:26:25]	[done]
+	build successfully !
+
+[2022-05-22 15:38:32]	[done]
+	build successfully !
+
+[2022-05-22 15:38:41]	[done]
+	build successfully !
+
+[2022-05-22 15:59:50]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 159 OF .\MAIN.C: syntax error near '}'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-22 15:59:58]	[done]
+	build successfully !
+
+[2022-05-22 16:00:04]	[done]
+	build successfully !
+
+[2022-05-22 16:18:14]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01932] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\build\Target 1\第12届国赛 2.0.lnp" 
+".\build\Target 1\ds1302.o",".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第12届国赛 2.0"
+PRINT(".\build\Target 1\第12届国赛 2.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Juli_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Julicanshu_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Caijishijian_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Shuju_Jilu_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Juli_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 10004EAH
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Shuju_Jilu_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 10004F2H
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Caijishijian_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 10004FBH
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Julicanshu_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 1000501H
+Program Size: data=66.4 xdata=0 const=0 code=1498
+LX51 RUN COMPLETE.  0 WARNING(S),  8 ERROR(S)
+
+
+[2022-05-22 16:18:20]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01932] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\build\Target 1\第12届国赛 2.0.lnp" 
+".\build\Target 1\ds1302.o",".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第12届国赛 2.0"
+PRINT(".\build\Target 1\第12届国赛 2.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Juli_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Julicanshu_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Caijishijian_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Shuju_Jilu_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Juli_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 10004EFH
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Shuju_Jilu_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 10004F7H
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Caijishijian_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 1000500H
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Julicanshu_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 1000506H
+Program Size: data=66.4 xdata=0 const=0 code=1503
+LX51 RUN COMPLETE.  0 WARNING(S),  8 ERROR(S)
+
+
+[2022-05-22 16:19:30]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01932] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\build\Target 1\第12届国赛 2.0.lnp" 
+".\build\Target 1\ds1302.o",".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第12届国赛 2.0"
+PRINT(".\build\Target 1\第12届国赛 2.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Juli_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Julicanshu_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Caijishijian_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Shuju_Jilu_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Juli_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 1000529H
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Shuju_Jilu_Xianshi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 1000531H
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Caijishijian_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 100053AH
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Julicanshu_Shezhi_Display
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 1000540H
+Program Size: data=66.4 xdata=0 const=0 code=1560
+LX51 RUN COMPLETE.  0 WARNING(S),  8 ERROR(S)
+
+
+[2022-05-22 16:19:53]	[done]
+	build successfully !
+
+[2022-05-22 16:34:23]	[done]
+	build successfully !
+
+[2022-05-22 16:35:24]	[done]
+	build successfully !
+
+[2022-05-22 16:36:34]	[done]
+	build successfully !
+
+[2022-05-22 16:40:05]	[done]
+	build successfully !
+
+[2022-05-22 16:42:28]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01932] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\build\Target 1\第12届国赛 2.0.lnp" 
+".\build\Target 1\ds1302.o",".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第12届国赛 2.0"
+PRINT(".\build\Target 1\第12届国赛 2.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  Led_Show_All
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  Led_Show_All
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 10007F7H
+Program Size: data=68.4 xdata=0 const=0 code=2116
+LX51 RUN COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+
+[2022-05-22 16:42:42]	[done]
+	build successfully !
+
+[2022-05-22 17:02:48]	[done]
+	build successfully !
+
+[2022-05-22 17:08:05]	[done]
+	build successfully !
+
+[2022-05-22 17:08:31]	[done]
+	build successfully !
+
+[2022-05-22 17:15:15]	[done]
+	build successfully !
+
+[2022-05-22 17:20:15]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第12届国赛 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0178e] in <6d8c0f91f6d94a3cb9e4240f591355c3>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 90 OF .\MAIN.C: syntax error near ')'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-22 17:23:40]	[done]
+	build successfully !
+
+[2022-05-22 17:24:17]	[done]
+	build successfully !
+
+[2022-05-22 17:25:48]	[done]
+	build successfully !
+
+[2022-05-22 17:27:25]	[done]
+	build successfully !
+
+[2022-05-22 17:34:37]	[done]
+	build successfully !
+
+[2022-05-22 17:35:43]	[done]
+	build successfully !
+
+[2022-05-22 17:47:41]	[done]
+	build successfully !
+
+[2022-05-22 17:49:56]	[done]
+	build successfully !
+
+[2022-05-22 17:50:46]	[done]
+	build successfully !
+
+[2022-05-22 17:52:46]	[done]
+	build successfully !
+
+[2022-05-22 18:05:38]	[done]
+	build successfully !
+
+[2022-05-22 18:07:47]	[done]
+	build successfully !
+
+[2022-05-22 18:09:34]	[done]
+	build successfully !
+
+[2022-05-22 18:11:41]	[done]
+	build successfully !
+

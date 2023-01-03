@@ -1,0 +1,328 @@
+LX51 LINKER/LOCATER V4.66.41.0                                                          04/06/2022  18:14:58  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.66.41.0, INVOKED BY:
+D:\KEIL51\C51\BIN\LX51.EXE .\build\Target 1\iic.o, .\build\Target 1\main.o TO .\build\Target 1\第九届省赛题2.0 PRINT (.\
+>> build\Target 1\第九届省赛题2.0.map) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\build\Target 1\iic.o (IIC)
+         COMMENT TYPE 0: C51 V9.54
+  .\build\Target 1\main.o (MAIN)
+         COMMENT TYPE 0: C51 V9.54
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C?IMUL)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_INIT)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\build\Target 1\第九届省赛题2.0 (IIC)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   000584H   CODE
+I:000020H.0 I:000020H.0 I:00002FH.7 000000H.1 BIT
+I:000000H   I:000000H   I:00007FH   000049H   DATA
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+
+
+MEMORY MAP OF MODULE:  .\build\Target 1\第九届省赛题2.0 (IIC)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H.0 00001FH.7 000018H.0 ---    ---      **GAP**
+000020H.0 000020H.0 000000H.1 BIT    UNIT     BIT            ?BI?MAIN
+000020H.1 000020H   000000H.7 ---    ---      **GAP**
+000021H   000061H   000041H   BYTE   UNIT     DATA           ?DT?MAIN
+000062H   000062H   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   000003H   000001H   BYTE   UNIT     CODE           ?PR?TM0_ISR?MAIN
+000004H   00000AH   000007H   ---    ---      **GAP**
+00000BH   00000DH   000003H   BYTE   OFFS..   CODE           ?MAIN?0000B
+00000EH   000045H   000038H   BYTE   UNIT     CODE           ?PR?IIC_STOP?IIC
+000046H   000060H   00001BH   BYTE   UNIT     CODE           ?PR?KEYSCAN?MAIN
+000061H   000062H   000002H   ---    ---      **GAP**
+000063H   000065H   000003H   BYTE   OFFS..   CODE           ?MAIN?00063
+000066H   000283H   00021EH   BYTE   UNIT     CODE           ?PR?T2INT?MAIN
+000284H   00030FH   00008CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+000310H   00037CH   00006DH   BYTE   UNIT     CODE           ?PR?IIC_WAITACK?IIC
+00037DH   0003E8H   00006CH   BYTE   UNIT     CODE           ?C_INITSEG
+0003E9H   000451H   000069H   BYTE   UNIT     CODE           ?PR?_IIC_SENDBYTE?IIC
+000452H   0004B6H   000065H   BYTE   UNIT     CODE           ?PR?IIC_RECBYTE?IIC
+0004B7H   00050FH   000059H   BYTE   UNIT     CODE           ?PR?IIC_START?IIC
+000510H   000531H   000022H   BYTE   UNIT     CODE           ?PR?ALLINIT?MAIN
+000532H   000547H   000016H   BYTE   UNIT     CODE           ?PR?_AD_READ?IIC
+000548H   00055AH   000013H   BYTE   UNIT     CODE           ?PR?_DELAY_MS?MAIN
+00055BH   00056CH   000012H   BYTE   UNIT     CODE           ?PR?TIMER2INIT?MAIN
+LX51 LINKER/LOCATER V4.66.41.0                                                        04/06/2022  18:14:58  PAGE 2
+
+
+00056DH   00057EH   000012H   BYTE   UNIT     CODE           ?C?LIB_CODE
+00057FH   00058CH   00000EH   BYTE   UNIT     CODE           ?PR?MAIN?MAIN
+
+* * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
+   *DEL*:           000088H   BYTE   UNIT     CODE           ?PR?IIC_ACK?IIC
+   *DEL*:           000000H.1 BIT    UNIT     BIT            ?BI?IIC_ACK?IIC
+   *DEL*:           000015H   BYTE   UNIT     CODE           ?PR?_DA_WRITE?IIC
+   *DEL*:           000016H   BYTE   UNIT     CODE           ?PR?_EEPROM_READ?IIC
+   *DEL*:           000015H   BYTE   UNIT     CODE           ?PR?_EEPROM_WRITE?IIC
+   *DEL*:           000015H   BYTE   UNIT     CODE           ?PR?TIMER0INIT?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\build\Target 1\第九届省赛题2.0 (IIC)
+
+
+FUNCTION/MODULE              BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE  START  STOP  START  STOP
+====================================================
+TM0_ISR/MAIN                ----- -----  ----- -----
+
+*** NEW ROOT **************
+
+T2INT/MAIN                  ----- -----  ----- -----
+  +--> _AD_READ/IIC
+
+_AD_READ/IIC                ----- -----  ----- -----
+  +--> IIC_START/IIC
+  +--> IIC_WAITACK/IIC
+  +--> IIC_STOP/IIC
+
+IIC_START/IIC               ----- -----  ----- -----
+
+IIC_WAITACK/IIC             ----- -----  ----- -----
+  +--> _IIC_SENDBYTE/IIC
+  +--> IIC_STOP/IIC
+
+_IIC_SENDBYTE/IIC           ----- -----  ----- -----
+
+IIC_STOP/IIC                ----- -----  ----- -----
+  +--> _IIC_SENDBYTE/IIC
+  +--> IIC_WAITACK/IIC
+  +--> IIC_RECBYTE/IIC
+
+IIC_RECBYTE/IIC             ----- -----  ----- -----
+
+*** NEW ROOT **************
+
+?C_C51STARTUP               ----- -----  ----- -----
+  +--> MAIN/MAIN
+  +--> ?C_INITSEG
+
+MAIN/MAIN                   ----- -----  ----- -----
+  +--> ALLINIT/MAIN
+  +--> TIMER2INIT/MAIN
+  +--> KEYSCAN/MAIN
+
+ALLINIT/MAIN                ----- -----  ----- -----
+
+TIMER2INIT/MAIN             ----- -----  ----- -----
+
+KEYSCAN/MAIN                ----- -----  ----- -----
+  +--> _DELAY_MS/MAIN
+
+_DELAY_MS/MAIN              ----- -----  ----- -----
+LX51 LINKER/LOCATER V4.66.41.0                                                        04/06/2022  18:14:58  PAGE 3
+
+
+
+?C_INITSEG                  ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\build\Target 1\第九届省赛题2.0 (IIC)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+      00000000H   NUMBER   ---       ?C?CODESEG
+      0100056DH   CODE     ---       ?C?IMUL
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      010002CBH   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+*DEL*:00000000H.0 BIT      BIT       ?IIC_Ack?BIT
+      01000532H   CODE     ---       _AD_Read
+*DEL*:00000000H   CODE     ---       _DA_Write
+      01000548H   CODE     ---       _Delay_ms
+*DEL*:00000000H   CODE     ---       _EEPROM_Read
+*DEL*:00000000H   CODE     ---       _EEPROM_Write
+      010003E9H   CODE     ---       _IIC_SendByte
+      00000026H   DATA     BYTE      AD
+      0000002AH   DATA     WORD      AD_TT
+      01000510H   CODE     ---       allinit
+      00000047H   DATA     ---       Digbuf
+      0000004FH   DATA     BYTE      Digcom
+      00000024H   DATA     BYTE      FLOW_INTERVAL
+      0000005AH   DATA     ---       FLOW_INTERVAL_SAVE_VALUE
+      00000053H   DATA     WORD      i
+*DEL*:00000000H   CODE     ---       IIC_Ack
+      01000452H   CODE     ---       IIC_RecByte
+      010004B7H   CODE     ---       IIC_Start
+      01000017H   CODE     ---       IIC_Stop
+      0100031BH   CODE     ---       IIC_WaitAck
+      00000055H   DATA     BYTE      KEY
+      00000023H   DATA     BYTE      KEY_TEMP
+      01000046H   CODE     ---       keyscan
+      00000045H   DATA     BYTE      LED_Bits
+      00000058H   DATA     BYTE      LED_FLOW
+      0000002CH   DATA     WORD      Led_Light_T
+      00000020H.0 BIT      BIT       Led_Liuzhuan_On
+      0000002EH   DATA     BYTE      LED_NUM
+      00000027H   DATA     WORD      LED_T
+      00000052H   DATA     BYTE      LED_TIME
+      00000050H   DATA     WORD      LED_TT
+      00000061H   DATA     BYTE      LIGHT
+      00000056H   DATA     WORD      Liuzhuan_Count_Tt
+      00000021H   DATA     WORD      Liuzhuan_Interval
+      0100057FH   CODE     ---       main
+      00000025H   DATA     BYTE      S4_FLAG
+      00000029H   DATA     BYTE      S6_SETTING
+      0000005FH   DATA     WORD      SET_TT
+      01000066H   CODE     ---       t2int
+      0000002FH   DATA     ---       tab
+*DEL*:00000000H   CODE     ---       Timer0Init
+      0100055BH   CODE     ---       Timer2Init
+      01000003H   CODE     ---       tm0_isr
+      00000046H   DATA     BYTE      WORK_MODE
+      00000059H   DATA     BYTE      Work_Moded
+
+
+
+SYMBOL TABLE OF MODULE:  .\build\Target 1\第九届省赛题2.0 (IIC)
+
+LX51 LINKER/LOCATER V4.66.41.0                                                        04/06/2022  18:14:58  PAGE 4
+
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       IIC
+      01000532H   PUBLIC    CODE     ---       _AD_Read
+      01000452H   PUBLIC    CODE     ---       IIC_RecByte
+      010003E9H   PUBLIC    CODE     ---       _IIC_SendByte
+      0100031BH   PUBLIC    CODE     ---       IIC_WaitAck
+      01000017H   PUBLIC    CODE     ---       IIC_Stop
+      010004B7H   PUBLIC    CODE     ---       IIC_Start
+
+      010004B7H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100000EH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000017H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000310H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100031BH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010003E9H   BLOCK     CODE     ---       LVL=0
+      010003E9H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000006H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000452H   BLOCK     CODE     ---       LVL=0
+      01000452H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000007H   SYMBOL    DATA     VOID      da
+      00000006H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000532H   BLOCK     CODE     ---       LVL=0
+      01000534H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000007H   SYMBOL    DATA     VOID      temp
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+      00000007H   SYMBOL    DATA     VOID      temp
+
+      ---         MODULE    ---      ---       MAIN
+      00000061H   PUBLIC    DATA     BYTE      LIGHT
+      0000005FH   PUBLIC    DATA     WORD      SET_TT
+      0000005AH   PUBLIC    DATA     ---       FLOW_INTERVAL_SAVE_VALUE
+      00000059H   PUBLIC    DATA     BYTE      Work_Moded
+      00000058H   PUBLIC    DATA     BYTE      LED_FLOW
+      00000056H   PUBLIC    DATA     WORD      Liuzhuan_Count_Tt
+      00000020H.0 PUBLIC    BIT      BIT       Led_Liuzhuan_On
+      00000055H   PUBLIC    DATA     BYTE      KEY
+      00000053H   PUBLIC    DATA     WORD      i
+      00000052H   PUBLIC    DATA     BYTE      LED_TIME
+      00000050H   PUBLIC    DATA     WORD      LED_TT
+      0000004FH   PUBLIC    DATA     BYTE      Digcom
+      00000047H   PUBLIC    DATA     ---       Digbuf
+      00000046H   PUBLIC    DATA     BYTE      WORK_MODE
+      00000045H   PUBLIC    DATA     BYTE      LED_Bits
+      0000002FH   PUBLIC    DATA     ---       tab
+      0000002EH   PUBLIC    DATA     BYTE      LED_NUM
+      0000002CH   PUBLIC    DATA     WORD      Led_Light_T
+      0000002AH   PUBLIC    DATA     WORD      AD_TT
+LX51 LINKER/LOCATER V4.66.41.0                                                        04/06/2022  18:14:58  PAGE 5
+
+
+      00000029H   PUBLIC    DATA     BYTE      S6_SETTING
+      00000027H   PUBLIC    DATA     WORD      LED_T
+      00000026H   PUBLIC    DATA     BYTE      AD
+      00000025H   PUBLIC    DATA     BYTE      S4_FLAG
+      00000024H   PUBLIC    DATA     BYTE      FLOW_INTERVAL
+      00000023H   PUBLIC    DATA     BYTE      KEY_TEMP
+      00000021H   PUBLIC    DATA     WORD      Liuzhuan_Interval
+      01000510H   PUBLIC    CODE     ---       allinit
+      01000548H   PUBLIC    CODE     ---       _Delay_ms
+      01000066H   PUBLIC    CODE     ---       t2int
+      0100055BH   PUBLIC    CODE     ---       Timer2Init
+      01000003H   PUBLIC    CODE     ---       tm0_isr
+      01000046H   PUBLIC    CODE     ---       keyscan
+      0100057FH   PUBLIC    CODE     ---       main
+
+      0100057FH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000046H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000003H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100055BH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000066H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000548H   BLOCK     CODE     ---       LVL=0
+      01000548H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000005H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      j
+      00000006H   SYMBOL    DATA     VOID      k
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000510H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+      ---         MODULE    ---      ---       ?C?IMUL
+      0100056DH   PUBLIC    CODE     ---       ?C?IMUL
+
+      ---         MODULE    ---      ---       ?C_INIT
+      010002CBH   PUBLIC    CODE     ---       ?C_START
+
+Program Size: data=74.1 xdata=0 const=0 code=1412
+LX51 RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

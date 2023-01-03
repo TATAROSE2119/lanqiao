@@ -1,0 +1,658 @@
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.
+                    -lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <STC15F2K60S2.H>
+   2          #include "intrins.h"
+   3          #include "stdio.h"
+   4          #include "onewire.h"
+   5          #include "iic.h"
+   6          
+   7          #define uchar unsigned  char
+   8          #define uint unsigned  int
+   9          
+  10          #define Somenop {_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();}
+  11          
+  12          sbit TX=P1^0;
+  13          sbit RX=P1^1;
+  14          
+  15          uchar LED_Bits=0xff;
+  16          uchar code tab[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,
+  17                                                  0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10,
+  18                                                                                                                  0xbf,0xff,0xc6,0xc7,0xc8,0x8c};//C--22,L--23,N--24,P--25
+  19          uchar Digbuf[]={21,21,21,21,21,21,21,21};
+  20          uchar Digcom=0;
+  21          
+  22          void allinit();
+  23          void Timer2Init(void);          //1毫秒@11.0592MHz
+  24          void Delay_ms(uint ms);         //@12.000MHz
+  25          void keyscan();
+  26          void LED_on(uchar LED_num);
+  27          void LED_off(uchar LED_num);
+  28          
+  29          uint temperature=0;
+  30          uchar s12_short_or_long=2;//0--short,1--long
+  31          uchar s13_short_or_long=2;//0--short,1--long
+  32          bit s13_flag=0;
+  33          bit s12_flag=0;
+  34          uint s12_tt=0;
+  35          uint s13_tt=0;
+  36          uint bian_num=0;                                //变更次数//
+  37          bit interface=0;                        //界面切换
+  38          uchar shuju_type=0;                     //数据类型
+  39          uchar canshu_type=0;            //参数类型
+  40          int temper_canshu=30;           //温度参数
+  41          int dis_canshu=35;                      //距离参数
+  42          void DAC();
+  43          bit DAC_on=0;
+  44          uint temper_tt=0;
+  45          void LED_Display();
+  46          
+  47          //串口//
+  48          void UartInit(void);            //4800bps@11.0592MHz
+  49          void Uart_Function();
+  50          void Send_Buffer(uchar *p,uchar length);
+  51          uchar Receive_flag=0;
+  52          bit Receive_over=0;
+  53          uchar Receive_num=0;
+  54          uchar Rec_buffer[]="123\r\n";
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 2   
+
+  55          uchar send_arr[10];
+  56          
+  57          
+  58          //超声波//
+  59          void Bo_Function();
+  60          void Timer0Init(void);          //1毫秒@11.0592MHz
+  61          void Send_Wave();
+  62          uint Get_Dis();
+  63          uint dis=0;
+  64          uint distance=0;
+  65          bit bo_flag=0;
+  66          
+  67          void main()
+  68          {
+  69   1              allinit();
+  70   1              Timer2Init();
+  71   1              Timer0Init();
+  72   1              UartInit();
+  73   1              bian_num=EEPROM_Read(0x01);
+  74   1              while(1)
+  75   1              {
+  76   2                      Bo_Function();
+  77   2                      Uart_Function();
+  78   2                      DAC();
+  79   2                      keyscan();
+  80   2                      LED_Display();
+  81   2                      if(interface==0)//数据界面//
+  82   2                      {
+  83   3                              //温度界面//
+  84   3                              if(shuju_type==0)
+  85   3                              {
+  86   4                                      Digbuf[0]=22;
+  87   4                                      Digbuf[1]=21;
+  88   4                                      Digbuf[2]=21;
+  89   4                                      Digbuf[3]=21;
+  90   4                                      Digbuf[4]=temperature/1000;
+  91   4                                      Digbuf[5]=temperature%1000/100+10;
+  92   4                                      Digbuf[6]=temperature%100/10;
+  93   4                                      Digbuf[7]=temperature%10;
+  94   4                              }
+  95   3                              //距离界面//
+  96   3                              else if(shuju_type==1)
+  97   3                              {
+  98   4                                      Digbuf[0]=23;
+  99   4                                      Digbuf[1]=21;
+ 100   4                                      Digbuf[2]=21;
+ 101   4                                      Digbuf[3]=21;
+ 102   4                                      Digbuf[4]=21;
+ 103   4                                      Digbuf[5]=21;
+ 104   4                                      Digbuf[6]=dis/10;
+ 105   4                                      Digbuf[7]=dis%10;
+ 106   4                              }
+ 107   3                              //变更次数界面//
+ 108   3                              else if(shuju_type==2)
+ 109   3                              {
+ 110   4                                      Digbuf[0]=24;
+ 111   4                                      Digbuf[1]=21;
+ 112   4                                      Digbuf[2]=21;
+ 113   4                                      if(bian_num>9999)
+ 114   4                                      {
+ 115   5                                              Digbuf[3]=bian_num/10000;
+ 116   5                                              Digbuf[4]=bian_num%10000/1000;
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 3   
+
+ 117   5                                              Digbuf[5]=bian_num%1000/100;
+ 118   5                                              Digbuf[6]=bian_num%100/10;
+ 119   5                                              Digbuf[7]=bian_num%10/1;
+ 120   5                                      }
+ 121   4                                      else if((bian_num>999)&&(bian_num<=9999))
+ 122   4                                      {
+ 123   5                                              Digbuf[3]=21;
+ 124   5                                              Digbuf[4]=bian_num/1000;
+ 125   5                                              Digbuf[5]=bian_num%1000/100;
+ 126   5                                              Digbuf[6]=bian_num%100/10;
+ 127   5                                              Digbuf[7]=bian_num%10/1;
+ 128   5                                      }
+ 129   4                                      else if((bian_num>99)&&(bian_num<=999))
+ 130   4                                      {
+ 131   5                                              Digbuf[3]=21;
+ 132   5                                              Digbuf[4]=21;
+ 133   5                                              Digbuf[5]=bian_num/100;
+ 134   5                                              Digbuf[6]=bian_num%100/10;
+ 135   5                                              Digbuf[7]=bian_num%10/1;
+ 136   5                                      }
+ 137   4                                      else if((bian_num>9)&&(bian_num<=99))
+ 138   4                                      {
+ 139   5                                              Digbuf[3]=21;
+ 140   5                                              Digbuf[4]=21;
+ 141   5                                              Digbuf[5]=21;
+ 142   5                                              Digbuf[6]=bian_num/10;
+ 143   5                                              Digbuf[7]=bian_num%10;
+ 144   5                                      }
+ 145   4                                      else if(bian_num<=9)
+ 146   4                                      {
+ 147   5                                              Digbuf[3]=21;
+ 148   5                                              Digbuf[4]=21;
+ 149   5                                              Digbuf[5]=21;
+ 150   5                                              Digbuf[6]=21;
+ 151   5                                              Digbuf[7]=bian_num;
+ 152   5                                      }
+ 153   4                              }
+ 154   3                              
+ 155   3                      }
+ 156   2                      else if(interface==1)//参数界面
+ 157   2                      {
+ 158   3                              if(canshu_type==0)
+ 159   3                              {
+ 160   4                                      Digbuf[0]=25;
+ 161   4                                      Digbuf[1]=21;
+ 162   4                                      Digbuf[2]=21;
+ 163   4                                      Digbuf[3]=1;
+ 164   4                                      Digbuf[4]=21;
+ 165   4                                      Digbuf[5]=21;
+ 166   4                                      Digbuf[6]=temper_canshu/10;
+ 167   4                                      Digbuf[7]=temper_canshu%10;
+ 168   4                              }
+ 169   3                              else if(canshu_type==1)
+ 170   3                              {
+ 171   4                                      Digbuf[0]=25;
+ 172   4                                      Digbuf[1]=21;
+ 173   4                                      Digbuf[2]=21;
+ 174   4                                      Digbuf[3]=2;
+ 175   4                                      Digbuf[4]=21;
+ 176   4                                      Digbuf[5]=21;
+ 177   4                                      Digbuf[6]=dis_canshu/10;
+ 178   4                                      Digbuf[7]=dis_canshu%10;
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 4   
+
+ 179   4                              }
+ 180   3                      }
+ 181   2              }
+ 182   1      }
+ 183          void keyscan()
+ 184          {
+ 185   1              uchar temp;
+ 186   1              P3=0xef;P44=1;P42=1;//s16,s17
+ 187   1              temp=P3&0x0f;
+ 188   1              if(temp!=0x0f)
+ 189   1              {
+ 190   2                      Delay_ms(5);
+ 191   2                      temp=P3&0x0f;
+ 192   2                      if(temp!=0x0f)
+ 193   2                      {
+ 194   3                              
+ 195   3                              if(temp==0x0b)//s17short
+ 196   3                              {
+ 197   4                                      if(interface==1)
+ 198   4                                      {
+ 199   5                                              if(canshu_type==0)
+ 200   5                                              {
+ 201   6                                                      temper_canshu+=2;
+ 202   6                                                      if(temper_canshu>99)
+ 203   6                                                      {
+ 204   7                                                              temper_canshu=0;
+ 205   7                                                      }
+ 206   6                                              }
+ 207   5                                              else if(canshu_type==1)
+ 208   5                                              {
+ 209   6                                                      dis_canshu+=5;
+ 210   6                                                      if(dis_canshu>99)
+ 211   6                                                      {
+ 212   7                                                              dis_canshu=0;
+ 213   7                                                      }
+ 214   6                                              }
+ 215   5                                      }
+ 216   4                              }
+ 217   3                              else if(temp==0x07)//s16short
+ 218   3                              {
+ 219   4                                      if(interface==1)
+ 220   4                                      {
+ 221   5                                              if(canshu_type==0)
+ 222   5                                              {
+ 223   6                                                      temper_canshu-=2;
+ 224   6                                                      if(temper_canshu<0)
+ 225   6                                                      {
+ 226   7                                                              temper_canshu+=99;
+ 227   7                                                      }
+ 228   6                                                      
+ 229   6                                              }
+ 230   5                                              else if(canshu_type==1)
+ 231   5                                              {
+ 232   6                                                      dis_canshu-=5;
+ 233   6                                                      if(dis_canshu<0)
+ 234   6                                                      {
+ 235   7                                                              dis_canshu=99;
+ 236   7                                                      }
+ 237   6                                              }
+ 238   5                                      }
+ 239   4                              }
+ 240   3                              if(interface==1)
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 5   
+
+ 241   3                              {
+ 242   4                                      bian_num++;
+ 243   4                                      Delay_ms(10);
+ 244   4                                      EEPROM_Write(0x01,bian_num);
+ 245   4                                      Delay_ms(10);
+ 246   4                              }
+ 247   3                      }
+ 248   2                      while(temp!=0x0f)
+ 249   2                      {
+ 250   3                              temp=P3&0x0f;
+ 251   3                      }
+ 252   2              }
+ 253   1              P3=0xdf;P44=1;P42=1;
+ 254   1              if(P33==0)//s12
+ 255   1              {
+ 256   2                      Delay_ms(2);
+ 257   2                      if(P33==0)
+ 258   2                      {
+ 259   3                              s12_flag=1;
+ 260   3                      }
+ 261   2              }
+ 262   1              if(P33==1)
+ 263   1              {
+ 264   2                      Delay_ms(2);
+ 265   2                      if(P33==1)
+ 266   2                      {
+ 267   3                              s12_flag=0;
+ 268   3                              if(s12_tt>=10)
+ 269   3                              {
+ 270   4                                      
+ 271   4                                      if(s12_tt>=1000)
+ 272   4                                      {
+ 273   5                                              s12_short_or_long=1;
+ 274   5                                      }
+ 275   4                                      else if(s12_tt<1000)
+ 276   4                                      {
+ 277   5                                              s12_short_or_long=0;
+ 278   5                                      }
+ 279   4                                      s12_tt=0;
+ 280   4                              }
+ 281   3                      }
+ 282   2              }
+ 283   1              if(P32==0)//s13
+ 284   1              {
+ 285   2                      Delay_ms(2);
+ 286   2                      if(P32==0)
+ 287   2                      {
+ 288   3                              s13_flag=1;
+ 289   3                      }
+ 290   2              }
+ 291   1              if(P32==1)
+ 292   1              {
+ 293   2                      Delay_ms(2);
+ 294   2                      if(P32==1)
+ 295   2                      {
+ 296   3                              s13_flag=0;
+ 297   3                              if(s13_tt>=10)
+ 298   3                              {
+ 299   4                                      
+ 300   4                                      if(s13_tt>=1000)
+ 301   4                                      {
+ 302   5                                              s13_short_or_long=1;
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 6   
+
+ 303   5                                      }
+ 304   4                                      else if(s13_tt<1000)
+ 305   4                                      {
+ 306   5                                              s13_short_or_long=0;
+ 307   5                                      }
+ 308   4                                      s13_tt=0;
+ 309   4                              }
+ 310   3                      }
+ 311   2              }
+ 312   1              
+ 313   1              if(s12_short_or_long==1)//s12long
+ 314   1              {
+ 315   2                      bian_num=0;
+ 316   2                      Delay_ms(10);
+ 317   2                      EEPROM_Write(0x01,bian_num);
+ 318   2                      Delay_ms(10);
+ 319   2              }
+ 320   1              else if(s12_short_or_long==0)//s12short
+ 321   1              {
+ 322   2                      s12_short_or_long=2;
+ 323   2                      if(interface==0)
+ 324   2                      {
+ 325   3                              if(shuju_type==0){shuju_type=1;}
+ 326   3                              else if(shuju_type==1){shuju_type=2;}
+ 327   3                              else if(shuju_type==2){shuju_type=0;}
+ 328   3                      }
+ 329   2                      else if(interface==1)
+ 330   2                      {
+ 331   3                              if(canshu_type==0){canshu_type=1;}
+ 332   3                              else if(canshu_type==1){canshu_type=0;}
+ 333   3                      }                       
+ 334   2              }
+ 335   1              
+ 336   1              
+ 337   1              if(s13_short_or_long==1)//s13long
+ 338   1              {
+ 339   2                      s13_short_or_long=2;
+ 340   2                      if(DAC_on==0){DAC_on=1;}
+ 341   2                      else if(DAC_on==1){DAC_on=0;}
+ 342   2              
+ 343   2              }
+ 344   1              else if(s13_short_or_long==0)//s13short
+ 345   1              {
+ 346   2                      s13_short_or_long=2;
+ 347   2                      if(interface==0){interface=1;}                          //界面切换功能
+ 348   2                      else if(interface==1){interface=0;}
+ 349   2                              
+ 350   2              }
+ 351   1      }
+ 352          void UartInit(void)             //4800bps@11.0592MHz
+ 353          {
+ 354   1              SCON = 0x50;            //8位数据,可变波特率
+ 355   1              AUXR |= 0x40;           //定时器时钟1T模式
+ 356   1              AUXR &= 0xFE;           //串口1选择定时器1为波特率发生器
+ 357   1              TMOD &= 0x0F;           //设置定时器模式
+ 358   1              TL1 = 0xC0;             //设置定时初始值
+ 359   1              TH1 = 0xFD;             //设置定时初始值
+ 360   1              ET1 = 0;                //禁止定时器%d中断
+ 361   1              TR1 = 1;                //定时器1开始计时
+ 362   1      
+ 363   1      
+ 364   1          ES=1;
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 7   
+
+ 365   1          EA=1;
+ 366   1      }
+ 367          void rec_ser() interrupt 4
+ 368          {
+ 369   1          if (RI==1)
+ 370   1          {
+ 371   2              Rec_buffer[Receive_num]=SBUF;
+ 372   2              Receive_num++;
+ 373   2              Receive_flag=1;
+ 374   2              RI=0;
+ 375   2          }
+ 376   1          
+ 377   1      }
+ 378          void send_buffer(uchar *p,uchar Length)
+ 379          {
+ 380   1          uchar i=0;
+ 381   1          for ( i = 0; i < Length; i++)
+ 382   1          {
+ 383   2              SBUF=*(p+i);
+ 384   2              while(TI==0);
+ 385   2              TI=0;
+ 386   2          }
+ 387   1          
+ 388   1      }
+ 389          void Uart_Function()
+ 390          {
+ 391   1          if (Receive_over==1)
+ 392   1          {
+ 393   2              Receive_over=0;
+ 394   2              
+ 395   2              if ((Rec_buffer[0]=='S')&(Rec_buffer[1]=='T')&(Rec_buffer[2]=='\r')&(Rec_buffer[3]=='\n')&&(Receiv
+             -e_num==4))
+ 396   2              {
+ 397   3                  sprintf((char*)send_arr,"$%d,%d.%d\r\n",dis,temperature/100,temperature%100);
+ 398   3                  send_buffer(send_arr,11);
+ 399   3              }
+ 400   2                      else if((Rec_buffer[0]=='P')&(Rec_buffer[1]=='A')&(Rec_buffer[2]=='R')&(Rec_buffer[3]=='A')&(Rec_buffer[
+             -4]=='\r')&(Rec_buffer[5]=='\n')&&(Receive_num==6))
+ 401   2                      {
+ 402   3                  sprintf((char*)send_arr,"#%d,%d\r\n",dis_canshu,temper_canshu);
+ 403   3                  send_buffer(send_arr,8);
+ 404   3                      }
+ 405   2                      else
+ 406   2                      {
+ 407   3                  sprintf((char*)send_arr,"ERROR\r\n");
+ 408   3                  send_buffer(send_arr,7);
+ 409   3                      }
+ 410   2                      
+ 411   2              Receive_num=0;
+ 412   2          }
+ 413   1          
+ 414   1      }
+ 415          
+ 416          uint Get_Dis()
+ 417          {
+ 418   1              TH0=0;
+ 419   1              TL0=0;
+ 420   1              Send_Wave();
+ 421   1              TR0=1;
+ 422   1              while((TF0==0)&&(RX==1));
+ 423   1              TR0=0;
+ 424   1              if(TF0==1)
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 8   
+
+ 425   1              {
+ 426   2                      TF0=0;
+ 427   2                      distance=99;
+ 428   2              }
+ 429   1              if(RX==0)
+ 430   1              {
+ 431   2                      RX=1;
+ 432   2                      distance=(((TH0<<8)|(TL0))*0.017);
+ 433   2                      if(distance>=99)
+ 434   2                      {
+ 435   3                              distance=99;
+ 436   3                      }
+ 437   2              }
+ 438   1              return distance;
+ 439   1      }       
+ 440          
+ 441          void Bo_Function()
+ 442          {
+ 443   1              if(bo_flag==1)
+ 444   1              {
+ 445   2                      bo_flag=0;
+ 446   2                      dis=Get_Dis();
+ 447   2              }
+ 448   1      }
+ 449          void Send_Wave()
+ 450          {
+ 451   1              uchar i=8;
+ 452   1              do
+ 453   1              {
+ 454   2                      TX=1;
+ 455   2                      Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;
+ 456   2                      TX=0;
+ 457   2                      Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;
+ 458   2              }while(i--);
+ 459   1      }
+ 460          
+ 461          void Timer0Init(void)           //1毫秒@11.0592MHz
+ 462          {
+ 463   1              AUXR &= 0x7F;           //定时器时钟12T模式
+ 464   1              TMOD &= 0xF0;           //设置定时器模式
+ 465   1              TL0 = 0;                //设置定时初始值
+ 466   1              TH0 = 0;                //设置定时初始值
+ 467   1              TF0 = 0;                //清除TF0标志
+ 468   1              TR0 = 0;                //定时器0开始计时
+ 469   1      }
+ 470          
+ 471          
+ 472          
+ 473          void LED_on(uchar LED_num)
+ 474          {
+ 475   1              LED_Bits&=~(0x01<<LED_num-1);
+ 476   1              P2|=0x80;
+ 477   1              P2&=0x9f;
+ 478   1              P0=LED_Bits;
+ 479   1      }
+ 480          void LED_off(uchar LED_num)
+ 481          {
+ 482   1              LED_Bits|=(0x01<<LED_num-1);
+ 483   1              P2|=0x80;
+ 484   1              P2&=0x9f;
+ 485   1              P0=LED_Bits;
+ 486   1      
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 9   
+
+ 487   1      }
+ 488          
+ 489          void Timer2Init(void)           //1毫秒@11.0592MHz
+ 490          {
+ 491   1              AUXR |= 0x04;           //定时器时钟1T模式
+ 492   1              T2L = 0xCD;             //设置定时初始值
+ 493   1              T2H = 0xD4;             //设置定时初始值
+ 494   1              AUXR |= 0x10;           //定时器2开始计时
+ 495   1              
+ 496   1              IE2|=0x04;
+ 497   1              EA=1;
+ 498   1      }
+ 499          void t2_ser() interrupt 12
+ 500          {
+ 501   1              static uint bo_tt=0;
+ 502   1              
+ 503   1              static uint temper_tt=0;
+ 504   1              
+ 505   1              P2|=0xe0;
+ 506   1              P2&=0xff;
+ 507   1              P0=0xff;
+ 508   1              
+ 509   1              P2|=0xc0;
+ 510   1              P2&=0xdf;
+ 511   1              P0=0x01<<Digcom;
+ 512   1              
+ 513   1              P2|=0xe0;
+ 514   1              P2&=0xff;
+ 515   1              P0=tab[Digbuf[Digcom]];
+ 516   1              
+ 517   1              if(++Digcom==8){Digcom=0;}
+ 518   1              
+ 519   1              if(++bo_tt==500)
+ 520   1              {
+ 521   2                      bo_tt=0;
+ 522   2                      bo_flag=1;
+ 523   2              }
+ 524   1          if (Receive_flag>=1)
+ 525   1          {
+ 526   2              Receive_flag++;
+ 527   2              if (Receive_flag>=20)
+ 528   2              {
+ 529   3                  Receive_over=1;
+ 530   3                  Receive_flag=0;
+ 531   3              }
+ 532   2              
+ 533   2          }
+ 534   1              
+ 535   1              if(s12_flag==1)
+ 536   1              {
+ 537   2                      s12_tt++;
+ 538   2              }
+ 539   1              if(s13_flag==1)
+ 540   1              {
+ 541   2                      s13_tt++;
+ 542   2              }
+ 543   1              
+ 544   1              
+ 545   1              if(++temper_tt==100)
+ 546   1              {
+ 547   2                      temperature=Temper_Get();
+ 548   2                      temper_tt=0;
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 10  
+
+ 549   2              }
+ 550   1      }
+ 551          void Delay_ms(uint ms)          //@12.000MHz
+ 552          {
+ 553   1              unsigned char i, j,k;
+ 554   1              for(k=0;k<ms;k++)
+ 555   1              {
+ 556   2                      i = 12;
+ 557   2                      j = 169;
+ 558   2                      do
+ 559   2                      {
+ 560   3                              while (--j);
+ 561   3                      } while (--i);
+ 562   2              }
+ 563   1      }
+ 564          void allinit()
+ 565          {
+ 566   1              P2|=0xa0;
+ 567   1              P2&=0xbf;
+ 568   1              P0=0x00;
+ 569   1              
+ 570   1              P2|=0x80;
+ 571   1              P2&=0x9f;
+ 572   1              P0=0xff;
+ 573   1              
+ 574   1              P2|=0xc0;
+ 575   1              P2&=0xdf;
+ 576   1              P0=0xff;
+ 577   1              
+ 578   1              P2|=0xe0;
+ 579   1              P2&=0xff;
+ 580   1              P0=0xff;
+ 581   1      }
+ 582          void DAC()
+ 583          {
+ 584   1              if(DAC_on==1)
+ 585   1              {
+ 586   2                      if(dis>dis_canshu)
+ 587   2                      {
+ 588   3                              DA_Write(204);
+ 589   3                      }
+ 590   2                      else if(dis<=dis_canshu)
+ 591   2                      {
+ 592   3                              DA_Write(102);
+ 593   3                      }
+ 594   2                      LED_on(3);
+ 595   2              }
+ 596   1              else if(DAC_on==0)
+ 597   1              {
+ 598   2                      DA_Write(20);
+ 599   2                      LED_off(3);
+ 600   2              }
+ 601   1      }
+ 602          void LED_Display()
+ 603          {
+ 604   1              if(interface==0)
+ 605   1              {
+ 606   2                      if(temperature>temper_canshu){LED_on(1);}
+ 607   2                      else {LED_off(1);}
+ 608   2                      if(dis<dis_canshu){LED_on(2);}
+ 609   2                      else {LED_off(2);}
+ 610   2                      
+C51 COMPILER V9.54   MAIN                                                                  06/14/2022 01:02:07 PAGE 11  
+
+ 611   2              }
+ 612   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2340    ----
+   CONSTANT SIZE    =     55    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     54       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      6    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

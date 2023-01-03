@@ -1,0 +1,1903 @@
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\build\Target 1\main.o
+COMPILER INVOKED BY: D:\Keil51\C51\BIN\C51.exe .\MAIN.C PRINT(.\build\Target 1\main.lst) OMF2 TABS(4) CODE NOCOND SYMBOL
+                    -S OPTIMIZE(8,SPEED) SMALL ROM(LARGE) INCDIR(D:/Keil51/C51/INC/STC;D:\Keil51\C51\INC) DEFINE(__UVISION_VERSION=526) OBJEC
+                    -T(.\build\Target 1\main.o)
+
+line level    source
+
+   1          #include <STC15F2K60S2.H>
+   2          #include <INTRINS.H>
+   3          #include "iic.h"
+   4          
+   5          #define uchar unsigned char
+   6          #define uint unsigned int
+   7          
+   8          #define Somenop {_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();}
+   9          
+  10          sbit TX=P1^0;
+  11          sbit RX=P1^1;
+  12          
+  13          uchar LED_Bits=0xff;
+  14          uchar tab[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,
+  15                          0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10,
+  16                                                                  0xbf,0xff,0xc6,0x8e};//22--C;;23--F
+  17          uchar Digbuf[]={21,21,21,21,21,21,21,21};
+  18          uchar Digcom=0;
+  19          
+  20          void allinit();
+  21          void Timer2Init(void);      //1??@12.000MHz
+  22          void Delay_ms(uchar ms);        //@12.000MHz
+  23          void keyscan();
+  24          
+  25          //超声波//
+  26          void Timer0Init(void);      //1毫秒@11.0592MHz
+  27          void Send_Wave();
+  28          void Bo_Function();
+  29          uint Get_Dis();
+  30          uint dis=0;
+  31          uint distance=0;
+  32          bit bo_flag=0;
+  33          
+  34          void Display_All();
+  35          void Ceju_Display();
+  36          void Shuju_Huixian_Display();
+  37          void Canshu_Shezhi();
+  38          
+  39          bit huixian_jiance=1;               //0--数据回显；；1--检测显示
+  40          bit canshu_shezhi_interface=0;      //0--显示界面；；1--参数设置界面
+  41          uchar shuju_jilu_arr[4];
+  42          uchar shuju_jilu_num=1;
+  43          uchar S0=20;
+  44          uchar jilu_cishu=0;
+  45          uchar dis_last=0;
+  46          
+  47          void DAC_Out_Function();
+  48          uchar V_out=0;
+  49          
+  50          bit LED1_flash=0;
+  51          bit fla=0;
+  52          uint LED_tt=0;
+  53          void LED_7_8();
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 2   
+
+  54          
+  55          void main()
+  56          {
+  57   1          allinit();
+  58   1          Timer2Init();
+  59   1          Timer0Init();
+  60   1          S0=EEPROM_Read(0x10);Delay_ms(10);
+  61   1          while(1)
+  62   1          {
+  63   2              keyscan();
+  64   2              //Bo_Function();
+  65   2              // Digbuf[5]=dis/100;
+  66   2              // Digbuf[6]=dis%100/10;
+  67   2              // Digbuf[7]=dis%10;
+  68   2              Display_All();
+  69   2              DAC_Out_Function();
+  70   2              LED_7_8();
+  71   2      
+  72   2      
+  73   2          }
+  74   1      }
+  75          void LED_7_8()
+  76          {
+  77   1          if (canshu_shezhi_interface==1)
+  78   1          {
+  79   2              LED_Bits&=~(0x01<<6);
+  80   2              P2|=0x80;
+  81   2              P2&=0x9f;
+  82   2              P0=LED_Bits;
+  83   2          }
+  84   1          else
+  85   1          {
+  86   2              LED_Bits|=(0x01<<6);
+  87   2              P2|=0x80;
+  88   2              P2&=0x9f;
+  89   2              P0=LED_Bits;
+  90   2          }
+  91   1          
+  92   1          if (canshu_shezhi_interface==0)
+  93   1          {
+  94   2              if (huixian_jiance==0)
+  95   2              {
+  96   3                  LED_Bits&=~(0x01<<7);
+  97   3                  P2|=0x80;
+  98   3                  P2&=0x9f;
+  99   3                  P0=LED_Bits;
+ 100   3              }
+ 101   2              else
+ 102   2              {
+ 103   3                  LED_Bits|=(0x01<<7);
+ 104   3                  P2|=0x80;
+ 105   3                  P2&=0x9f;
+ 106   3                  P0=LED_Bits;
+ 107   3              }
+ 108   2              
+ 109   2          }
+ 110   1          else
+ 111   1          {
+ 112   2              LED_Bits|=(0x01<<7);
+ 113   2              P2|=0x80;
+ 114   2              P2&=0x9f;
+ 115   2              P0=LED_Bits;
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 3   
+
+ 116   2          }
+ 117   1          
+ 118   1      }
+ 119          void DAC_Out_Function()
+ 120          {
+ 121   1          if (dis<=S0)
+ 122   1          {
+ 123   2              V_out=0;
+ 124   2          }
+ 125   1          else if (dis>S0)
+ 126   1          {
+ 127   2              V_out=(dis-S0)*0.02;
+ 128   2          }
+ 129   1          if (V_out>5)
+ 130   1          {
+ 131   2              V_out=5;
+ 132   2          }
+ 133   1          DA_Write(V_out/1.96*100);
+ 134   1      }
+ 135          
+ 136          void Display_All()
+ 137          {
+ 138   1          if (canshu_shezhi_interface==0)
+ 139   1          {
+ 140   2              if (huixian_jiance==1)
+ 141   2              {
+ 142   3                  Ceju_Display();
+ 143   3              }
+ 144   2              else if (huixian_jiance==0)
+ 145   2              {
+ 146   3                  Shuju_Huixian_Display();
+ 147   3              }
+ 148   2              
+ 149   2          }
+ 150   1          else if (canshu_shezhi_interface==1)
+ 151   1          {
+ 152   2              Canshu_Shezhi();
+ 153   2          }
+ 154   1          
+ 155   1      }
+ 156          void Ceju_Display()
+ 157          {
+ 158   1          
+ 159   1      
+ 160   1          Digbuf[0]=22;
+ 161   1          Digbuf[1]=21;
+ 162   1          Digbuf[2]=dis/100;
+ 163   1          Digbuf[3]=dis%100/10;
+ 164   1          Digbuf[4]=dis%10;
+ 165   1          Digbuf[5]=dis_last/100;
+ 166   1          Digbuf[6]=dis_last%100/10;
+ 167   1          Digbuf[7]=dis_last%10;
+ 168   1      
+ 169   1      }
+ 170          void Shuju_Huixian_Display()
+ 171          {
+ 172   1          Digbuf[0]=shuju_jilu_num;
+ 173   1          Digbuf[1]=21;
+ 174   1          Digbuf[2]=21;
+ 175   1          Digbuf[3]=21;
+ 176   1          Digbuf[4]=21;
+ 177   1          Digbuf[5]=shuju_jilu_arr[shuju_jilu_num-1]/100;
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 4   
+
+ 178   1          Digbuf[6]=shuju_jilu_arr[shuju_jilu_num-1]%100/10;
+ 179   1          Digbuf[7]=shuju_jilu_arr[shuju_jilu_num-1]%10;
+ 180   1      }
+ 181          void Canshu_Shezhi()
+ 182          {
+ 183   1          Digbuf[0]=23;
+ 184   1          Digbuf[1]=21;
+ 185   1          Digbuf[2]=21;
+ 186   1          Digbuf[3]=21;
+ 187   1          Digbuf[4]=21;
+ 188   1          Digbuf[5]=21;
+ 189   1          Digbuf[6]=S0/10;
+ 190   1          Digbuf[7]=S0%10;
+ 191   1      }
+ 192          
+ 193          void Timer0Init(void)       //1毫秒@11.0592MHz
+ 194          {
+ 195   1          AUXR &= 0x7F;       //定时器时钟12T模式
+ 196   1          TMOD &= 0xF0;       //设置定时器模式
+ 197   1          TL0 = 0;        //设置定时初始值
+ 198   1          TH0 = 0;        //设置定时初始值
+ 199   1          TF0 = 0;        //清除TF0标志
+ 200   1          TR0 = 0;        //定时器0开始计时
+ 201   1      }
+ 202          void Send_Wave()
+ 203          {
+ 204   1          uchar i=8;
+ 205   1          do
+ 206   1          {
+ 207   2              TX=1;
+ 208   2              Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;
+ 209   2              TX=0;
+ 210   2              Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;Somenop;
+ 211   2          } while (i--);
+ 212   1          
+ 213   1      }
+ 214          void Bo_Function()
+ 215          {
+ 216   1          if (bo_flag==1)
+ 217   1          {
+ 218   2              bo_flag=0;
+ 219   2              
+ 220   2              dis_last=dis;
+ 221   2              
+ 222   2              dis=Get_Dis();
+ 223   2              
+ 224   2      
+ 225   2          }
+ 226   1          
+ 227   1      }
+ 228          uint Get_Dis()
+ 229          {
+ 230   1          TH0=0;
+ 231   1          TL0=0;
+ 232   1          Send_Wave();
+ 233   1          TR0=1;
+ 234   1          while((RX==1)&&(TF0==0));
+ 235   1          TR0=0;
+ 236   1          if (TF0==1)
+ 237   1          {
+ 238   2              TF0=0;
+ 239   2              distance=9999;
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 5   
+
+ 240   2          }
+ 241   1          if (RX==0)
+ 242   1          {
+ 243   2              distance=(((TH0<<8)|(TL0))*0.017);
+ 244   2          }
+ 245   1          return distance;
+ 246   1      }
+ 247          
+ 248          void allinit()
+ 249          {
+ 250   1          P2|=0xa0;
+ 251   1          P2&=0xbf;
+ 252   1          P0=0x00;//·??ù?÷?????÷
+ 253   1          
+ 254   1          P2|=0x80;
+ 255   1          P2&=0x9f;
+ 256   1          P0=0xff;//LED
+ 257   1          
+ 258   1          P2|=0xc0;
+ 259   1          P2&=0xdf;
+ 260   1          P0=0xff;//????
+ 261   1          
+ 262   1          P2|=0xe0;
+ 263   1          P2&=0xff;
+ 264   1          P0=0xff;//????
+ 265   1          
+ 266   1      }
+ 267          void Timer2Init(void)       //1??@12.000MHz
+ 268          {
+ 269   1          AUXR |= 0x04;       //?????1T??
+ 270   1          T2L = 0x20;     //???????
+ 271   1          T2H = 0xD1;     //???????
+ 272   1          AUXR |= 0x10;       //???2????
+ 273   1          
+ 274   1          IE2 |= 0x04;                    //????2??
+ 275   1          EA = 1;
+ 276   1      }
+ 277          void t2int() interrupt 12           //????
+ 278          {
+ 279   1          static uint bo_tt=0;
+ 280   1      
+ 281   1          P2|=0xe0;
+ 282   1          P2&=0xff;
+ 283   1          P0=0xff;//????
+ 284   1          
+ 285   1          P2|=0xc0;
+ 286   1          P2&=0xdf;
+ 287   1          P0=0x01<<Digcom;
+ 288   1          
+ 289   1          P2|=0xe0;
+ 290   1          P2&=0xff;
+ 291   1          P0=tab[Digbuf[Digcom]];
+ 292   1          
+ 293   1          if(++Digcom==8)
+ 294   1          {
+ 295   2              Digcom=0;
+ 296   2          }
+ 297   1          
+ 298   1          if (++bo_tt==200)
+ 299   1          {
+ 300   2              bo_tt=0;
+ 301   2              bo_flag=1;
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 6   
+
+ 302   2          }
+ 303   1          
+ 304   1          if (LED1_flash==1)
+ 305   1          {
+ 306   2              LED_tt++;
+ 307   2              if (LED_tt%1000==0)
+ 308   2              {
+ 309   3                  if (fla==0)
+ 310   3                  {
+ 311   4                      fla=1;
+ 312   4                      LED_Bits&=0xfe;
+ 313   4                      P2|=0x80;
+ 314   4                      P2&=0x9f;
+ 315   4                      P0=LED_Bits;
+ 316   4                  }
+ 317   3                  else if (fla==1)
+ 318   3                  {
+ 319   4                      fla=0;
+ 320   4                      LED_Bits|=0x01;
+ 321   4                      P2|=0x80;
+ 322   4                      P2&=0x9f;
+ 323   4                      P0=LED_Bits;
+ 324   4                  }
+ 325   3                  if (LED_tt==6000)
+ 326   3                  {
+ 327   4                      LED1_flash=0;
+ 328   4                      LED_tt=0;
+ 329   4      
+ 330   4                      LED_Bits|=0x01;
+ 331   4                      P2|=0x80;
+ 332   4                      P2&=0x9f;
+ 333   4                      P0=LED_Bits;
+ 334   4                  }
+ 335   3                  
+ 336   3              }
+ 337   2              
+ 338   2          }
+ 339   1          
+ 340   1      }
+ 341          void Delay_ms(uchar ms)     //@12.000MHz
+ 342          {
+ 343   1          unsigned char i, j,k;
+ 344   1          for(k=0;k<ms;k++)
+ 345   1          {
+ 346   2              i = 12;
+ 347   2              j = 169;
+ 348   2              do
+ 349   2              {
+ 350   3                  while (--j);
+ 351   3              } while (--i);
+ 352   2          
+ 353   2          }
+ 354   1      }
+ 355          void keyscan()
+ 356          {
+ 357   1      
+ 358   1          if(P30==0)//s7
+ 359   1          {
+ 360   2              Delay_ms(5);
+ 361   2              if(P30==0)
+ 362   2              {
+ 363   3                  if (canshu_shezhi_interface==0)
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 7   
+
+ 364   3                  {
+ 365   4                      if (huixian_jiance==0)
+ 366   4                      {
+ 367   5                          shuju_jilu_num++;
+ 368   5                          if (shuju_jilu_num==5)
+ 369   5                          {
+ 370   6                              shuju_jilu_num=1;
+ 371   6                          }
+ 372   5                          
+ 373   5                      }
+ 374   4                      
+ 375   4                  }
+ 376   3                  else if (canshu_shezhi_interface==1)
+ 377   3                  {
+ 378   4                      S0+=10;
+ 379   4                      if (S0==40)
+ 380   4                      {
+ 381   5                          S0=10;
+ 382   5                      }
+ 383   4                      
+ 384   4                  }
+ 385   3                  EEPROM_Write(0x10,S0);
+ 386   3                  Delay_ms(10);
+ 387   3              }
+ 388   2              while(!P30);
+ 389   2          }
+ 390   1          else if(P31==0)//s6
+ 391   1          {
+ 392   2              Delay_ms(5);
+ 393   2              if(P31==0)
+ 394   2              {
+ 395   3                  if (canshu_shezhi_interface==0)
+ 396   3                  {
+ 397   4                      canshu_shezhi_interface=1;
+ 398   4                  }
+ 399   3                  else if (canshu_shezhi_interface==1)
+ 400   3                  {
+ 401   4                      canshu_shezhi_interface=0;
+ 402   4                  }
+ 403   3                  
+ 404   3              }
+ 405   2              while(!P31);
+ 406   2          }
+ 407   1          else if(P32==0)//s5
+ 408   1          {
+ 409   2              Delay_ms(5);
+ 410   2              if(P32==0)
+ 411   2              {
+ 412   3                  if (canshu_shezhi_interface==0)
+ 413   3                  {
+ 414   4                      if (huixian_jiance==0)
+ 415   4                      {
+ 416   5                          huixian_jiance=1;
+ 417   5                      }
+ 418   4                      else if (huixian_jiance==1)
+ 419   4                      {
+ 420   5                          huixian_jiance=0;
+ 421   5                      }
+ 422   4                      
+ 423   4                  }
+ 424   3                  
+ 425   3              }
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 8   
+
+ 426   2              while(!P32);
+ 427   2          }
+ 428   1          else if(P33==0)//s4
+ 429   1          {
+ 430   2              Delay_ms(5);
+ 431   2              if(P33==0)
+ 432   2              {
+ 433   3                  Bo_Function();
+ 434   3      
+ 435   3                  LED1_flash=1;
+ 436   3      
+ 437   3      
+ 438   3                  shuju_jilu_arr[jilu_cishu]=dis;
+ 439   3                  jilu_cishu++;
+ 440   3      
+ 441   3                  EEPROM_Write(0x01<<jilu_cishu,shuju_jilu_arr[jilu_cishu]);
+ 442   3                  Delay_ms(10);
+ 443   3                  if (jilu_cishu==4)
+ 444   3                  {
+ 445   4                      jilu_cishu=0;
+ 446   4                  }
+ 447   3                  
+ 448   3              }
+ 449   2              while(!P33);
+ 450   2          }
+ 451   1      }
+ 452          //????LED1
+ 453          //LED_Bits&=0xfe;
+ 454          //  P2|=0x80;
+ 455          //  P2&=0x9f;
+ 456          //  P0=LED_Bits;
+ 457          //?¨??LED1
+ 458          //LED_Bits|=0x01;
+ 459          //  P2|=0x80;
+ 460          //  P2&=0x9f;
+ 461          //  P0=LED_Bits;
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 9   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 55
+                                           ; SOURCE LINE # 56
+                                           ; SOURCE LINE # 57
+0000 120000      R     LCALL   allinit
+                                           ; SOURCE LINE # 58
+0003 120000      R     LCALL   Timer2Init
+                                           ; SOURCE LINE # 59
+0006 120000      R     LCALL   Timer0Init
+                                           ; SOURCE LINE # 60
+0009 7F10              MOV     R7,#010H
+000B 120000      E     LCALL   _EEPROM_Read
+000E 8F00        R     MOV     S0,R7
+0010 7F0A              MOV     R7,#0AH
+0012 120000      R     LCALL   _Delay_ms
+0015         ?C0001:
+                                           ; SOURCE LINE # 61
+                                           ; SOURCE LINE # 62
+                                           ; SOURCE LINE # 63
+0015 120000      R     LCALL   keyscan
+                                           ; SOURCE LINE # 68
+0018 120000      R     LCALL   Display_All
+                                           ; SOURCE LINE # 69
+001B 120000      R     LCALL   DAC_Out_Function
+                                           ; SOURCE LINE # 70
+001E 120000      R     LCALL   LED_7_8
+                                           ; SOURCE LINE # 73
+0021 80F2              SJMP    ?C0001
+             ; FUNCTION main (END)
+
+             ; FUNCTION LED_7_8 (BEGIN)
+                                           ; SOURCE LINE # 75
+                                           ; SOURCE LINE # 76
+                                           ; SOURCE LINE # 77
+0000 300005            JNB     canshu_shezhi_interface,?C0004
+                                           ; SOURCE LINE # 78
+                                           ; SOURCE LINE # 79
+0003 5300BF      R     ANL     LED_Bits,#0BFH
+                                           ; SOURCE LINE # 80
+                                           ; SOURCE LINE # 81
+                                           ; SOURCE LINE # 82
+                                           ; SOURCE LINE # 83
+0006 8003              SJMP    ?C0099
+0008         ?C0004:
+                                           ; SOURCE LINE # 85
+                                           ; SOURCE LINE # 86
+0008 430040      R     ORL     LED_Bits,#040H
+                                           ; SOURCE LINE # 87
+000B         ?C0099:
+000B 43A080            ORL     P2,#080H
+                                           ; SOURCE LINE # 88
+000E 53A09F            ANL     P2,#09FH
+                                           ; SOURCE LINE # 89
+0011 850080      R     MOV     P0,LED_Bits
+                                           ; SOURCE LINE # 90
+0014         ?C0005:
+                                           ; SOURCE LINE # 92
+0014 20000D            JB      canshu_shezhi_interface,?C0006
+                                           ; SOURCE LINE # 93
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 10  
+
+                                           ; SOURCE LINE # 94
+0017 200005            JB      huixian_jiance,?C0007
+                                           ; SOURCE LINE # 95
+                                           ; SOURCE LINE # 96
+001A 53007F      R     ANL     LED_Bits,#07FH
+                                           ; SOURCE LINE # 97
+                                           ; SOURCE LINE # 98
+                                           ; SOURCE LINE # 99
+                                           ; SOURCE LINE # 100
+001D 8008              SJMP    ?C0101
+001F         ?C0007:
+                                           ; SOURCE LINE # 102
+                                           ; SOURCE LINE # 103
+001F 430080      R     ORL     LED_Bits,#080H
+                                           ; SOURCE LINE # 104
+0022         ?C0100:
+                                           ; SOURCE LINE # 105
+                                           ; SOURCE LINE # 106
+                                           ; SOURCE LINE # 107
+                                           ; SOURCE LINE # 109
+0022 8003              SJMP    ?C0101
+0024         ?C0006:
+                                           ; SOURCE LINE # 111
+                                           ; SOURCE LINE # 112
+0024 430080      R     ORL     LED_Bits,#080H
+                                           ; SOURCE LINE # 113
+0027         ?C0101:
+0027 43A080            ORL     P2,#080H
+                                           ; SOURCE LINE # 114
+002A 53A09F            ANL     P2,#09FH
+                                           ; SOURCE LINE # 115
+002D 850080      R     MOV     P0,LED_Bits
+                                           ; SOURCE LINE # 116
+                                           ; SOURCE LINE # 118
+0030         ?C0010:
+0030 22                RET     
+             ; FUNCTION LED_7_8 (END)
+
+             ; FUNCTION DAC_Out_Function (BEGIN)
+                                           ; SOURCE LINE # 119
+                                           ; SOURCE LINE # 120
+                                           ; SOURCE LINE # 121
+0000 AF00        R     MOV     R7,S0
+0002 7E00              MOV     R6,#00H
+0004 D3                SETB    C
+0005 E500        R     MOV     A,dis+01H
+0007 9F                SUBB    A,R7
+0008 E500        R     MOV     A,dis
+000A 9E                SUBB    A,R6
+000B 5005              JNC     ?C0011
+                                           ; SOURCE LINE # 122
+                                           ; SOURCE LINE # 123
+000D E4                CLR     A
+000E F500        R     MOV     V_out,A
+                                           ; SOURCE LINE # 124
+0010 8027              SJMP    ?C0012
+0012         ?C0011:
+                                           ; SOURCE LINE # 125
+0012 D3                SETB    C
+0013 E500        R     MOV     A,dis+01H
+0015 9F                SUBB    A,R7
+0016 E500        R     MOV     A,dis
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 11  
+
+0018 9E                SUBB    A,R6
+0019 401E              JC      ?C0012
+                                           ; SOURCE LINE # 126
+                                           ; SOURCE LINE # 127
+001B E500        R     MOV     A,dis+01H
+001D 9500        R     SUBB    A,S0
+001F FD                MOV     R5,A
+0020 E500        R     MOV     A,dis
+0022 9400              SUBB    A,#00H
+0024 FC                MOV     R4,A
+0025 E4                CLR     A
+0026 120000      E     LCALL   ?C?FCASTI
+0029 7B0A              MOV     R3,#0AH
+002B 7AD7              MOV     R2,#0D7H
+002D 79A3              MOV     R1,#0A3H
+002F 783C              MOV     R0,#03CH
+0031 120000      E     LCALL   ?C?FPMUL
+0034 120000      E     LCALL   ?C?CASTF
+0037 8F00        R     MOV     V_out,R7
+                                           ; SOURCE LINE # 128
+0039         ?C0012:
+                                           ; SOURCE LINE # 129
+0039 E500        R     MOV     A,V_out
+003B D3                SETB    C
+003C 9405              SUBB    A,#05H
+003E 4003              JC      ?C0014
+                                           ; SOURCE LINE # 130
+                                           ; SOURCE LINE # 131
+0040 750005      R     MOV     V_out,#05H
+                                           ; SOURCE LINE # 132
+0043         ?C0014:
+                                           ; SOURCE LINE # 133
+0043 AC00        R     MOV     R4,V_out
+0045 E4                CLR     A
+0046 120000      E     LCALL   ?C?FCASTC
+0049 7B48              MOV     R3,#048H
+004B 7AE1              MOV     R2,#0E1H
+004D 79FA              MOV     R1,#0FAH
+004F 783F              MOV     R0,#03FH
+0051 120000      E     LCALL   ?C?FPDIV
+0054 E4                CLR     A
+0055 FB                MOV     R3,A
+0056 FA                MOV     R2,A
+0057 79C8              MOV     R1,#0C8H
+0059 7842              MOV     R0,#042H
+005B 120000      E     LCALL   ?C?FPMUL
+005E 120000      E     LCALL   ?C?CASTF
+0061 020000      E     LJMP    _DA_Write
+             ; FUNCTION DAC_Out_Function (END)
+
+             ; FUNCTION Display_All (BEGIN)
+                                           ; SOURCE LINE # 136
+                                           ; SOURCE LINE # 137
+                                           ; SOURCE LINE # 138
+0000 20000C            JB      canshu_shezhi_interface,?C0016
+                                           ; SOURCE LINE # 139
+                                           ; SOURCE LINE # 140
+0003 300003            JNB     huixian_jiance,?C0017
+                                           ; SOURCE LINE # 141
+                                           ; SOURCE LINE # 142
+0006 020000      R     LJMP    Ceju_Display
+                                           ; SOURCE LINE # 143
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 12  
+
+0009         ?C0017:
+                                           ; SOURCE LINE # 144
+0009 200009            JB      huixian_jiance,?C0022
+                                           ; SOURCE LINE # 145
+                                           ; SOURCE LINE # 146
+000C 020000      R     LJMP    Shuju_Huixian_Display
+                                           ; SOURCE LINE # 147
+                                           ; SOURCE LINE # 149
+000F         ?C0016:
+                                           ; SOURCE LINE # 150
+000F 300003            JNB     canshu_shezhi_interface,?C0022
+                                           ; SOURCE LINE # 151
+                                           ; SOURCE LINE # 152
+0012 120000      R     LCALL   Canshu_Shezhi
+                                           ; SOURCE LINE # 153
+                                           ; SOURCE LINE # 155
+0015         ?C0022:
+0015 22                RET     
+             ; FUNCTION Display_All (END)
+
+             ; FUNCTION Ceju_Display (BEGIN)
+                                           ; SOURCE LINE # 156
+                                           ; SOURCE LINE # 157
+                                           ; SOURCE LINE # 160
+0000 750016      R     MOV     Digbuf,#016H
+                                           ; SOURCE LINE # 161
+0003 750015      R     MOV     Digbuf+01H,#015H
+                                           ; SOURCE LINE # 162
+0006 AE00        R     MOV     R6,dis
+0008 AF00        R     MOV     R7,dis+01H
+000A 7C00              MOV     R4,#00H
+000C 7D64              MOV     R5,#064H
+000E 120000      E     LCALL   ?C?UIDIV
+0011 8F00        R     MOV     Digbuf+02H,R7
+                                           ; SOURCE LINE # 163
+0013 AE00        R     MOV     R6,dis
+0015 AF00        R     MOV     R7,dis+01H
+0017 7C00              MOV     R4,#00H
+0019 7D64              MOV     R5,#064H
+001B 120000      E     LCALL   ?C?UIDIV
+001E 7E00              MOV     R6,#00H
+0020 7F0A              MOV     R7,#0AH
+0022 CF                XCH     A,R7
+0023 CD                XCH     A,R5
+0024 CF                XCH     A,R7
+0025 CE                XCH     A,R6
+0026 CC                XCH     A,R4
+0027 CE                XCH     A,R6
+0028 120000      E     LCALL   ?C?UIDIV
+002B 8F00        R     MOV     Digbuf+03H,R7
+                                           ; SOURCE LINE # 164
+002D AE00        R     MOV     R6,dis
+002F AF00        R     MOV     R7,dis+01H
+0031 7C00              MOV     R4,#00H
+0033 7D0A              MOV     R5,#0AH
+0035 120000      E     LCALL   ?C?UIDIV
+0038 8D00        R     MOV     Digbuf+04H,R5
+                                           ; SOURCE LINE # 165
+003A E500        R     MOV     A,dis_last
+003C 75F064            MOV     B,#064H
+003F 84                DIV     AB
+0040 F500        R     MOV     Digbuf+05H,A
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 13  
+
+                                           ; SOURCE LINE # 166
+0042 E500        R     MOV     A,dis_last
+0044 75F064            MOV     B,#064H
+0047 84                DIV     AB
+0048 E5F0              MOV     A,B
+004A 75F00A            MOV     B,#0AH
+004D 84                DIV     AB
+004E F500        R     MOV     Digbuf+06H,A
+                                           ; SOURCE LINE # 167
+0050 E500        R     MOV     A,dis_last
+0052 75F00A            MOV     B,#0AH
+0055 84                DIV     AB
+0056 85F000      R     MOV     Digbuf+07H,B
+                                           ; SOURCE LINE # 169
+0059 22                RET     
+             ; FUNCTION Ceju_Display (END)
+
+             ; FUNCTION Shuju_Huixian_Display (BEGIN)
+                                           ; SOURCE LINE # 170
+                                           ; SOURCE LINE # 171
+                                           ; SOURCE LINE # 172
+0000 850000      R     MOV     Digbuf,shuju_jilu_num
+                                           ; SOURCE LINE # 173
+0003 750015      R     MOV     Digbuf+01H,#015H
+                                           ; SOURCE LINE # 174
+0006 750015      R     MOV     Digbuf+02H,#015H
+                                           ; SOURCE LINE # 175
+0009 750015      R     MOV     Digbuf+03H,#015H
+                                           ; SOURCE LINE # 176
+000C 750015      R     MOV     Digbuf+04H,#015H
+                                           ; SOURCE LINE # 177
+000F 7400        R     MOV     A,#LOW shuju_jilu_arr+0FFFFH
+0011 2500        R     ADD     A,shuju_jilu_num
+0013 F8                MOV     R0,A
+0014 E6                MOV     A,@R0
+0015 FF                MOV     R7,A
+0016 75F064            MOV     B,#064H
+0019 84                DIV     AB
+001A F500        R     MOV     Digbuf+05H,A
+                                           ; SOURCE LINE # 178
+001C EF                MOV     A,R7
+001D 75F064            MOV     B,#064H
+0020 84                DIV     AB
+0021 E5F0              MOV     A,B
+0023 75F00A            MOV     B,#0AH
+0026 84                DIV     AB
+0027 F500        R     MOV     Digbuf+06H,A
+                                           ; SOURCE LINE # 179
+0029 E6                MOV     A,@R0
+002A 75F00A            MOV     B,#0AH
+002D 84                DIV     AB
+002E 85F000      R     MOV     Digbuf+07H,B
+                                           ; SOURCE LINE # 180
+0031 22                RET     
+             ; FUNCTION Shuju_Huixian_Display (END)
+
+             ; FUNCTION Canshu_Shezhi (BEGIN)
+                                           ; SOURCE LINE # 181
+                                           ; SOURCE LINE # 182
+                                           ; SOURCE LINE # 183
+0000 750017      R     MOV     Digbuf,#017H
+                                           ; SOURCE LINE # 184
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 14  
+
+0003 750015      R     MOV     Digbuf+01H,#015H
+                                           ; SOURCE LINE # 185
+0006 750015      R     MOV     Digbuf+02H,#015H
+                                           ; SOURCE LINE # 186
+0009 750015      R     MOV     Digbuf+03H,#015H
+                                           ; SOURCE LINE # 187
+000C 750015      R     MOV     Digbuf+04H,#015H
+                                           ; SOURCE LINE # 188
+000F 750015      R     MOV     Digbuf+05H,#015H
+                                           ; SOURCE LINE # 189
+0012 E500        R     MOV     A,S0
+0014 75F00A            MOV     B,#0AH
+0017 84                DIV     AB
+0018 F500        R     MOV     Digbuf+06H,A
+                                           ; SOURCE LINE # 190
+001A E500        R     MOV     A,S0
+001C 75F00A            MOV     B,#0AH
+001F 84                DIV     AB
+0020 85F000      R     MOV     Digbuf+07H,B
+                                           ; SOURCE LINE # 191
+0023 22                RET     
+             ; FUNCTION Canshu_Shezhi (END)
+
+             ; FUNCTION Timer0Init (BEGIN)
+                                           ; SOURCE LINE # 193
+                                           ; SOURCE LINE # 194
+                                           ; SOURCE LINE # 195
+0000 538E7F            ANL     AUXR,#07FH
+                                           ; SOURCE LINE # 196
+0003 5389F0            ANL     TMOD,#0F0H
+                                           ; SOURCE LINE # 197
+0006 E4                CLR     A
+0007 F58A              MOV     TL0,A
+                                           ; SOURCE LINE # 198
+0009 F58C              MOV     TH0,A
+                                           ; SOURCE LINE # 199
+000B C28D              CLR     TF0
+                                           ; SOURCE LINE # 200
+000D C28C              CLR     TR0
+                                           ; SOURCE LINE # 201
+000F 22                RET     
+             ; FUNCTION Timer0Init (END)
+
+             ; FUNCTION Send_Wave (BEGIN)
+                                           ; SOURCE LINE # 202
+                                           ; SOURCE LINE # 203
+                                           ; SOURCE LINE # 204
+;---- Variable 'i' assigned to Register 'R7' ----
+0000 7F08              MOV     R7,#08H
+0002         ?C0029:
+                                           ; SOURCE LINE # 206
+                                           ; SOURCE LINE # 207
+0002 D290              SETB    TX
+                                           ; SOURCE LINE # 208
+0004 00                NOP     
+0005 00                NOP     
+0006 00                NOP     
+0007 00                NOP     
+0008 00                NOP     
+0009 00                NOP     
+000A 00                NOP     
+000B 00                NOP     
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 15  
+
+000C 00                NOP     
+000D 00                NOP     
+000E 00                NOP     
+000F 00                NOP     
+0010 00                NOP     
+0011 00                NOP     
+0012 00                NOP     
+0013 00                NOP     
+0014 00                NOP     
+0015 00                NOP     
+0016 00                NOP     
+0017 00                NOP     
+0018 00                NOP     
+0019 00                NOP     
+001A 00                NOP     
+001B 00                NOP     
+001C 00                NOP     
+001D 00                NOP     
+001E 00                NOP     
+001F 00                NOP     
+0020 00                NOP     
+0021 00                NOP     
+0022 00                NOP     
+0023 00                NOP     
+0024 00                NOP     
+0025 00                NOP     
+0026 00                NOP     
+0027 00                NOP     
+0028 00                NOP     
+0029 00                NOP     
+002A 00                NOP     
+002B 00                NOP     
+002C 00                NOP     
+002D 00                NOP     
+002E 00                NOP     
+002F 00                NOP     
+0030 00                NOP     
+0031 00                NOP     
+0032 00                NOP     
+0033 00                NOP     
+0034 00                NOP     
+0035 00                NOP     
+0036 00                NOP     
+0037 00                NOP     
+0038 00                NOP     
+0039 00                NOP     
+003A 00                NOP     
+003B 00                NOP     
+003C 00                NOP     
+003D 00                NOP     
+003E 00                NOP     
+003F 00                NOP     
+0040 00                NOP     
+0041 00                NOP     
+0042 00                NOP     
+0043 00                NOP     
+0044 00                NOP     
+0045 00                NOP     
+0046 00                NOP     
+0047 00                NOP     
+0048 00                NOP     
+0049 00                NOP     
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 16  
+
+004A 00                NOP     
+004B 00                NOP     
+004C 00                NOP     
+004D 00                NOP     
+004E 00                NOP     
+004F 00                NOP     
+0050 00                NOP     
+0051 00                NOP     
+0052 00                NOP     
+0053 00                NOP     
+0054 00                NOP     
+0055 00                NOP     
+0056 00                NOP     
+0057 00                NOP     
+0058 00                NOP     
+0059 00                NOP     
+005A 00                NOP     
+005B 00                NOP     
+005C 00                NOP     
+005D 00                NOP     
+005E 00                NOP     
+005F 00                NOP     
+0060 00                NOP     
+0061 00                NOP     
+0062 00                NOP     
+0063 00                NOP     
+0064 00                NOP     
+0065 00                NOP     
+0066 00                NOP     
+0067 00                NOP     
+                                           ; SOURCE LINE # 209
+0068 C290              CLR     TX
+                                           ; SOURCE LINE # 210
+006A 00                NOP     
+006B 00                NOP     
+006C 00                NOP     
+006D 00                NOP     
+006E 00                NOP     
+006F 00                NOP     
+0070 00                NOP     
+0071 00                NOP     
+0072 00                NOP     
+0073 00                NOP     
+0074 00                NOP     
+0075 00                NOP     
+0076 00                NOP     
+0077 00                NOP     
+0078 00                NOP     
+0079 00                NOP     
+007A 00                NOP     
+007B 00                NOP     
+007C 00                NOP     
+007D 00                NOP     
+007E 00                NOP     
+007F 00                NOP     
+0080 00                NOP     
+0081 00                NOP     
+0082 00                NOP     
+0083 00                NOP     
+0084 00                NOP     
+0085 00                NOP     
+0086 00                NOP     
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 17  
+
+0087 00                NOP     
+0088 00                NOP     
+0089 00                NOP     
+008A 00                NOP     
+008B 00                NOP     
+008C 00                NOP     
+008D 00                NOP     
+008E 00                NOP     
+008F 00                NOP     
+0090 00                NOP     
+0091 00                NOP     
+0092 00                NOP     
+0093 00                NOP     
+0094 00                NOP     
+0095 00                NOP     
+0096 00                NOP     
+0097 00                NOP     
+0098 00                NOP     
+0099 00                NOP     
+009A 00                NOP     
+009B 00                NOP     
+009C 00                NOP     
+009D 00                NOP     
+009E 00                NOP     
+009F 00                NOP     
+00A0 00                NOP     
+00A1 00                NOP     
+00A2 00                NOP     
+00A3 00                NOP     
+00A4 00                NOP     
+00A5 00                NOP     
+00A6 00                NOP     
+00A7 00                NOP     
+00A8 00                NOP     
+00A9 00                NOP     
+00AA 00                NOP     
+00AB 00                NOP     
+00AC 00                NOP     
+00AD 00                NOP     
+00AE 00                NOP     
+00AF 00                NOP     
+00B0 00                NOP     
+00B1 00                NOP     
+00B2 00                NOP     
+00B3 00                NOP     
+00B4 00                NOP     
+00B5 00                NOP     
+00B6 00                NOP     
+00B7 00                NOP     
+00B8 00                NOP     
+00B9 00                NOP     
+00BA 00                NOP     
+00BB 00                NOP     
+00BC 00                NOP     
+00BD 00                NOP     
+00BE 00                NOP     
+00BF 00                NOP     
+00C0 00                NOP     
+00C1 00                NOP     
+00C2 00                NOP     
+00C3 00                NOP     
+00C4 00                NOP     
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 18  
+
+00C5 00                NOP     
+00C6 00                NOP     
+00C7 00                NOP     
+00C8 00                NOP     
+00C9 00                NOP     
+00CA 00                NOP     
+00CB 00                NOP     
+00CC 00                NOP     
+00CD 00                NOP     
+                                           ; SOURCE LINE # 211
+00CE AE07              MOV     R6,AR7
+00D0 1F                DEC     R7
+00D1 EE                MOV     A,R6
+00D2 6003              JZ      $ + 5H
+00D4 020000      R     LJMP    ?C0029
+                                           ; SOURCE LINE # 213
+00D7 22                RET     
+             ; FUNCTION Send_Wave (END)
+
+             ; FUNCTION Bo_Function (BEGIN)
+                                           ; SOURCE LINE # 214
+                                           ; SOURCE LINE # 215
+                                           ; SOURCE LINE # 216
+0000 30000C            JNB     bo_flag,?C0032
+                                           ; SOURCE LINE # 217
+                                           ; SOURCE LINE # 218
+0003 C200        R     CLR     bo_flag
+                                           ; SOURCE LINE # 220
+0005 850000      R     MOV     dis_last,dis+01H
+                                           ; SOURCE LINE # 222
+0008 120000      R     LCALL   Get_Dis
+000B 8E00        R     MOV     dis,R6
+000D 8F00        R     MOV     dis+01H,R7
+                                           ; SOURCE LINE # 225
+                                           ; SOURCE LINE # 227
+000F         ?C0032:
+000F 22                RET     
+             ; FUNCTION Bo_Function (END)
+
+             ; FUNCTION Get_Dis (BEGIN)
+                                           ; SOURCE LINE # 228
+                                           ; SOURCE LINE # 229
+                                           ; SOURCE LINE # 230
+0000 E4                CLR     A
+0001 F58C              MOV     TH0,A
+                                           ; SOURCE LINE # 231
+0003 F58A              MOV     TL0,A
+                                           ; SOURCE LINE # 232
+0005 120000      R     LCALL   Send_Wave
+                                           ; SOURCE LINE # 233
+0008 D28C              SETB    TR0
+000A         ?C0033:
+                                           ; SOURCE LINE # 234
+000A 309103            JNB     RX,?C0034
+000D 308DFA            JNB     TF0,?C0033
+0010         ?C0034:
+                                           ; SOURCE LINE # 235
+0010 C28C              CLR     TR0
+                                           ; SOURCE LINE # 236
+0012 308D08            JNB     TF0,?C0035
+                                           ; SOURCE LINE # 237
+                                           ; SOURCE LINE # 238
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 19  
+
+0015 C28D              CLR     TF0
+                                           ; SOURCE LINE # 239
+0017 750027      R     MOV     distance,#027H
+001A 75000F      R     MOV     distance+01H,#0FH
+                                           ; SOURCE LINE # 240
+001D         ?C0035:
+                                           ; SOURCE LINE # 241
+001D 20911C            JB      RX,?C0036
+                                           ; SOURCE LINE # 242
+                                           ; SOURCE LINE # 243
+0020 AF8C              MOV     R7,TH0
+0022 EF                MOV     A,R7
+0023 AD8A              MOV     R5,TL0
+0025 FC                MOV     R4,A
+0026 E4                CLR     A
+0027 120000      E     LCALL   ?C?FCASTI
+002A 7B96              MOV     R3,#096H
+002C 7A43              MOV     R2,#043H
+002E 798B              MOV     R1,#08BH
+0030 783C              MOV     R0,#03CH
+0032 120000      E     LCALL   ?C?FPMUL
+0035 120000      E     LCALL   ?C?CASTF
+0038 8E00        R     MOV     distance,R6
+003A 8F00        R     MOV     distance+01H,R7
+                                           ; SOURCE LINE # 244
+003C         ?C0036:
+                                           ; SOURCE LINE # 245
+003C AE00        R     MOV     R6,distance
+003E AF00        R     MOV     R7,distance+01H
+                                           ; SOURCE LINE # 246
+0040         ?C0037:
+0040 22                RET     
+             ; FUNCTION Get_Dis (END)
+
+             ; FUNCTION allinit (BEGIN)
+                                           ; SOURCE LINE # 248
+                                           ; SOURCE LINE # 249
+                                           ; SOURCE LINE # 250
+0000 43A0A0            ORL     P2,#0A0H
+                                           ; SOURCE LINE # 251
+0003 53A0BF            ANL     P2,#0BFH
+                                           ; SOURCE LINE # 252
+0006 E4                CLR     A
+0007 F580              MOV     P0,A
+                                           ; SOURCE LINE # 254
+0009 43A080            ORL     P2,#080H
+                                           ; SOURCE LINE # 255
+000C 53A09F            ANL     P2,#09FH
+                                           ; SOURCE LINE # 256
+000F 7580FF            MOV     P0,#0FFH
+                                           ; SOURCE LINE # 258
+0012 43A0C0            ORL     P2,#0C0H
+                                           ; SOURCE LINE # 259
+0015 53A0DF            ANL     P2,#0DFH
+                                           ; SOURCE LINE # 260
+0018 7580FF            MOV     P0,#0FFH
+                                           ; SOURCE LINE # 262
+001B 43A0E0            ORL     P2,#0E0H
+                                           ; SOURCE LINE # 263
+                                           ; SOURCE LINE # 264
+001E 7580FF            MOV     P0,#0FFH
+                                           ; SOURCE LINE # 266
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 20  
+
+0021 22                RET     
+             ; FUNCTION allinit (END)
+
+             ; FUNCTION Timer2Init (BEGIN)
+                                           ; SOURCE LINE # 267
+                                           ; SOURCE LINE # 268
+                                           ; SOURCE LINE # 269
+0000 438E04            ORL     AUXR,#04H
+                                           ; SOURCE LINE # 270
+0003 75D720            MOV     T2L,#020H
+                                           ; SOURCE LINE # 271
+0006 75D6D1            MOV     T2H,#0D1H
+                                           ; SOURCE LINE # 272
+0009 438E10            ORL     AUXR,#010H
+                                           ; SOURCE LINE # 274
+000C 43AF04            ORL     IE2,#04H
+                                           ; SOURCE LINE # 275
+000F D2AF              SETB    EA
+                                           ; SOURCE LINE # 276
+0011 22                RET     
+             ; FUNCTION Timer2Init (END)
+
+             ; FUNCTION t2int (BEGIN)
+0000 C0E0              PUSH    ACC
+0002 C0F0              PUSH    B
+0004 C0D0              PUSH    PSW
+0006 75D000            MOV     PSW,#00H
+0009 C000              PUSH    AR0
+000B C004              PUSH    AR4
+000D C005              PUSH    AR5
+000F C006              PUSH    AR6
+0011 C007              PUSH    AR7
+                                           ; SOURCE LINE # 277
+                                           ; SOURCE LINE # 281
+0013 43A0E0            ORL     P2,#0E0H
+                                           ; SOURCE LINE # 282
+                                           ; SOURCE LINE # 283
+0016 7580FF            MOV     P0,#0FFH
+                                           ; SOURCE LINE # 285
+0019 43A0C0            ORL     P2,#0C0H
+                                           ; SOURCE LINE # 286
+001C 53A0DF            ANL     P2,#0DFH
+                                           ; SOURCE LINE # 287
+001F AF00        R     MOV     R7,Digcom
+0021 7401              MOV     A,#01H
+0023 A807              MOV     R0,AR7
+0025 08                INC     R0
+0026 8002              SJMP    ?C0093
+0028         ?C0092:
+0028 C3                CLR     C
+0029 33                RLC     A
+002A         ?C0093:
+002A D8FC              DJNZ    R0,?C0092
+002C F580              MOV     P0,A
+                                           ; SOURCE LINE # 289
+002E 43A0E0            ORL     P2,#0E0H
+                                           ; SOURCE LINE # 290
+                                           ; SOURCE LINE # 291
+0031 7400        R     MOV     A,#LOW Digbuf
+0033 2500        R     ADD     A,Digcom
+0035 F8                MOV     R0,A
+0036 E6                MOV     A,@R0
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 21  
+
+0037 2400        R     ADD     A,#LOW tab
+0039 F8                MOV     R0,A
+003A E6                MOV     A,@R0
+003B F580              MOV     P0,A
+                                           ; SOURCE LINE # 293
+003D 0500        R     INC     Digcom
+003F E500        R     MOV     A,Digcom
+0041 B40803            CJNE    A,#08H,?C0040
+                                           ; SOURCE LINE # 294
+                                           ; SOURCE LINE # 295
+0044 750000      R     MOV     Digcom,#00H
+                                           ; SOURCE LINE # 296
+0047         ?C0040:
+                                           ; SOURCE LINE # 298
+0047 0500        R     INC     bo_tt+01H
+0049 E500        R     MOV     A,bo_tt+01H
+004B 7002              JNZ     ?C0094
+004D 0500        R     INC     bo_tt
+004F         ?C0094:
+004F 64C8              XRL     A,#0C8H
+0051 4500        R     ORL     A,bo_tt
+0053 7006              JNZ     ?C0041
+                                           ; SOURCE LINE # 299
+                                           ; SOURCE LINE # 300
+0055 F500        R     MOV     bo_tt,A
+0057 F500        R     MOV     bo_tt+01H,A
+                                           ; SOURCE LINE # 301
+0059 D200        R     SETB    bo_flag
+                                           ; SOURCE LINE # 302
+005B         ?C0041:
+                                           ; SOURCE LINE # 304
+005B 30004F            JNB     LED1_flash,?C0048
+                                           ; SOURCE LINE # 305
+                                           ; SOURCE LINE # 306
+005E 0500        R     INC     LED_tt+01H
+0060 E500        R     MOV     A,LED_tt+01H
+0062 7002              JNZ     ?C0095
+0064 0500        R     INC     LED_tt
+0066         ?C0095:
+                                           ; SOURCE LINE # 307
+0066 AE00        R     MOV     R6,LED_tt
+0068 FF                MOV     R7,A
+0069 7C03              MOV     R4,#03H
+006B 7DE8              MOV     R5,#0E8H
+006D 120000      E     LCALL   ?C?UIDIV
+0070 ED                MOV     A,R5
+0071 4C                ORL     A,R4
+0072 7039              JNZ     ?C0048
+                                           ; SOURCE LINE # 308
+                                           ; SOURCE LINE # 309
+0074 200007            JB      fla,?C0044
+                                           ; SOURCE LINE # 310
+                                           ; SOURCE LINE # 311
+0077 D200        R     SETB    fla
+                                           ; SOURCE LINE # 312
+0079 5300FE      R     ANL     LED_Bits,#0FEH
+                                           ; SOURCE LINE # 313
+                                           ; SOURCE LINE # 314
+                                           ; SOURCE LINE # 315
+                                           ; SOURCE LINE # 316
+007C 8008              SJMP    ?C0102
+007E         ?C0044:
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 22  
+
+                                           ; SOURCE LINE # 317
+007E 30000E            JNB     fla,?C0045
+                                           ; SOURCE LINE # 318
+                                           ; SOURCE LINE # 319
+0081 C200        R     CLR     fla
+                                           ; SOURCE LINE # 320
+0083 430001      R     ORL     LED_Bits,#01H
+                                           ; SOURCE LINE # 321
+0086         ?C0102:
+0086 43A080            ORL     P2,#080H
+                                           ; SOURCE LINE # 322
+0089 53A09F            ANL     P2,#09FH
+                                           ; SOURCE LINE # 323
+008C 850080      R     MOV     P0,LED_Bits
+                                           ; SOURCE LINE # 324
+008F         ?C0045:
+                                           ; SOURCE LINE # 325
+008F E500        R     MOV     A,LED_tt+01H
+0091 B47019            CJNE    A,#070H,?C0048
+0094 E500        R     MOV     A,LED_tt
+0096 B41714            CJNE    A,#017H,?C0048
+                                           ; SOURCE LINE # 326
+                                           ; SOURCE LINE # 327
+0099 C200        R     CLR     LED1_flash
+                                           ; SOURCE LINE # 328
+009B 750000      R     MOV     LED_tt,#00H
+009E 750000      R     MOV     LED_tt+01H,#00H
+                                           ; SOURCE LINE # 330
+00A1 430001      R     ORL     LED_Bits,#01H
+                                           ; SOURCE LINE # 331
+00A4 43A080            ORL     P2,#080H
+                                           ; SOURCE LINE # 332
+00A7 53A09F            ANL     P2,#09FH
+                                           ; SOURCE LINE # 333
+00AA 850080      R     MOV     P0,LED_Bits
+                                           ; SOURCE LINE # 334
+                                           ; SOURCE LINE # 336
+                                           ; SOURCE LINE # 338
+                                           ; SOURCE LINE # 340
+00AD         ?C0048:
+00AD D007              POP     AR7
+00AF D006              POP     AR6
+00B1 D005              POP     AR5
+00B3 D004              POP     AR4
+00B5 D000              POP     AR0
+00B7 D0D0              POP     PSW
+00B9 D0F0              POP     B
+00BB D0E0              POP     ACC
+00BD 32                RETI    
+             ; FUNCTION t2int (END)
+
+             ; FUNCTION _Delay_ms (BEGIN)
+                                           ; SOURCE LINE # 341
+;---- Variable 'ms' assigned to Register 'R7' ----
+                                           ; SOURCE LINE # 342
+                                           ; SOURCE LINE # 344
+;---- Variable 'k' assigned to Register 'R6' ----
+0000 E4                CLR     A
+0001 FE                MOV     R6,A
+0002         ?C0049:
+0002 EE                MOV     A,R6
+0003 C3                CLR     C
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 23  
+
+0004 9F                SUBB    A,R7
+0005 500B              JNC     ?C0057
+                                           ; SOURCE LINE # 345
+                                           ; SOURCE LINE # 346
+;---- Variable 'i' assigned to Register 'R5' ----
+0007 7D0C              MOV     R5,#0CH
+                                           ; SOURCE LINE # 347
+;---- Variable 'j' assigned to Register 'R4' ----
+0009 7CA9              MOV     R4,#0A9H
+                                           ; SOURCE LINE # 349
+000B         ?C0055:
+                                           ; SOURCE LINE # 350
+000B DCFE              DJNZ    R4,?C0055
+000D         ?C0056:
+                                           ; SOURCE LINE # 351
+000D         ?C0052:
+000D DDFC              DJNZ    R5,?C0055
+                                           ; SOURCE LINE # 353
+000F 0E                INC     R6
+0010 80F0              SJMP    ?C0049
+                                           ; SOURCE LINE # 354
+0012         ?C0057:
+0012 22                RET     
+             ; FUNCTION _Delay_ms (END)
+
+             ; FUNCTION keyscan (BEGIN)
+                                           ; SOURCE LINE # 355
+                                           ; SOURCE LINE # 356
+                                           ; SOURCE LINE # 358
+0000 20B03D            JB      P30,?C0058
+                                           ; SOURCE LINE # 359
+                                           ; SOURCE LINE # 360
+0003 7F05              MOV     R7,#05H
+0005 120000      R     LCALL   _Delay_ms
+                                           ; SOURCE LINE # 361
+0008 20B02D            JB      P30,?C0066
+                                           ; SOURCE LINE # 362
+                                           ; SOURCE LINE # 363
+000B 20000F            JB      canshu_shezhi_interface,?C0060
+                                           ; SOURCE LINE # 364
+                                           ; SOURCE LINE # 365
+000E 20001B            JB      huixian_jiance,?C0063
+                                           ; SOURCE LINE # 366
+                                           ; SOURCE LINE # 367
+0011 0500        R     INC     shuju_jilu_num
+                                           ; SOURCE LINE # 368
+0013 E500        R     MOV     A,shuju_jilu_num
+0015 B40514            CJNE    A,#05H,?C0063
+                                           ; SOURCE LINE # 369
+                                           ; SOURCE LINE # 370
+0018 750001      R     MOV     shuju_jilu_num,#01H
+                                           ; SOURCE LINE # 371
+                                           ; SOURCE LINE # 373
+                                           ; SOURCE LINE # 375
+001B 800F              SJMP    ?C0063
+001D         ?C0060:
+                                           ; SOURCE LINE # 376
+001D 30000C            JNB     canshu_shezhi_interface,?C0063
+                                           ; SOURCE LINE # 377
+                                           ; SOURCE LINE # 378
+0020 740A              MOV     A,#0AH
+0022 2500        R     ADD     A,S0
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 24  
+
+0024 F500        R     MOV     S0,A
+                                           ; SOURCE LINE # 379
+0026 B42803            CJNE    A,#028H,?C0063
+                                           ; SOURCE LINE # 380
+                                           ; SOURCE LINE # 381
+0029 75000A      R     MOV     S0,#0AH
+                                           ; SOURCE LINE # 382
+                                           ; SOURCE LINE # 384
+002C         ?C0063:
+                                           ; SOURCE LINE # 385
+002C AD00        R     MOV     R5,S0
+002E 7F10              MOV     R7,#010H
+0030 120000      E     LCALL   _EEPROM_Write
+                                           ; SOURCE LINE # 386
+0033 7F0A              MOV     R7,#0AH
+0035 120000      R     LCALL   _Delay_ms
+                                           ; SOURCE LINE # 387
+0038         ?C0066:
+                                           ; SOURCE LINE # 388
+0038 30B003            JNB     P30,$ + 6H
+003B 020000      R     LJMP    ?C0091
+003E 80F8              SJMP    ?C0066
+0040         ?C0058:
+                                           ; SOURCE LINE # 390
+0040 20B119            JB      P31,?C0069
+                                           ; SOURCE LINE # 391
+                                           ; SOURCE LINE # 392
+0043 7F05              MOV     R7,#05H
+0045 120000      R     LCALL   _Delay_ms
+                                           ; SOURCE LINE # 393
+0048 20B10C            JB      P31,?C0074
+                                           ; SOURCE LINE # 394
+                                           ; SOURCE LINE # 395
+004B 200004            JB      canshu_shezhi_interface,?C0071
+                                           ; SOURCE LINE # 396
+                                           ; SOURCE LINE # 397
+004E D200        R     SETB    canshu_shezhi_interface
+                                           ; SOURCE LINE # 398
+0050 8005              SJMP    ?C0074
+0052         ?C0071:
+                                           ; SOURCE LINE # 399
+0052 300002            JNB     canshu_shezhi_interface,?C0074
+                                           ; SOURCE LINE # 400
+                                           ; SOURCE LINE # 401
+0055 C200        R     CLR     canshu_shezhi_interface
+                                           ; SOURCE LINE # 402
+                                           ; SOURCE LINE # 404
+0057         ?C0074:
+                                           ; SOURCE LINE # 405
+0057 20B162            JB      P31,?C0091
+005A 80FB              SJMP    ?C0074
+005C         ?C0069:
+                                           ; SOURCE LINE # 407
+005C 20B21C            JB      P32,?C0077
+                                           ; SOURCE LINE # 408
+                                           ; SOURCE LINE # 409
+005F 7F05              MOV     R7,#05H
+0061 120000      R     LCALL   _Delay_ms
+                                           ; SOURCE LINE # 410
+0064 20B20F            JB      P32,?C0083
+                                           ; SOURCE LINE # 411
+                                           ; SOURCE LINE # 412
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 25  
+
+0067 20000C            JB      canshu_shezhi_interface,?C0083
+                                           ; SOURCE LINE # 413
+                                           ; SOURCE LINE # 414
+006A 200004            JB      huixian_jiance,?C0080
+                                           ; SOURCE LINE # 415
+                                           ; SOURCE LINE # 416
+006D D200        R     SETB    huixian_jiance
+                                           ; SOURCE LINE # 417
+006F 8005              SJMP    ?C0083
+0071         ?C0080:
+                                           ; SOURCE LINE # 418
+0071 300002            JNB     huixian_jiance,?C0083
+                                           ; SOURCE LINE # 419
+                                           ; SOURCE LINE # 420
+0074 C200        R     CLR     huixian_jiance
+                                           ; SOURCE LINE # 421
+                                           ; SOURCE LINE # 423
+                                           ; SOURCE LINE # 425
+0076         ?C0083:
+                                           ; SOURCE LINE # 426
+0076 20B243            JB      P32,?C0091
+0079 80FB              SJMP    ?C0083
+007B         ?C0077:
+                                           ; SOURCE LINE # 428
+007B 20B33E            JB      P33,?C0091
+                                           ; SOURCE LINE # 429
+                                           ; SOURCE LINE # 430
+007E 7F05              MOV     R7,#05H
+0080 120000      R     LCALL   _Delay_ms
+                                           ; SOURCE LINE # 431
+0083 20B333            JB      P33,?C0089
+                                           ; SOURCE LINE # 432
+                                           ; SOURCE LINE # 433
+0086 120000      R     LCALL   Bo_Function
+                                           ; SOURCE LINE # 435
+0089 D200        R     SETB    LED1_flash
+                                           ; SOURCE LINE # 438
+008B 7400        R     MOV     A,#LOW shuju_jilu_arr
+008D 2500        R     ADD     A,jilu_cishu
+008F F8                MOV     R0,A
+0090 A600        R     MOV     @R0,dis+01H
+                                           ; SOURCE LINE # 439
+0092 0500        R     INC     jilu_cishu
+                                           ; SOURCE LINE # 441
+0094 AF00        R     MOV     R7,jilu_cishu
+0096 7401              MOV     A,#01H
+0098 A807              MOV     R0,AR7
+009A 08                INC     R0
+009B 8002              SJMP    ?C0098
+009D         ?C0097:
+009D C3                CLR     C
+009E 33                RLC     A
+009F         ?C0098:
+009F D8FC              DJNZ    R0,?C0097
+00A1 FF                MOV     R7,A
+00A2 7400        R     MOV     A,#LOW shuju_jilu_arr
+00A4 2500        R     ADD     A,jilu_cishu
+00A6 F8                MOV     R0,A
+00A7 E6                MOV     A,@R0
+00A8 FD                MOV     R5,A
+00A9 120000      E     LCALL   _EEPROM_Write
+                                           ; SOURCE LINE # 442
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 26  
+
+00AC 7F0A              MOV     R7,#0AH
+00AE 120000      R     LCALL   _Delay_ms
+                                           ; SOURCE LINE # 443
+00B1 E500        R     MOV     A,jilu_cishu
+00B3 B40403            CJNE    A,#04H,?C0089
+                                           ; SOURCE LINE # 444
+                                           ; SOURCE LINE # 445
+00B6 E4                CLR     A
+00B7 F500        R     MOV     jilu_cishu,A
+                                           ; SOURCE LINE # 446
+                                           ; SOURCE LINE # 448
+00B9         ?C0089:
+                                           ; SOURCE LINE # 449
+00B9 30B3FD            JNB     P33,?C0089
+00BC         ?C0090:
+                                           ; SOURCE LINE # 450
+                                           ; SOURCE LINE # 451
+00BC         ?C0091:
+00BC 22                RET     
+             ; FUNCTION keyscan (END)
+
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 27  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+CCF2 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00DAH  1
+P1M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0092H  1
+P0M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0093H  1
+P2M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0096H  1
+P1M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0091H  1
+P0 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0080H  1
+P3M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B2H  1
+P2M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0095H  1
+P1 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0090H  1
+Send_Wave. . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+P4M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B4H  1
+P3M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B1H  1
+P2 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A0H  1
+S0 . . . . . . . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   0002H  1
+WKTCH. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00ABH  1
+P5M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CAH  1
+P4M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B3H  1
+P3 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B0H  1
+P6M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CCH  1
+P5M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C9H  1
+P4 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C0H  1
+AC . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D6H  1
+LED_7_8. . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+PWMIF. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F6H  1
+P7M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E2H  1
+P6M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CBH  1
+P5 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C8H  1
+EA . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AFH  1
+P7M1 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E1H  1
+P6 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E8H  1
+WKTCL. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00AAH  1
+P7 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F8H  1
+SPCTL. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CEH  1
+Shuju_Huixian_Display. . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+CF . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00DFH  1
+PWMCR. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F5H  1
+CH . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F9H  1
+P_SW1. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A2H  1
+P_SW2. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00BAH  1
+canshu_shezhi_interface. . . . . . . .  PUBLIC   DATA   BIT      0000H  1
+EADC . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ADH  1
+IE . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A8H  1
+DAC_Out_Function . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+CL . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E9H  1
+V_out. . . . . . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   0003H  1
+IAP_CMD. . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C5H  1
+CCAP0H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00FAH  1
+CCAP1H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00FBH  1
+CCAP2H . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00FCH  1
+ADC_RES. . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00BDH  1
+CCAP0L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00EAH  1
+CR . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00DEH  1
+PWMFDCR. . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F7H  1
+CCAP1L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00EBH  1
+CCAPM0 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00DAH  1
+CCAP2L . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00ECH  1
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 28  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+CCAPM1 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00DBH  1
+CCAPM2 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00DCH  1
+ES . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ACH  1
+PADC . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BDH  1
+IP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B8H  1
+RI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0098H  1
+CY . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D7H  1
+TI . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0099H  1
+LED_tt . . . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    0004H  2
+CLK_DIV. . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0097H  1
+IAP_ADDRH. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C3H  1
+Get_Dis. . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+PS . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BCH  1
+SP . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0081H  1
+CMOD . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D9H  1
+CCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D8H  1
+IAP_ADDRL. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C4H  1
+PPCA . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BFH  1
+OV . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D2H  1
+main . . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+CMPCR1 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E6H  1
+_EEPROM_Read . . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+CMPCR2 . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E7H  1
+RX . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0091H  1
+TX . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0090H  1
+ELVD . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AEH  1
+P00. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0080H  1
+ADC_CONTR. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00BCH  1
+SBUF . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0099H  1
+PCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0087H  1
+P10. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0090H  1
+P01. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0081H  1
+P20. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A0H  1
+P11. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0091H  1
+P02. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0082H  1
+_Delay_ms. . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  ms . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0007H  1
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0005H  1
+  j. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0004H  1
+  k. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_CHAR   0006H  1
+P30. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B0H  1
+P21. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A1H  1
+P12. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0092H  1
+P03. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0083H  1
+fla. . . . . . . . . . . . . . . . . .  PUBLIC   DATA   BIT      0001H  1
+SCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0098H  1
+P40. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C0H  1
+P31. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B1H  1
+P22. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A2H  1
+P13. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0093H  1
+P04. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0084H  1
+Canshu_Shezhi. . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+TMOD . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0089H  1
+TCON . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0088H  1
+P50. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C8H  1
+P41. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C1H  1
+P32. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B2H  1
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 29  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+P23. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A3H  1
+P14. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0094H  1
+P05. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0085H  1
+jilu_cishu . . . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   0006H  1
+P60. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E8H  1
+P51. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C9H  1
+P42. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C2H  1
+P33. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B3H  1
+P24. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A4H  1
+P15. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0095H  1
+P06. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0086H  1
+PLVD . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BEH  1
+P70. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F8H  1
+P61. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00E9H  1
+P52. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CAH  1
+P43. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C3H  1
+P34. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B4H  1
+P25. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A5H  1
+P16. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0096H  1
+P07. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0087H  1
+tab. . . . . . . . . . . . . . . . . .  PUBLIC   DATA   ARRAY    0007H  24
+P71. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00F9H  1
+P62. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00EAH  1
+P53. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CBH  1
+P44. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C4H  1
+P35. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B5H  1
+P26. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A6H  1
+P17. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0097H  1
+_EEPROM_Write. . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+P72. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00FAH  1
+P63. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00EBH  1
+P54. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CCH  1
+P45. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C5H  1
+P36. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B6H  1
+P27. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A7H  1
+P73. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00FBH  1
+P64. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ECH  1
+P55. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CDH  1
+P46. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C6H  1
+P37. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B7H  1
+P74. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00FCH  1
+P65. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00EDH  1
+P56. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CEH  1
+P47. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00C7H  1
+P75. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00FDH  1
+P66. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00EEH  1
+P57. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00CFH  1
+P76. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00FEH  1
+P67. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00EFH  1
+IE0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0089H  1
+BUS_SPEED. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A1H  1
+P77. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00FFH  1
+IE1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008BH  1
+IE2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00AFH  1
+dis. . . . . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    001FH  2
+AUXR . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008EH  1
+B. . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F0H  1
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 30  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+IAP_CONTR. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C7H  1
+Ceju_Display . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+PWMCFG . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F1H  1
+ACC. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00E0H  1
+huixian_jiance . . . . . . . . . . . .  PUBLIC   DATA   BIT      0002H  1
+ET0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A9H  1
+LED_Bits . . . . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   0021H  1
+TF0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008DH  1
+ET1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00ABH  1
+Timer0Init . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+TF1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008FH  1
+IP2. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B5H  1
+RB8. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009AH  1
+TH0. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008CH  1
+Timer2Init . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+TH1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008DH  1
+IT0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0088H  1
+EX0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00A8H  1
+bo_flag. . . . . . . . . . . . . . . .  PUBLIC   DATA   BIT      0003H  1
+TB8. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009BH  1
+T2H. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D6H  1
+IT1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008AH  1
+EX1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00AAH  1
+T3H. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D4H  1
+P. . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D0H  1
+distance . . . . . . . . . . . . . . .  PUBLIC   DATA   U_INT    0022H  2
+SM0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009FH  1
+T4H. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D2H  1
+TL0. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008AH  1
+SM1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009EH  1
+TL1. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008BH  1
+SM2. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009DH  1
+T2L. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D7H  1
+T3L. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D5H  1
+Digbuf . . . . . . . . . . . . . . . .  PUBLIC   DATA   ARRAY    0024H  8
+T4L. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D3H  1
+PT0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B9H  1
+Display_All. . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+PT1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BBH  1
+RS0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D3H  1
+Digcom . . . . . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   002CH  1
+IAP_DATA . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C2H  1
+TR0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008CH  1
+RS1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D4H  1
+TR1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      008EH  1
+dis_last . . . . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   002DH  1
+WDT_CONTR. . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C1H  1
+PX0. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00B8H  1
+PX1. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00BAH  1
+PCA_PWM0 . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F2H  1
+PCA_PWM1 . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F3H  1
+PCA_PWM2 . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00F4H  1
+P1ASF. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   009DH  1
+DPH. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0083H  1
+Bo_Function. . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+T3T4M. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D1H  1
+T4T3M. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D1H  1
+C51 COMPILER V9.54   MAIN                                                                  06/01/2022 13:08:14 PAGE 31  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+ADC_RESL . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00BEH  1
+DPL. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0082H  1
+SPSTAT . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CDH  1
+S2BUF. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   009BH  1
+S3BUF. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00ADH  1
+S4BUF. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0085H  1
+REN. . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      009CH  1
+S2CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   009AH  1
+S3CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00ACH  1
+S4CON. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0084H  1
+SADEN. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B9H  1
+SADDR. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A9H  1
+shuju_jilu_arr . . . . . . . . . . . .  PUBLIC   DATA   ARRAY    002EH  4
+allinit. . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+keyscan. . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+IAP_TRIG . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00C6H  1
+AUXR1. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A2H  1
+t2int. . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  bo_tt. . . . . . . . . . . . . . . .  STATIC   DATA   U_INT    0000H  2
+_DA_Write. . . . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+F0 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D5H  1
+INT_CLKO . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   008FH  1
+F1 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D1H  1
+LED1_flash . . . . . . . . . . . . . .  PUBLIC   DATA   BIT      0004H  1
+PSW. . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00D0H  1
+shuju_jilu_num . . . . . . . . . . . .  PUBLIC   DATA   U_CHAR   0032H  1
+CCF0 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D8H  1
+CCF1 . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      00D9H  1
+SPDAT. . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00CFH  1
+P0M0 . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0094H  1
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1148    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     51    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      5    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

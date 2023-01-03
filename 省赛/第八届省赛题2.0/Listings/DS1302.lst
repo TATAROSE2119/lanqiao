@@ -1,0 +1,133 @@
+C51 COMPILER V9.54   DS1302                                                                03/22/2022 08:17:45 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE DS1302
+OBJECT MODULE PLACED IN .\Objects\DS1302.obj
+COMPILER INVOKED BY: D:\Keil51\C51\BIN\C51.EXE DS1302.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\DS1
+                    -302.lst) OBJECT(.\Objects\DS1302.obj)
+
+line level    source
+
+   1          /*
+   2            ???????: DS1302????????
+   3            ????????: Keil uVision 4.10 
+   4            ???????: CT107???????????? 8051??12MHz
+   5            ??    ??: 2011-8-9
+   6          */
+   7          
+   8          #include <STC15F2K60S2.H>
+   9          #include <INTRINS.H>
+  10          
+  11          sbit SCK=P1^7;          
+  12          sbit SDA=P2^3;          
+  13          sbit RST = P1^3;   // DS1302???                                                                                         
+  14          
+  15          unsigned char shijian[]={50,59,23,0,0,0,0};
+  16          void Write_Ds1302_Byte(unsigned  char temp) 
+  17          {
+  18   1              unsigned char i;
+  19   1              for (i=0;i<8;i++)       
+  20   1              { 
+  21   2                      SCK=0;
+  22   2                      SDA=temp&0x01;
+  23   2                      temp>>=1; 
+  24   2                      SCK=1;
+  25   2              }
+  26   1      }   
+  27          
+  28          void Write_Ds1302( unsigned char address,unsigned char dat )     
+  29          {
+  30   1              unsigned char dat1,dat2;
+  31   1              RST=0;
+  32   1              _nop_();
+  33   1              SCK=0;
+  34   1              _nop_();
+  35   1              RST=1;  
+  36   1              _nop_();  
+  37   1              Write_Ds1302_Byte(address);     
+  38   1              dat1=dat/10;
+  39   1              dat2=dat%10;
+  40   1              dat=(dat1<<4)|dat2;
+  41   1              Write_Ds1302_Byte(dat);         
+  42   1              RST=0; 
+  43   1      }
+  44          
+  45          unsigned char Read_Ds1302 ( unsigned char address )
+  46          {
+  47   1              unsigned char i,temp=0x00;
+  48   1              unsigned char dat1,dat2;
+  49   1      
+  50   1              RST=0;
+  51   1              _nop_();
+  52   1              SCK=0;
+  53   1              _nop_();
+  54   1              RST=1;
+C51 COMPILER V9.54   DS1302                                                                03/22/2022 08:17:45 PAGE 2   
+
+  55   1              _nop_();
+  56   1              Write_Ds1302_Byte(address);
+  57   1              for (i=0;i<8;i++)       
+  58   1              {               
+  59   2                      SCK=0;
+  60   2                      temp>>=1;       
+  61   2                      if(SDA)
+  62   2                      temp|=0x80;     
+  63   2                      SCK=1;
+  64   2              } 
+  65   1              RST=0;
+  66   1              _nop_();
+  67   1              RST=0;
+  68   1              SCK=0;
+  69   1              _nop_();
+  70   1              SCK=1;
+  71   1              _nop_();
+  72   1              SDA=0;
+  73   1              _nop_();
+  74   1              SDA=1;
+  75   1              _nop_();
+  76   1              dat1=temp/16;
+  77   1              dat2=temp%16;
+  78   1              temp=dat1*10+dat2;
+  79   1              return (temp);                  
+  80   1      }
+  81          void DS1302_Init()
+  82          {
+  83   1              unsigned char i;
+  84   1              unsigned char add=0x80;
+  85   1              
+  86   1              Write_Ds1302(0x8e,0x00);
+  87   1              for(i=0;i<8;i++)
+  88   1              {
+  89   2                      Write_Ds1302(add,shijian[i]);
+  90   2                      add+=2;
+  91   2              }
+  92   1              Write_Ds1302(0x8e,0x80);
+  93   1      }void DS1302_Get()
+  94          {
+  95   1              unsigned char i;
+  96   1              unsigned char add=0x81;
+  97   1              
+  98   1              Write_Ds1302(0x8e,0x00);
+  99   1              for(i=0;i<8;i++)
+ 100   1              {
+ 101   2                      shijian[i]=Read_Ds1302(add);
+ 102   2                      add+=2;
+ 103   2              }
+ 104   1              Write_Ds1302(0x8e,0x80);
+ 105   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    194    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      7    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.54   DS1302                                                                03/22/2022 08:17:45 PAGE 3   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

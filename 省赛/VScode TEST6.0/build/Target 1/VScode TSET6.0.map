@@ -1,0 +1,173 @@
+LX51 LINKER/LOCATER V4.66.41.0                                                          01/31/2022  11:11:36  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.66.41.0, INVOKED BY:
+D:\KEIL51\C51\BIN\LX51.EXE .\build\Target 1\main.o TO .\build\Target 1\VScode TSET6.0 PRINT (.\build\Target 1\VScode TSE
+>> T6.0.map) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\build\Target 1\main.o (MAIN)
+         COMMENT TYPE 0: C51 V9.54
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_INIT)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\build\Target 1\VScode TSET6.0 (MAIN)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   0002A6H   CODE
+I:000000H   I:000000H   I:00007FH   000029H   DATA
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+
+
+MEMORY MAP OF MODULE:  .\build\Target 1\VScode TSET6.0 (MAIN)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H   000027H   000020H   BYTE   UNIT     DATA           ?DT?MAIN
+000028H   000028H   000001H   BYTE   UNIT     DATA           _DATA_GROUP_
+000029H   000029H   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   00004AH   000048H   BYTE   UNIT     CODE           ?PR?T2INT?MAIN
+00004BH   00005DH   000013H   BYTE   UNIT     CODE           ?PR?_DELAY_MS?MAIN
+00005EH   000062H   000005H   ---    ---      **GAP**
+000063H   000065H   000003H   BYTE   OFFS..   CODE           ?MAIN?00063
+000066H   0001B6H   000151H   BYTE   UNIT     CODE           ?PR?KEYSCAN16_2?MAIN
+0001B7H   000242H   00008CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+000243H   00026BH   000029H   BYTE   UNIT     CODE           ?C_INITSEG
+00026CH   00028DH   000022H   BYTE   UNIT     CODE           ?PR?ALLINIT?MAIN
+00028EH   00029FH   000012H   BYTE   UNIT     CODE           ?PR?TIMER2INIT?MAIN
+0002A0H   0002AAH   00000BH   BYTE   UNIT     CODE           ?PR?MAIN?MAIN
+
+* * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
+   *DEL*:           00004BH   BYTE   UNIT     CODE           ?PR?KEYSCAN?MAIN
+   *DEL*:           000085H   BYTE   UNIT     CODE           ?PR?KEYSCAN16_1?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\build\Target 1\VScode TSET6.0 (MAIN)
+
+
+FUNCTION/MODULE              BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE  START  STOP  START  STOP
+====================================================
+T2INT/MAIN                  ----- -----  ----- -----
+
+LX51 LINKER/LOCATER V4.66.41.0                                                        01/31/2022  11:11:36  PAGE 2
+
+
+*** NEW ROOT **************
+
+?C_C51STARTUP               ----- -----  ----- -----
+  +--> MAIN/MAIN
+  +--> ?C_INITSEG
+
+MAIN/MAIN                   ----- -----  ----- -----
+  +--> ALLINIT/MAIN
+  +--> TIMER2INIT/MAIN
+  +--> KEYSCAN16_2/MAIN
+
+ALLINIT/MAIN                ----- -----  ----- -----
+
+TIMER2INIT/MAIN             ----- -----  ----- -----
+
+KEYSCAN16_2/MAIN            ----- -----  0028H 0028H
+  +--> _DELAY_MS/MAIN
+
+_DELAY_MS/MAIN              ----- -----  ----- -----
+
+?C_INITSEG                  ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\build\Target 1\VScode TSET6.0 (MAIN)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+      00000000H   NUMBER   ---       ?C?CODESEG
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      010001FEH   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+      0100004BH   CODE     ---       _Delay_ms
+      0100026CH   CODE     ---       allinit
+      0000001FH   DATA     ---       Digbuf
+      00000027H   DATA     BYTE      Digcom
+*DEL*:00000000H   CODE     ---       keyscan
+*DEL*:00000000H   CODE     ---       keyscan16_1
+      01000066H   CODE     ---       keyscan16_2
+      0000001EH   DATA     BYTE      LED_Bits
+      010002A0H   CODE     ---       main
+      01000003H   CODE     ---       t2int
+      00000008H   DATA     ---       tab
+      0100028EH   CODE     ---       Timer2Init
+
+
+
+SYMBOL TABLE OF MODULE:  .\build\Target 1\VScode TSET6.0 (MAIN)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       MAIN
+      00000027H   PUBLIC    DATA     BYTE      Digcom
+      0000001FH   PUBLIC    DATA     ---       Digbuf
+      0000001EH   PUBLIC    DATA     BYTE      LED_Bits
+      00000008H   PUBLIC    DATA     ---       tab
+      0100004BH   PUBLIC    CODE     ---       _Delay_ms
+      01000066H   PUBLIC    CODE     ---       keyscan16_2
+      01000003H   PUBLIC    CODE     ---       t2int
+      0100028EH   PUBLIC    CODE     ---       Timer2Init
+      0100026CH   PUBLIC    CODE     ---       allinit
+      010002A0H   PUBLIC    CODE     ---       main
+
+      010002A0H   BLOCK     CODE     ---       LVL=0
+LX51 LINKER/LOCATER V4.66.41.0                                                        01/31/2022  11:11:36  PAGE 3
+
+
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100026CH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100028EH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000003H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000066H   BLOCK     CODE     ---       LVL=0
+      01000066H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000028H   SYMBOL    DATA     VOID      temp
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100004BH   BLOCK     CODE     ---       LVL=0
+      0100004BH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000005H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      j
+      00000006H   SYMBOL    DATA     VOID      k
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+      ---         MODULE    ---      ---       ?C_INIT
+      010001FEH   PUBLIC    CODE     ---       ?C_START
+
+Program Size: data=42.0 xdata=0 const=0 code=678
+LX51 RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

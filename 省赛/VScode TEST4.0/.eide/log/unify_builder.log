@@ -1,0 +1,38 @@
+[2022-01-29 12:45:57]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\kEILPROJECT\VScode TEST4.0\build\Target 1\VScode TEST4.0.lnp" 
+".\build\Target 1\STARTUP.o" TO ".\build\Target 1\VScode TEST4.0"
+PRINT(".\build\Target 1\VScode TEST4.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  ?C_START
+    MODULE:  .\build\Target 1\STARTUP.o (?C_STARTUP)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?C_START
+    MODULE:  .\build\Target 1\STARTUP.o (?C_STARTUP)
+    ADDRESS: 100000DH
+Program Size: data=9.0 xdata=0 const=0 code=15
+LX51 RUN COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+
+[2022-01-29 12:46:05]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\kEILPROJECT\VScode TEST4.0\build\Target 1\VScode TEST4.0.lnp" 
+".\build\Target 1\STARTUP.o" TO ".\build\Target 1\VScode TEST4.0"
+PRINT(".\build\Target 1\VScode TEST4.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  ?C_START
+    MODULE:  .\build\Target 1\STARTUP.o (?C_STARTUP)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?C_START
+    MODULE:  .\build\Target 1\STARTUP.o (?C_STARTUP)
+    ADDRESS: 100000DH
+Program Size: data=9.0 xdata=0 const=0 code=15
+LX51 RUN COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+

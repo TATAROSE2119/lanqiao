@@ -1,0 +1,230 @@
+[2022-05-01 16:21:51]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 70 OF .\MAIN.C: 'Digbuf': undefined identifier
+*** ERROR C202 IN LINE 99 OF .\MAIN.C: 'Digbuf': undefined identifier
+*** ERROR C202 IN LINE 108 OF .\MAIN.C: 'Digbuf': undefined identifier
+*** ERROR C202 IN LINE 117 OF .\MAIN.C: 'Digbuf': undefined identifier
+*** ERROR C202 IN LINE 126 OF .\MAIN.C: 'Digbuf': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  5 ERROR(S)
+
+[2022-05-01 16:22:19]	[done]
+	build successfully !
+
+[2022-05-04 20:33:12]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 26 OF .\MAIN.C: syntax error near 'unsigned'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-04 20:33:30]	[done]
+	build successfully !
+
+[2022-05-04 20:33:41]	[done]
+	build successfully !
+
+[2022-05-04 20:34:02]	[done]
+	build successfully !
+
+[2022-05-04 20:34:05]	[done]
+	build successfully !
+
+[2022-05-04 20:35:51]	[done]
+	build successfully !
+
+[2022-05-04 20:36:50]	[done]
+	build successfully !
+
+[2022-05-04 20:39:52]	[done]
+	build successfully !
+
+[2022-05-04 20:40:59]	[done]
+	build successfully !
+
+[2022-05-04 20:41:24]	[done]
+	build successfully !
+
+[2022-05-04 20:41:42]	[done]
+	build successfully !
+
+[2022-05-04 20:42:09]	[done]
+	build successfully !
+
+[2022-05-04 20:42:57]	[done]
+	build successfully !
+
+[2022-05-04 20:43:15]	[done]
+	build successfully !
+
+[2022-05-04 20:44:26]	[done]
+	build successfully !
+
+[2022-05-04 20:44:33]	[done]
+	build successfully !
+
+[2022-05-04 20:45:09]	[done]
+	build successfully !
+
+[2022-05-04 20:45:19]	[done]
+	build successfully !
+
+[2022-05-04 20:46:01]	[done]
+	build successfully !
+
+[2022-05-04 20:48:16]	[done]
+	build successfully !
+
+[2022-05-04 20:48:23]	[done]
+	build successfully !
+
+[2022-05-05 09:08:48]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** WARNING C329 IN LINE 32 OF .\MAIN.C: single-line comment contains line-continuation
+*** ERROR C202 IN LINE 148 OF .\MAIN.C: 'Temperature_': undefined identifier
+C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)
+
+[2022-05-05 09:09:00]	[done]
+	build successfully !
+
+[2022-05-05 09:13:33]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 73 OF .\MAIN.C: syntax error near 'void'
+*** ERROR C141 IN LINE 79 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 79 OF .\MAIN.C: syntax error near '==', expected ')'
+*** ERROR C231 IN LINE 81 OF .\MAIN.C: 'SHUJU_DISPLAY_Dianya': redefinition
+*** ERROR C141 IN LINE 82 OF .\MAIN.C: syntax error near '}'
+*** ERROR C141 IN LINE 83 OF .\MAIN.C: syntax error near '==', expected ')'
+*** ERROR C231 IN LINE 85 OF .\MAIN.C: 'SHUJU_DISPLAY_Pinlv': redefinition
+*** ERROR C141 IN LINE 86 OF .\MAIN.C: syntax error near '}'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  8 ERROR(S)
+
+[2022-05-05 09:13:46]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 71 OF .\MAIN.C: syntax error near 'void'
+*** ERROR C141 IN LINE 73 OF .\MAIN.C: syntax error near 'void'
+*** ERROR C141 IN LINE 79 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 79 OF .\MAIN.C: syntax error near '==', expected ')'
+*** ERROR C231 IN LINE 81 OF .\MAIN.C: 'SHUJU_DISPLAY_Dianya': redefinition
+*** ERROR C141 IN LINE 82 OF .\MAIN.C: syntax error near '}'
+*** ERROR C141 IN LINE 83 OF .\MAIN.C: syntax error near '==', expected ')'
+*** ERROR C231 IN LINE 85 OF .\MAIN.C: 'SHUJU_DISPLAY_Pinlv': redefinition
+*** ERROR C141 IN LINE 86 OF .\MAIN.C: syntax error near '}'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  9 ERROR(S)
+
+[2022-05-05 09:14:03]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 73 OF .\MAIN.C: syntax error near 'void'
+*** ERROR C141 IN LINE 74 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 90 OF .\MAIN.C: syntax error near 'void'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
+
+[2022-05-05 09:14:21]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第九届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 73 OF .\MAIN.C: syntax error near 'void'
+*** ERROR C141 IN LINE 74 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 90 OF .\MAIN.C: syntax error near 'void'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
+
+[2022-05-05 09:14:31]	[done]
+	build successfully !
+
+[2022-05-05 09:16:51]	[done]
+	build successfully !
+
+[2022-05-05 09:29:36]	[done]
+	build successfully !
+
+[2022-05-05 09:30:08]	[done]
+	build successfully !
+
+[2022-05-05 09:34:18]	[done]
+	build successfully !
+
+[2022-05-05 09:37:05]	[done]
+	build successfully !
+
+[2022-05-05 09:38:06]	[done]
+	build successfully !
+
+[2022-05-05 09:40:40]	[done]
+	build successfully !
+
+[2022-05-05 09:46:02]	[done]
+	build successfully !
+
+[2022-05-05 09:46:45]	[done]
+	build successfully !
+
+[2022-05-05 09:48:42]	[done]
+	build successfully !
+
+[2022-05-05 09:58:57]	[done]
+	build successfully !
+
+[2022-05-05 10:05:01]	[done]
+	build successfully !
+
+[2022-05-05 10:06:51]	[done]
+	build successfully !
+
+[2022-05-05 10:07:24]	[done]
+	build successfully !
+
+[2022-05-05 10:10:06]	[done]
+	build successfully !
+
+[2022-05-05 10:16:08]	[done]
+	build successfully !
+
+[2022-05-05 10:16:17]	[done]
+	build successfully !
+
+[2022-05-05 10:23:59]	[done]
+	build successfully !
+
+[2022-05-05 10:26:30]	[done]
+	build successfully !
+
+[2022-05-05 10:28:53]	[done]
+	build successfully !
+
+[2022-05-05 10:32:50]	[done]
+	build successfully !
+
+[2022-05-05 10:35:22]	[done]
+	build successfully !
+
+[2022-05-05 10:35:38]	[done]
+	build successfully !
+
+[2022-05-05 10:37:49]	[done]
+	build successfully !
+
+[2022-05-05 10:51:27]	[done]
+	build successfully !
+
+[2022-05-05 10:52:30]	[done]
+	build successfully !
+
+[2022-05-05 10:55:16]	[done]
+	build successfully !
+

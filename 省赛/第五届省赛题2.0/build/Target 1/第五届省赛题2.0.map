@@ -1,0 +1,292 @@
+LX51 LINKER/LOCATER V4.66.41.0                                                          03/10/2022  14:06:32  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.66.41.0, INVOKED BY:
+D:\KEIL51\C51\BIN\LX51.EXE .\build\Target 1\main.o, .\build\Target 1\onewire.o TO .\build\Target 1\第五届省赛题2.0 PRINT
+>>  (.\build\Target 1\第五届省赛题2.0.map) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\build\Target 1\main.o (MAIN)
+         COMMENT TYPE 0: C51 V9.54
+  .\build\Target 1\onewire.o (ONEWIRE)
+         COMMENT TYPE 0: C51 V9.54
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_INIT)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\build\Target 1\第五届省赛题2.0 (MAIN)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   000534H   CODE
+I:000000H   I:000000H   I:00007FH   000030H   DATA
+I:000020H.0 I:000020H.0 I:00002FH.7 000000H.5 BIT
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+
+
+MEMORY MAP OF MODULE:  .\build\Target 1\第五届省赛题2.0 (MAIN)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H   000008H   000001H   BYTE   UNIT     DATA           _DATA_GROUP_
+000009H.0 00001FH.7 000017H.0 ---    ---      **GAP**
+000020H.0 000020H.3 000000H.4 BIT    UNIT     BIT            ?BI?MAIN
+000020H.4 000020H.4 000000H.1 BIT    UNIT     BIT            _BIT_GROUP_
+000020H.5 000020H   000000H.3 ---    ---      **GAP**
+000021H   000047H   000027H   BYTE   UNIT     DATA           ?DT?MAIN
+000048H   000048H   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   00000AH   000008H   ---    ---      **GAP**
+00000BH   00000DH   000003H   BYTE   OFFS..   CODE           ?MAIN?0000B
+00000EH   000055H   000048H   BYTE   UNIT     CODE           ?PR?T2INT?MAIN
+000056H   000062H   00000DH   ---    ---      **GAP**
+000063H   000065H   000003H   BYTE   OFFS..   CODE           ?MAIN?00063
+000066H   0001B2H   00014DH   BYTE   UNIT     CODE           ?PR?KEYSCAN16_2?MAIN
+0001B3H   0002DEH   00012CH   BYTE   UNIT     CODE           ?PR?MAIN?MAIN
+0002DFH   00036DH   00008FH   BYTE   UNIT     CODE           ?PR?TM0_ISR?MAIN
+00036EH   0003F9H   00008CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+0003FAH   00043DH   000044H   BYTE   UNIT     CODE           ?C_INITSEG
+00043EH   00047CH   00003FH   BYTE   UNIT     CODE           ?PR?TEMPER_GET?ONEWIRE
+00047DH   0004A3H   000027H   BYTE   UNIT     CODE           ?PR?INIT_DS18B20?ONEWIRE
+0004A4H   0004C5H   000022H   BYTE   UNIT     CODE           ?PR?ALLINIT?MAIN
+0004C6H   0004E3H   00001EH   BYTE   UNIT     CODE           ?PR?_WRITE_DS18B20?ONEWIRE
+0004E4H   0004FDH   00001AH   BYTE   UNIT     CODE           ?PR?READ_DS18B20?ONEWIRE
+0004FEH   000516H   000019H   BYTE   UNIT     CODE           ?PR?_DELAY_MS?MAIN
+000517H   000528H   000012H   BYTE   UNIT     CODE           ?PR?TIMER2INIT?MAIN
+000529H   000539H   000011H   BYTE   UNIT     CODE           ?PR?TIMER0INIT?MAIN
+LX51 LINKER/LOCATER V4.66.41.0                                                        03/10/2022  14:06:32  PAGE 2
+
+
+00053AH   000548H   00000FH   BYTE   UNIT     CODE           ?PR?_DELAY_ONEWIRE?ONEWIRE
+
+
+
+OVERLAY MAP OF MODULE:   .\build\Target 1\第五届省赛题2.0 (MAIN)
+
+
+FUNCTION/MODULE              BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE  START  STOP  START  STOP
+====================================================
+T2INT/MAIN                  ----- -----  ----- -----
+
+*** NEW ROOT **************
+
+TM0_ISR/MAIN                ----- -----  ----- -----
+
+*** NEW ROOT **************
+
+?C_C51STARTUP               ----- -----  ----- -----
+  +--> MAIN/MAIN
+  +--> ?C_INITSEG
+
+MAIN/MAIN                   ----- -----  ----- -----
+  +--> ALLINIT/MAIN
+  +--> TIMER2INIT/MAIN
+  +--> TIMER0INIT/MAIN
+  +--> TEMPER_GET/ONEWIRE
+  +--> KEYSCAN16_2/MAIN
+
+ALLINIT/MAIN                ----- -----  ----- -----
+
+TIMER2INIT/MAIN             ----- -----  ----- -----
+
+TIMER0INIT/MAIN             ----- -----  ----- -----
+
+TEMPER_GET/ONEWIRE          ----- -----  ----- -----
+  +--> INIT_DS18B20/ONEWIRE
+  +--> _WRITE_DS18B20/ONEWIRE
+  +--> _DELAY_ONEWIRE/ONEWIRE
+  +--> READ_DS18B20/ONEWIRE
+
+INIT_DS18B20/ONEWIRE        20H.4 20H.4  ----- -----
+  +--> _DELAY_ONEWIRE/ONEWIRE
+
+_DELAY_ONEWIRE/ONEWIRE      ----- -----  ----- -----
+
+_WRITE_DS18B20/ONEWIRE      ----- -----  ----- -----
+  +--> _DELAY_ONEWIRE/ONEWIRE
+
+READ_DS18B20/ONEWIRE        ----- -----  ----- -----
+  +--> _DELAY_ONEWIRE/ONEWIRE
+
+KEYSCAN16_2/MAIN            ----- -----  0008H 0008H
+  +--> _DELAY_MS/MAIN
+
+_DELAY_MS/MAIN              ----- -----  ----- -----
+
+?C_INITSEG                  ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\build\Target 1\第五届省赛题2.0 (MAIN)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+LX51 LINKER/LOCATER V4.66.41.0                                                        03/10/2022  14:06:32  PAGE 3
+
+
+      =================================================
+      00000000H   NUMBER   ---       ?C?CODESEG
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      010003B5H   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+      01000502H   CODE     ---       _Delay_ms
+      0100053EH   CODE     ---       _Delay_OneWire
+      010004C6H   CODE     ---       _Write_DS18B20
+      010004A4H   CODE     ---       allinit
+      0000003CH   DATA     ---       Digbuf
+      00000044H   DATA     BYTE      Digcom
+      00000020H.1 BIT      BIT       DOWN_flag
+      00000020H.0 BIT      BIT       fla
+      0100047DH   CODE     ---       init_ds18b20
+      01000066H   CODE     ---       keyscan16_2
+      0000003BH   DATA     BYTE      LED_Bits
+      010001B3H   CODE     ---       main
+      00000047H   DATA     BYTE      NUM
+      00000021H   DATA     BYTE      qujian
+      010004E4H   CODE     ---       Read_DS18B20
+      00000020H.2 BIT      BIT       REMOVE
+      00000020H.3 BIT      BIT       SET_MODE
+      0100000EH   CODE     ---       t2int
+      00000023H   DATA     BYTE      T_MAX
+      00000022H   DATA     BYTE      T_MIN
+      00000025H   DATA     ---       tab
+      0100043EH   CODE     ---       Temper_Get
+      00000024H   DATA     BYTE      temperature
+      01000529H   CODE     ---       Timer0Init
+      01000517H   CODE     ---       Timer2Init
+      010002DFH   CODE     ---       tm0_isr
+      00000045H   DATA     WORD      tt
+
+
+
+SYMBOL TABLE OF MODULE:  .\build\Target 1\第五届省赛题2.0 (MAIN)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       MAIN
+      00000020H.3 PUBLIC    BIT      BIT       SET_MODE
+      00000047H   PUBLIC    DATA     BYTE      NUM
+      00000045H   PUBLIC    DATA     WORD      tt
+      00000044H   PUBLIC    DATA     BYTE      Digcom
+      0000003CH   PUBLIC    DATA     ---       Digbuf
+      00000020H.2 PUBLIC    BIT      BIT       REMOVE
+      0000003BH   PUBLIC    DATA     BYTE      LED_Bits
+      00000025H   PUBLIC    DATA     ---       tab
+      00000024H   PUBLIC    DATA     BYTE      temperature
+      00000020H.1 PUBLIC    BIT      BIT       DOWN_flag
+      00000020H.0 PUBLIC    BIT      BIT       fla
+      00000023H   PUBLIC    DATA     BYTE      T_MAX
+      00000022H   PUBLIC    DATA     BYTE      T_MIN
+      00000021H   PUBLIC    DATA     BYTE      qujian
+      01000066H   PUBLIC    CODE     ---       keyscan16_2
+      01000502H   PUBLIC    CODE     ---       _Delay_ms
+      010002DFH   PUBLIC    CODE     ---       tm0_isr
+      0100000EH   PUBLIC    CODE     ---       t2int
+      01000529H   PUBLIC    CODE     ---       Timer0Init
+      01000517H   PUBLIC    CODE     ---       Timer2Init
+      010004A4H   PUBLIC    CODE     ---       allinit
+      010001B3H   PUBLIC    CODE     ---       main
+
+      010001B3H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+LX51 LINKER/LOCATER V4.66.41.0                                                        03/10/2022  14:06:32  PAGE 4
+
+
+
+      010004A4H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000517H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000529H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100000EH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010002DFH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010004FEH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000502H   BLOCK     CODE     ---       LVL=0
+      01000502H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000004H   SYMBOL    DATA     VOID      i
+      00000003H   SYMBOL    DATA     VOID      j
+      00000005H   SYMBOL    DATA     VOID      k
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000066H   BLOCK     CODE     ---       LVL=0
+      01000066H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000008H   SYMBOL    DATA     VOID      temp
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ONEWIRE
+      0100043EH   PUBLIC    CODE     ---       Temper_Get
+      0100047DH   PUBLIC    CODE     ---       init_ds18b20
+      010004E4H   PUBLIC    CODE     ---       Read_DS18B20
+      010004C6H   PUBLIC    CODE     ---       _Write_DS18B20
+      0100053EH   PUBLIC    CODE     ---       _Delay_OneWire
+
+      0100053AH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100053EH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010004C6H   BLOCK     CODE     ---       LVL=0
+      010004C8H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000003H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010004E4H   BLOCK     CODE     ---       LVL=0
+      010004E4H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000003H   SYMBOL    DATA     VOID      i
+      00000005H   SYMBOL    DATA     VOID      dat
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100047DH   BLOCK     CODE     ---       LVL=0
+      0100047DH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000020H.4 SYMBOL    BIT      VOID      initflag
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+LX51 LINKER/LOCATER V4.66.41.0                                                        03/10/2022  14:06:32  PAGE 5
+
+
+      0100043EH   BLOCK     CODE     ---       LVL=0
+      0100043EH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000006H   SYMBOL    DATA     VOID      temp
+      00000002H   SYMBOL    DATA     VOID      low
+      00000007H   SYMBOL    DATA     VOID      high
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+      ---         MODULE    ---      ---       ?C_INIT
+      010003B5H   PUBLIC    CODE     ---       ?C_START
+
+Program Size: data=49.5 xdata=0 const=0 code=1332
+LX51 RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

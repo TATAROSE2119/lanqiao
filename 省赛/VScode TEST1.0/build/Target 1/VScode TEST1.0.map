@@ -1,0 +1,170 @@
+LX51 LINKER/LOCATER V4.66.41.0                                                          01/27/2022  11:53:36  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.66.41.0, INVOKED BY:
+D:\KEIL51\C51\BIN\LX51.EXE .\build\Target 1\main.o, .\build\Target 1\STARTUP.o TO .\build\Target 1\VScode TEST1.0 PRINT 
+>> (.\build\Target 1\VScode TEST1.0.map) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\build\Target 1\main.o (MAIN)
+         COMMENT TYPE 0: C51 V9.54
+  .\build\Target 1\STARTUP.o (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_INIT)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\build\Target 1\VScode TEST1.0 (MAIN)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   00019EH   CODE
+I:000000H   I:000000H   I:00007FH   000026H   DATA
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+
+
+MEMORY MAP OF MODULE:  .\build\Target 1\VScode TEST1.0 (MAIN)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H   000025H   00001EH   BYTE   UNIT     DATA           ?DT?MAIN
+000026H   000026H   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   00004DH   00004BH   BYTE   UNIT     CODE           ?PR?KEYSCAN?MAIN
+00004EH   000060H   000013H   BYTE   UNIT     CODE           ?PR?_DELAY_MS?MAIN
+000061H   000062H   000002H   ---    ---      **GAP**
+000063H   000065H   000003H   BYTE   OFFS..   CODE           ?MAIN?00063
+000066H   0000F1H   00008CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+0000F2H   000139H   000048H   BYTE   UNIT     CODE           ?PR?T2INT?MAIN
+00013AH   000160H   000027H   BYTE   UNIT     CODE           ?C_INITSEG
+000161H   000182H   000022H   BYTE   UNIT     CODE           ?PR?ALLINIT?MAIN
+000183H   000194H   000012H   BYTE   UNIT     CODE           ?PR?TIMER2_INIT?MAIN
+000195H   00019FH   00000BH   BYTE   UNIT     CODE           ?PR?MAIN?MAIN
+
+* * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
+   *DEL*:           000085H   BYTE   UNIT     CODE           ?PR?KEYSCAN16_1?MAIN
+   *DEL*:           000151H   BYTE   UNIT     CODE           ?PR?KEYSCAN16_2?MAIN
+   *DEL*:           000001H   BYTE   UNIT     DATA           ?DT?KEYSCAN16_2?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\build\Target 1\VScode TEST1.0 (MAIN)
+
+
+FUNCTION/MODULE              BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE  START  STOP  START  STOP
+====================================================
+T2INT/MAIN                  ----- -----  ----- -----
+
+LX51 LINKER/LOCATER V4.66.41.0                                                        01/27/2022  11:53:36  PAGE 2
+
+
+*** NEW ROOT **************
+
+?C_C51STARTUP               ----- -----  ----- -----
+  +--> MAIN/MAIN
+  +--> ?C_INITSEG
+
+MAIN/MAIN                   ----- -----  ----- -----
+  +--> ALLINIT/MAIN
+  +--> TIMER2_INIT/MAIN
+  +--> KEYSCAN/MAIN
+
+ALLINIT/MAIN                ----- -----  ----- -----
+
+TIMER2_INIT/MAIN            ----- -----  ----- -----
+
+KEYSCAN/MAIN                ----- -----  ----- -----
+  +--> _DELAY_MS/MAIN
+
+_DELAY_MS/MAIN              ----- -----  ----- -----
+
+?C_INITSEG                  ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\build\Target 1\VScode TEST1.0 (MAIN)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+      00000000H   NUMBER   ---       ?C?CODESEG
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      010000ADH   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+      0100004EH   CODE     ---       _Delay_ms
+      01000161H   CODE     ---       allinit
+      0000001EH   DATA     ---       Digbuf
+      00000025H   DATA     BYTE      Digcom
+      01000003H   CODE     ---       keyscan
+*DEL*:00000000H   CODE     ---       keyscan16_1
+*DEL*:00000000H   CODE     ---       keyscan16_2
+      0000001DH   DATA     BYTE      LED_Bits
+      01000195H   CODE     ---       main
+      010000F2H   CODE     ---       t2int
+      00000008H   DATA     ---       tab
+      01000183H   CODE     ---       Timer2_Init
+
+
+
+SYMBOL TABLE OF MODULE:  .\build\Target 1\VScode TEST1.0 (MAIN)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       MAIN
+      00000025H   PUBLIC    DATA     BYTE      Digcom
+      0000001EH   PUBLIC    DATA     ---       Digbuf
+      0000001DH   PUBLIC    DATA     BYTE      LED_Bits
+      00000008H   PUBLIC    DATA     ---       tab
+      0100004EH   PUBLIC    CODE     ---       _Delay_ms
+      01000003H   PUBLIC    CODE     ---       keyscan
+      010000F2H   PUBLIC    CODE     ---       t2int
+      01000183H   PUBLIC    CODE     ---       Timer2_Init
+      01000161H   PUBLIC    CODE     ---       allinit
+      01000195H   PUBLIC    CODE     ---       main
+
+      01000195H   BLOCK     CODE     ---       LVL=0
+LX51 LINKER/LOCATER V4.66.41.0                                                        01/27/2022  11:53:36  PAGE 3
+
+
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000161H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000183H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      010000F2H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000003H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      0100004EH   BLOCK     CODE     ---       LVL=0
+      0100004EH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000005H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      j
+      00000006H   SYMBOL    DATA     VOID      k
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+      ---         MODULE    ---      ---       ?C_INIT
+      010000ADH   PUBLIC    CODE     ---       ?C_START
+
+Program Size: data=39.0 xdata=0 const=0 code=414
+LX51 RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

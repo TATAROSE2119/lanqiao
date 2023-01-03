@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "win32",
+            "intelliSenseMode": "${default}",
+            "configurationProvider": "cl.eide"
+        }
+    ],
+    "version": 4
+}

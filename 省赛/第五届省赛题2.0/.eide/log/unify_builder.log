@@ -1,0 +1,92 @@
+[2022-03-09 09:43:48]	[done]
+	build successfully !
+
+[2022-03-09 09:45:16]	[done]
+	build successfully !
+
+[2022-03-10 13:32:46]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\第五届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 41 OF .\MAIN.C: 'eles': undefined identifier
+*** ERROR C141 IN LINE 41 OF .\MAIN.C: syntax error near 'if'
+*** ERROR C141 IN LINE 41 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 42 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 45 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 71 OF .\MAIN.C: syntax error near ')'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  6 ERROR(S)
+
+[2022-03-10 13:32:56]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\第五届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 41 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 42 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 45 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 71 OF .\MAIN.C: syntax error near ')'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  4 ERROR(S)
+
+[2022-03-10 13:33:07]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\第五届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 71 OF .\MAIN.C: syntax error near ')'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-03-10 13:35:32]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\第五届省赛题2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 84 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 85 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 89 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 89 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 90 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 94 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 94 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 95 OF .\MAIN.C: syntax error near '{'
+*** ERROR C141 IN LINE 99 OF .\MAIN.C: syntax error near 'else'
+*** ERROR C141 IN LINE 99 OF .\MAIN.C: syntax error near '&&'
+*** ERROR C141 IN LINE 100 OF .\MAIN.C: syntax error near '{'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  11 ERROR(S)
+
+[2022-03-10 13:36:04]	[done]
+	build successfully !
+
+[2022-03-10 13:37:21]	[done]
+	build successfully !
+
+[2022-03-10 13:37:24]	[done]
+	build successfully !
+
+[2022-03-10 13:37:27]	[done]
+	build successfully !
+
+[2022-03-10 13:42:54]	[done]
+	build successfully !
+
+[2022-03-10 13:45:20]	[done]
+	build successfully !
+
+[2022-03-10 13:46:36]	[done]
+	build successfully !
+
+[2022-03-10 13:51:11]	[done]
+	build successfully !
+
+[2022-03-10 14:04:47]	[done]
+	build successfully !
+
+[2022-03-10 14:05:26]	[done]
+	build successfully !
+
+[2022-03-10 14:06:00]	[done]
+	build successfully !
+
+[2022-03-10 14:06:32]	[done]
+	build successfully !
+

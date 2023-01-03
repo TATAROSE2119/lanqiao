@@ -1,0 +1,175 @@
+[2022-05-01 10:23:56]	[done]
+	build successfully !
+
+[2022-05-01 10:24:28]	[done]
+	build successfully !
+
+[2022-05-01 10:25:04]	[done]
+	build successfully !
+
+[2022-05-01 10:25:26]	[done]
+	build successfully !
+
+[2022-05-01 10:26:19]	[done]
+	build successfully !
+
+[2022-05-01 10:32:57]	[done]
+	build successfully !
+
+[2022-05-01 10:56:29]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第十一届国赛\ds1302.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 13 OF .\DS1302.C: syntax error near 'void'
+*** ERROR C141 IN LINE 14 OF .\DS1302.C: syntax error near '{'
+*** ERROR C141 IN LINE 16 OF .\DS1302.C: syntax error near 'for'
+*** ERROR C141 IN LINE 16 OF .\DS1302.C: syntax error near '=', expected ')'
+*** ERROR C129 IN LINE 16 OF .\DS1302.C: missing ';' before '<'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  5 ERROR(S)
+
+[2022-05-01 10:56:39]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第十一届国赛\ds1302.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 18 OF .\DS1302.C: 'SCK': undefined identifier
+*** ERROR C202 IN LINE 19 OF .\DS1302.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 21 OF .\DS1302.C: 'SCK': undefined identifier
+*** ERROR C202 IN LINE 30 OF .\DS1302.C: 'RST': undefined identifier
+*** ERROR C202 IN LINE 32 OF .\DS1302.C: 'SCK': undefined identifier
+*** ERROR C202 IN LINE 34 OF .\DS1302.C: 'RST': undefined identifier
+*** ERROR C202 IN LINE 41 OF .\DS1302.C: 'RST': undefined identifier
+*** ERROR C202 IN LINE 48 OF .\DS1302.C: 'RST': undefined identifier
+*** ERROR C202 IN LINE 50 OF .\DS1302.C: 'SCK': undefined identifier
+*** ERROR C202 IN LINE 52 OF .\DS1302.C: 'RST': undefined identifier
+*** ERROR C202 IN LINE 57 OF .\DS1302.C: 'SCK': undefined identifier
+*** ERROR C202 IN LINE 59 OF .\DS1302.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 61 OF .\DS1302.C: 'SCK': undefined identifier
+*** ERROR C202 IN LINE 63 OF .\DS1302.C: 'RST': undefined identifier
+*** ERROR C202 IN LINE 65 OF .\DS1302.C: 'RST': undefined identifier
+*** ERROR C202 IN LINE 66 OF .\DS1302.C: 'SCK': undefined identifier
+*** ERROR C202 IN LINE 68 OF .\DS1302.C: 'SCK': undefined identifier
+*** ERROR C202 IN LINE 70 OF .\DS1302.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 72 OF .\DS1302.C: 'SDA': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  19 ERROR(S)
+
+[2022-05-01 10:57:35]	[done]
+	build successfully !
+
+[2022-05-01 11:02:39]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第十一届国赛\iic.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 22 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 23 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 25 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 27 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 33 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 34 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 36 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 44 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 48 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 51 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 53 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 54 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 61 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 63 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 65 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 67 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 73 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 86 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 90 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 93 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 96 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 108 OF .\IIC.C: 'SCL': undefined identifier
+*** ERROR C202 IN LINE 111 OF .\IIC.C: 'SDA': undefined identifier
+*** ERROR C202 IN LINE 113 OF .\IIC.C: 'SCL': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  24 ERROR(S)
+
+[2022-05-01 11:02:52]	[done]
+	build successfully !
+
+[2022-05-01 11:03:08]	[done]
+	build successfully !
+
+[2022-05-01 11:12:05]	[done]
+	build successfully !
+
+[2022-05-01 11:31:21]	[done]
+	build successfully !
+
+[2022-05-01 12:02:45]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第十一届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 31 OF .\MAIN.C: syntax error near 'void'
+*** ERROR C231 IN LINE 274 OF .\MAIN.C: 'Timer2Init': redefinition
+*** ERROR C231 IN LINE 282 OF .\MAIN.C: 'Timer2Init': redefinition
+C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
+
+[2022-05-01 12:02:53]	[done]
+	build successfully !
+
+[2022-05-01 12:05:44]	[done]
+	build successfully !
+
+[2022-05-01 12:13:23]	[done]
+	build successfully !
+
+[2022-05-01 12:13:37]	[done]
+	build successfully !
+
+[2022-05-01 12:13:55]	[done]
+	build successfully !
+
+[2022-05-01 12:16:38]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第十一届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C193 IN LINE 92 OF .\MAIN.C: '': bad operand type
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-01 12:17:48]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第十一届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C193 IN LINE 92 OF .\MAIN.C: '': bad operand type
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-01 12:18:10]	[done]
+	build successfully !
+
+[2022-05-01 12:19:29]	[done]
+	build successfully !
+
+[2022-05-01 12:20:17]	[done]
+	build successfully !
+
+[2022-05-01 12:50:49]	[done]
+	build successfully !
+
+[2022-05-01 12:52:15]	[done]
+	build successfully !
+
+[2022-05-01 12:58:38]	compilation failed at : "c:\Users\Maxwell\Desktop\FILMS\kEILPROJECT\第十一届国赛\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <bd240058e6d9420e965b9407b6b7bc53>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C202 IN LINE 258 OF .\MAIN.C: 'LED_Bits_': undefined identifier
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-05-01 12:58:52]	[done]
+	build successfully !
+
+[2022-05-01 13:00:16]	[done]
+	build successfully !
+
+[2022-05-01 13:00:27]	[done]
+	build successfully !
+

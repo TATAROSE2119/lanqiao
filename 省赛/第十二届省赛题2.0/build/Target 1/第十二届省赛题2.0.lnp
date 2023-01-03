@@ -1,0 +1,3 @@
+
+".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第十二届省赛题2.0"
+PRINT(".\build\Target 1\第十二届省赛题2.0.map") REMOVEUNUSED

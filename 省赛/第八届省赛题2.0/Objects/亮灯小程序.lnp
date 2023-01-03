@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj" 
+TO ".\Objects\亮灯小程序" 
+PRINT(".\Listings\亮灯小程序.m51") RAMSIZE(256) 

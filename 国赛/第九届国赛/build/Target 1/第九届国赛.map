@@ -1,0 +1,556 @@
+LX51 LINKER/LOCATER V4.66.41.0                                                          05/05/2022  10:55:16  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.66.41.0, INVOKED BY:
+D:\KEIL51\C51\BIN\LX51.EXE .\build\Target 1\iic.o, .\build\Target 1\main.o, .\build\Target 1\onewire.o TO .\build\Target
+>>  1\第九届国赛 PRINT (.\build\Target 1\第九届国赛.map) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  .\build\Target 1\iic.o (IIC)
+         COMMENT TYPE 0: C51 V9.54
+  .\build\Target 1\main.o (MAIN)
+         COMMENT TYPE 0: C51 V9.54
+  .\build\Target 1\onewire.o (ONEWIRE)
+         COMMENT TYPE 0: C51 V9.54
+  D:\KEIL51\C51\LIB\C51FPS.LIB (?C?FPMUL)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51FPS.LIB (?C?FCAST)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51FPS.LIB (?C?CASTF)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C?UIDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C?SLDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C?LNEG)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C?SLCMP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C_INIT)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+  D:\KEIL51\C51\LIB\C51S.LIB (?C?ULDIV)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\build\Target 1\第九届国赛 (IIC)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   000D9FH   CODE
+I:000020H.0 I:000020H.0 I:00002FH.7 000000H.4 BIT
+I:000000H   I:000000H   I:00007FH   000041H   DATA
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+
+
+MEMORY MAP OF MODULE:  .\build\Target 1\第九届国赛 (IIC)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H.0 00001FH.7 000018H.0 ---    ---      **GAP**
+000020H.0 000020H.2 000000H.3 BIT    UNIT     BIT            ?BI?MAIN
+000020H.3 000020H.3 000000H.1 BIT    UNIT     BIT            _BIT_GROUP_
+000020H.4 000020H   000000H.4 ---    ---      **GAP**
+000021H   000059H   000039H   BYTE   UNIT     DATA           ?DT?MAIN
+00005AH   00005AH   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+LX51 LINKER/LOCATER V4.66.41.0                                                        05/05/2022  10:55:16  PAGE 2
+
+
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   000018H   000016H   BYTE   UNIT     CODE           ?PR?_AD_READ?IIC
+000019H   00001AH   000002H   ---    ---      **GAP**
+00001BH   00001DH   000003H   BYTE   OFFS..   CODE           ?MAIN?0001B
+00001EH   000061H   000044H   BYTE   UNIT     CODE           ?C?LDIV
+000062H   000062H   000001H   ---    ---      **GAP**
+000063H   000065H   000003H   BYTE   OFFS..   CODE           ?MAIN?00063
+000066H   000371H   00030CH   BYTE   UNIT     CODE           ?C?LIB_CODE
+000372H   000627H   0002B6H   BYTE   UNIT     CODE           ?PR?SHUJU_HUIXIAN_DISPLAY?MAIN
+000628H   000795H   00016EH   BYTE   UNIT     CODE           ?PR?SHUJU_DISPLAY_PINLV?MAIN
+000796H   000881H   0000ECH   BYTE   UNIT     CODE           ?PR?KEYSCAN?MAIN
+000882H   000939H   0000B8H   BYTE   UNIT     CODE           ?PR?T2INT?MAIN
+00093AH   0009C5H   00008CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+0009C6H   000A27H   000062H   BYTE   UNIT     CODE           ?C_INITSEG
+000A28H   000A85H   00005EH   BYTE   UNIT     CODE           ?PR?SHUJU_DISPLAY_WENDU?MAIN
+000A86H   000AD7H   000052H   BYTE   UNIT     CODE           ?PR?LED_SHOW?MAIN
+000AD8H   000B19H   000042H   BYTE   UNIT     CODE           ?PR?TEMPER_GET?ONEWIRE
+000B1AH   000B5AH   000041H   BYTE   UNIT     CODE           ?PR?TIMER_1?MAIN
+000B5BH   000B98H   00003EH   BYTE   UNIT     CODE           ?PR?MAIN?MAIN
+000B99H   000BC3H   00002BH   BYTE   UNIT     CODE           ?PR?SHUJU_DISPLAY_DIANYA?MAIN
+000BC4H   000BEDH   00002AH   BYTE   UNIT     CODE           ?PR?DISPLAY_ALL?MAIN
+000BEEH   000C14H   000027H   BYTE   UNIT     CODE           ?PR?IIC_WAITACK?IIC
+000C15H   000C3BH   000027H   BYTE   UNIT     CODE           ?PR?INIT_DS18B20?ONEWIRE
+000C3CH   000C61H   000026H   BYTE   UNIT     CODE           ?PR?DIANYA_YUZHI_SET_DISPLAY?MAIN
+000C62H   000C84H   000023H   BYTE   UNIT     CODE           ?PR?_IIC_SENDBYTE?IIC
+000C85H   000CA6H   000022H   BYTE   UNIT     CODE           ?PR?ALLINIT?MAIN
+000CA7H   000CC5H   00001FH   BYTE   UNIT     CODE           ?PR?IIC_RECBYTE?IIC
+000CC6H   000CE3H   00001EH   BYTE   UNIT     CODE           ?PR?_WRITE_DS18B20?ONEWIRE
+000CE4H   000CFDH   00001AH   BYTE   UNIT     CODE           ?PR?_DELAY_ONEWIRE?ONEWIRE
+000CFEH   000D17H   00001AH   BYTE   UNIT     CODE           ?PR?READ_DS18B20?ONEWIRE
+000D18H   000D2CH   000015H   BYTE   UNIT     CODE           ?PR?IIC_STOP?IIC
+000D2DH   000D41H   000015H   BYTE   UNIT     CODE           ?PR?_EEPROM_WRITE?IIC
+000D42H   000D56H   000015H   BYTE   UNIT     CODE           ?PR?TIMER1INIT?MAIN
+000D57H   000D69H   000013H   BYTE   UNIT     CODE           ?PR?IIC_START?IIC
+000D6AH   000D7CH   000013H   BYTE   UNIT     CODE           ?PR?TIMER0INIT?MAIN
+000D7DH   000D8FH   000013H   BYTE   UNIT     CODE           ?PR?_DELAY_MS?MAIN
+000D90H   000DA1H   000012H   BYTE   UNIT     CODE           ?PR?TIMER2INIT?MAIN
+
+* * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
+   *DEL*:           00001FH   BYTE   UNIT     CODE           ?PR?IIC_ACK?IIC
+   *DEL*:           000000H.1 BIT    UNIT     BIT            ?BI?IIC_ACK?IIC
+   *DEL*:           000016H   BYTE   UNIT     CODE           ?PR?_EEPROM_READ?IIC
+
+
+
+OVERLAY MAP OF MODULE:   .\build\Target 1\第九届国赛 (IIC)
+
+
+FUNCTION/MODULE                     BIT_GROUP   DATA_GROUP 
+--> CALLED FUNCTION/MODULE         START  STOP  START  STOP
+===========================================================
+TIMER_1/MAIN                       ----- -----  ----- -----
+
+*** NEW ROOT *********************
+
+T2INT/MAIN                         ----- -----  ----- -----
+
+*** NEW ROOT *********************
+
+?C_C51STARTUP                      ----- -----  ----- -----
+  +--> MAIN/MAIN
+  +--> ?C_INITSEG
+
+MAIN/MAIN                          ----- -----  ----- -----
+  +--> ALLINIT/MAIN
+LX51 LINKER/LOCATER V4.66.41.0                                                        05/05/2022  10:55:16  PAGE 3
+
+
+  +--> TIMER2INIT/MAIN
+  +--> _DELAY_MS/MAIN
+  +--> TIMER1INIT/MAIN
+  +--> TIMER0INIT/MAIN
+  +--> _AD_READ/IIC
+  +--> TEMPER_GET/ONEWIRE
+  +--> KEYSCAN/MAIN
+  +--> DISPLAY_ALL/MAIN
+  +--> LED_SHOW/MAIN
+
+ALLINIT/MAIN                       ----- -----  ----- -----
+
+TIMER2INIT/MAIN                    ----- -----  ----- -----
+
+_DELAY_MS/MAIN                     ----- -----  ----- -----
+
+TIMER1INIT/MAIN                    ----- -----  ----- -----
+
+TIMER0INIT/MAIN                    ----- -----  ----- -----
+
+_AD_READ/IIC                       ----- -----  ----- -----
+  +--> IIC_START/IIC
+  +--> IIC_WAITACK/IIC
+  +--> IIC_STOP/IIC
+
+IIC_START/IIC                      ----- -----  ----- -----
+
+IIC_WAITACK/IIC                    ----- -----  ----- -----
+  +--> _IIC_SENDBYTE/IIC
+  +--> IIC_STOP/IIC
+
+_IIC_SENDBYTE/IIC                  ----- -----  ----- -----
+
+IIC_STOP/IIC                       ----- -----  ----- -----
+  +--> _IIC_SENDBYTE/IIC
+  +--> IIC_WAITACK/IIC
+  +--> IIC_RECBYTE/IIC
+
+IIC_RECBYTE/IIC                    ----- -----  ----- -----
+
+TEMPER_GET/ONEWIRE                 ----- -----  ----- -----
+  +--> INIT_DS18B20/ONEWIRE
+  +--> _WRITE_DS18B20/ONEWIRE
+  +--> _DELAY_ONEWIRE/ONEWIRE
+  +--> READ_DS18B20/ONEWIRE
+
+INIT_DS18B20/ONEWIRE               20H.3 20H.3  ----- -----
+  +--> _DELAY_ONEWIRE/ONEWIRE
+
+_DELAY_ONEWIRE/ONEWIRE             ----- -----  ----- -----
+
+_WRITE_DS18B20/ONEWIRE             ----- -----  ----- -----
+  +--> _DELAY_ONEWIRE/ONEWIRE
+
+READ_DS18B20/ONEWIRE               ----- -----  ----- -----
+  +--> _DELAY_ONEWIRE/ONEWIRE
+
+KEYSCAN/MAIN                       ----- -----  ----- -----
+  +--> _DELAY_MS/MAIN
+  +--> DIANYA_YUZHI_SET_DISPLAY/MAIN
+  +--> _EEPROM_WRITE/IIC
+
+DIANYA_YUZHI_SET_DISPLAY/MAIN      ----- -----  ----- -----
+
+_EEPROM_WRITE/IIC                  ----- -----  ----- -----
+LX51 LINKER/LOCATER V4.66.41.0                                                        05/05/2022  10:55:16  PAGE 4
+
+
+  +--> IIC_START/IIC
+  +--> _IIC_SENDBYTE/IIC
+  +--> IIC_WAITACK/IIC
+  +--> IIC_STOP/IIC
+
+DISPLAY_ALL/MAIN                   ----- -----  ----- -----
+  +--> SHUJU_DISPLAY_WENDU/MAIN
+  +--> SHUJU_DISPLAY_DIANYA/MAIN
+  +--> SHUJU_DISPLAY_PINLV/MAIN
+  +--> SHUJU_HUIXIAN_DISPLAY/MAIN
+  +--> DIANYA_YUZHI_SET_DISPLAY/MAIN
+
+SHUJU_DISPLAY_WENDU/MAIN           ----- -----  ----- -----
+
+SHUJU_DISPLAY_DIANYA/MAIN          ----- -----  ----- -----
+
+SHUJU_DISPLAY_PINLV/MAIN           ----- -----  ----- -----
+
+SHUJU_HUIXIAN_DISPLAY/MAIN         ----- -----  ----- -----
+
+LED_SHOW/MAIN                      ----- -----  ----- -----
+
+?C_INITSEG                         ----- -----  ----- -----
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\build\Target 1\第九届国赛 (IIC)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+      010001AAH   CODE     ---       ?C?CASTF
+      00000000H   NUMBER   ---       ?C?CODESEG
+      01000176H   CODE     ---       ?C?FCASTC
+      01000171H   CODE     ---       ?C?FCASTI
+      0100016CH   CODE     ---       ?C?FCASTL
+      010001E1H   CODE     ---       ?C?FPGETOPN2
+      01000066H   CODE     ---       ?C?FPMUL
+      01000216H   CODE     ---       ?C?FPNANRESULT
+      01000220H   CODE     ---       ?C?FPOVERFLOW
+      010001F8H   CODE     ---       ?C?FPRESULT
+      0100020CH   CODE     ---       ?C?FPRESULT2
+      0100021DH   CODE     ---       ?C?FPUNDERFLOW
+      01000280H   CODE     ---       ?C?LNEG
+      0100028EH   CODE     ---       ?C?SLCMP
+      0100001EH   CODE     ---       ?C?SLDIV
+      0100022BH   CODE     ---       ?C?UIDIV
+      010002E0H   CODE     ---       ?C?ULDIV
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      01000981H   CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+*DEL*:00000000H.0 BIT      BIT       ?IIC_Ack?BIT
+      01000003H   CODE     ---       _AD_Read
+      01000D7DH   CODE     ---       _Delay_ms
+      01000CE8H   CODE     ---       _Delay_OneWire
+*DEL*:00000000H   CODE     ---       _EEPROM_Read
+      01000D2DH   CODE     ---       _EEPROM_Write
+      00000020H.1 BIT      BIT       _If_Canshu_Set
+      00000020H.2 BIT      BIT       _If_Huixian_On
+      01000C62H   CODE     ---       _IIC_SendByte
+      00000023H   DATA     BYTE      _Longpress_Flag
+      01000CC6H   CODE     ---       _Write_DS18B20
+      00000024H   DATA     BYTE      AD
+      00000056H   DATA     BYTE      AD_Save
+      01000C85H   CODE     ---       allinit
+LX51 LINKER/LOCATER V4.66.41.0                                                        05/05/2022  10:55:16  PAGE 5
+
+
+      00000052H   DATA     BYTE      Dianya_Yuzhi
+      01000C3CH   CODE     ---       DIANYA_YUZHI_SET_DISPLAY
+      0000004AH   DATA     ---       Digbuf
+      00000053H   DATA     BYTE      Digcom
+      01000BC4H   CODE     ---       DISPLAY_ALL
+      00000020H.0 BIT      BIT       fla
+*DEL*:00000000H   CODE     ---       IIC_Ack
+      01000CA7H   CODE     ---       IIC_RecByte
+      01000D57H   CODE     ---       IIC_Start
+      01000D21H   CODE     ---       IIC_Stop
+      01000BF9H   CODE     ---       IIC_WaitAck
+      01000C15H   CODE     ---       init_ds18b20
+      0000002BH   DATA     WORD      Key_Count
+      01000796H   CODE     ---       keyscan
+      00000049H   DATA     BYTE      LED_Bits
+      01000A86H   CODE     ---       LED_SHOW
+      00000054H   DATA     WORD      Led_tt
+      01000B5BH   CODE     ---       main
+      00000027H   DATA     WORD      Pinlv
+      00000058H   DATA     WORD      Pinlv_Save
+      01000CFEH   CODE     ---       Read_DS18B20
+      01000B99H   CODE     ---       SHUJU_DISPLAY_Dianya
+      01000628H   CODE     ---       SHUJU_DISPLAY_Pinlv
+      01000A28H   CODE     ---       SHUJU_DISPLAY_Wendu
+      01000372H   CODE     ---       SHUJU_HUIXIAN_DISPLAY
+      01000882H   CODE     ---       t2int
+      0000002DH   DATA     ---       tab
+      01000AD8H   CODE     ---       Temper_Get
+      00000029H   DATA     WORD      Temperature
+      00000025H   DATA     WORD      Temperature_Save
+      01000D6AH   CODE     ---       Timer0Init
+      01000D42H   CODE     ---       Timer1Init
+      01000D90H   CODE     ---       Timer2Init
+      01000B1AH   CODE     ---       timer_1
+      00000057H   DATA     BYTE      Xianshi_Huixian_Status
+      00000048H   DATA     BYTE      Xianshi_Status
+
+
+
+SYMBOL TABLE OF MODULE:  .\build\Target 1\第九届国赛 (IIC)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       IIC
+      01000D2DH   PUBLIC    CODE     ---       _EEPROM_Write
+      01000003H   PUBLIC    CODE     ---       _AD_Read
+      01000CA7H   PUBLIC    CODE     ---       IIC_RecByte
+      01000C62H   PUBLIC    CODE     ---       _IIC_SendByte
+      01000BF9H   PUBLIC    CODE     ---       IIC_WaitAck
+      01000D21H   PUBLIC    CODE     ---       IIC_Stop
+      01000D57H   PUBLIC    CODE     ---       IIC_Start
+
+      01000D57H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000D18H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000D21H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000BEEH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000BF9H   BLOCK     CODE     ---       LVL=0
+LX51 LINKER/LOCATER V4.66.41.0                                                        05/05/2022  10:55:16  PAGE 6
+
+
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000C62H   BLOCK     CODE     ---       LVL=0
+      01000C62H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000006H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000CA7H   BLOCK     CODE     ---       LVL=0
+      01000CA7H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000007H   SYMBOL    DATA     VOID      da
+      00000006H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000003H   BLOCK     CODE     ---       LVL=0
+      01000005H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000007H   SYMBOL    DATA     VOID      temp
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+      00000007H   SYMBOL    DATA     VOID      temp
+
+      01000D2DH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       MAIN
+      00000058H   PUBLIC    DATA     WORD      Pinlv_Save
+      00000057H   PUBLIC    DATA     BYTE      Xianshi_Huixian_Status
+      00000056H   PUBLIC    DATA     BYTE      AD_Save
+      00000020H.2 PUBLIC    BIT      BIT       _If_Huixian_On
+      00000020H.1 PUBLIC    BIT      BIT       _If_Canshu_Set
+      00000054H   PUBLIC    DATA     WORD      Led_tt
+      00000053H   PUBLIC    DATA     BYTE      Digcom
+      00000052H   PUBLIC    DATA     BYTE      Dianya_Yuzhi
+      0000004AH   PUBLIC    DATA     ---       Digbuf
+      00000049H   PUBLIC    DATA     BYTE      LED_Bits
+      00000048H   PUBLIC    DATA     BYTE      Xianshi_Status
+      0000002DH   PUBLIC    DATA     ---       tab
+      00000020H.0 PUBLIC    BIT      BIT       fla
+      0000002BH   PUBLIC    DATA     WORD      Key_Count
+      00000029H   PUBLIC    DATA     WORD      Temperature
+      00000027H   PUBLIC    DATA     WORD      Pinlv
+      00000025H   PUBLIC    DATA     WORD      Temperature_Save
+      00000024H   PUBLIC    DATA     BYTE      AD
+      00000023H   PUBLIC    DATA     BYTE      _Longpress_Flag
+      01000796H   PUBLIC    CODE     ---       keyscan
+      01000D7DH   PUBLIC    CODE     ---       _Delay_ms
+      01000882H   PUBLIC    CODE     ---       t2int
+      01000D90H   PUBLIC    CODE     ---       Timer2Init
+      01000C85H   PUBLIC    CODE     ---       allinit
+      01000C3CH   PUBLIC    CODE     ---       DIANYA_YUZHI_SET_DISPLAY
+      01000372H   PUBLIC    CODE     ---       SHUJU_HUIXIAN_DISPLAY
+      01000A28H   PUBLIC    CODE     ---       SHUJU_DISPLAY_Wendu
+      01000628H   PUBLIC    CODE     ---       SHUJU_DISPLAY_Pinlv
+      01000B99H   PUBLIC    CODE     ---       SHUJU_DISPLAY_Dianya
+      01000BC4H   PUBLIC    CODE     ---       DISPLAY_ALL
+      01000A86H   PUBLIC    CODE     ---       LED_SHOW
+      01000B1AH   PUBLIC    CODE     ---       timer_1
+      01000D42H   PUBLIC    CODE     ---       Timer1Init
+      01000D6AH   PUBLIC    CODE     ---       Timer0Init
+      01000B5BH   PUBLIC    CODE     ---       main
+
+      01000B5BH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+LX51 LINKER/LOCATER V4.66.41.0                                                        05/05/2022  10:55:16  PAGE 7
+
+
+      01000D6AH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000D42H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000B1AH   BLOCK     CODE     ---       LVL=0
+      01000B23H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000021H   SYMBOL    DATA     VOID      pinlv_tt
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000A86H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000BC4H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000B99H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000628H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000A28H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000372H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000C3CH   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000C85H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000D90H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000882H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000D7DH   BLOCK     CODE     ---       LVL=0
+      01000D7DH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000005H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      j
+      00000006H   SYMBOL    DATA     VOID      k
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000796H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ONEWIRE
+      01000AD8H   PUBLIC    CODE     ---       Temper_Get
+      01000C15H   PUBLIC    CODE     ---       init_ds18b20
+      01000CFEH   PUBLIC    CODE     ---       Read_DS18B20
+      01000CC6H   PUBLIC    CODE     ---       _Write_DS18B20
+      01000CE8H   PUBLIC    CODE     ---       _Delay_OneWire
+
+      01000CE4H   BLOCK     CODE     ---       LVL=0
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000CE8H   BLOCK     CODE     ---       LVL=0
+      01000CE8H   BLOCK     CODE     NEAR LAB  LVL=1
+LX51 LINKER/LOCATER V4.66.41.0                                                        05/05/2022  10:55:16  PAGE 8
+
+
+      00000005H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000CC6H   BLOCK     CODE     ---       LVL=0
+      01000CC8H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000003H   SYMBOL    DATA     VOID      i
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000CFEH   BLOCK     CODE     ---       LVL=0
+      01000CFEH   BLOCK     CODE     NEAR LAB  LVL=1
+      00000003H   SYMBOL    DATA     VOID      i
+      00000004H   SYMBOL    DATA     VOID      dat
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000C15H   BLOCK     CODE     ---       LVL=0
+      01000C15H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000020H.3 SYMBOL    BIT      VOID      initflag
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      01000AD8H   BLOCK     CODE     ---       LVL=0
+      01000AD8H   BLOCK     CODE     NEAR LAB  LVL=1
+      00000006H   SYMBOL    DATA     VOID      temp
+      00000001H   SYMBOL    DATA     VOID      low
+      00000007H   SYMBOL    DATA     VOID      high
+      ---         BLOCKEND  ---      ---       LVL=1
+      ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ?C?FPMUL
+      01000066H   PUBLIC    CODE     ---       ?C?FPMUL
+
+      ---         MODULE    ---      ---       ?C?FCAST
+      01000176H   PUBLIC    CODE     ---       ?C?FCASTC
+      01000171H   PUBLIC    CODE     ---       ?C?FCASTI
+      0100016CH   PUBLIC    CODE     ---       ?C?FCASTL
+
+      ---         MODULE    ---      ---       ?C?CASTF
+      010001AAH   PUBLIC    CODE     ---       ?C?CASTF
+
+      ---         MODULE    ---      ---       ?C?FPGETOPN
+      010001E1H   PUBLIC    CODE     ---       ?C?FPGETOPN2
+      01000216H   PUBLIC    CODE     ---       ?C?FPNANRESULT
+      01000220H   PUBLIC    CODE     ---       ?C?FPOVERFLOW
+      010001F8H   PUBLIC    CODE     ---       ?C?FPRESULT
+      0100020CH   PUBLIC    CODE     ---       ?C?FPRESULT2
+      0100021DH   PUBLIC    CODE     ---       ?C?FPUNDERFLOW
+
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+      ---         MODULE    ---      ---       ?C?UIDIV
+      0100022BH   PUBLIC    CODE     ---       ?C?UIDIV
+
+      ---         MODULE    ---      ---       ?C?SLDIV
+      0100001EH   PUBLIC    CODE     ---       ?C?SLDIV
+
+      ---         MODULE    ---      ---       ?C?LNEG
+      01000280H   PUBLIC    CODE     ---       ?C?LNEG
+
+      ---         MODULE    ---      ---       ?C?SLCMP
+      0100028EH   PUBLIC    CODE     ---       ?C?SLCMP
+
+LX51 LINKER/LOCATER V4.66.41.0                                                        05/05/2022  10:55:16  PAGE 9
+
+
+      ---         MODULE    ---      ---       ?C_INIT
+      01000981H   PUBLIC    CODE     ---       ?C_START
+
+      ---         MODULE    ---      ---       ?C?ULDIV
+      010002E0H   PUBLIC    CODE     ---       ?C?ULDIV
+
+Program Size: data=66.4 xdata=0 const=0 code=3487
+LX51 RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

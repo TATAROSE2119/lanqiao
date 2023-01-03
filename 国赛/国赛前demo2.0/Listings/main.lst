@@ -1,0 +1,216 @@
+C51 COMPILER V9.54   MAIN                                                                  06/17/2022 12:59:37 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.
+                    -lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          //长按键*******************************//
+   2          //s4长按计数快速加，短按+1//
+   3          //s5长按加2，短按加1//
+   4          #include <stc15f2k60s2.h>
+   5          #include <intrins.h>
+   6          code unsigned char tab[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,
+   7                                                                  0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10,
+   8                                                                                                                                  0xbf,0xff};
+   9          unsigned char Digbuf[]={21,21,21,21,21,21,21,21};
+  10          unsigned char Digcom=0;
+  11          
+  12          void allinit();
+  13          void keyscan();
+  14          void Timer2Init(void);          //1??@11.0592MHz
+  15          void Delay_ms(unsigned int ms);         //@11.0592MHz
+  16          
+  17          
+  18          unsigned char s4_long_flag=0;
+  19          unsigned char s5_flag=0;
+  20          unsigned char s5_long_flag=2;
+  21          
+  22          unsigned char count4=0;
+  23          unsigned char count5=0;
+  24          unsigned int s4_tt=0;
+  25          unsigned int s5_tt=0;
+  26          
+  27          void main()
+  28          {
+  29   1              Timer2Init();
+  30   1              allinit();
+  31   1              while(1)
+  32   1              {
+  33   2                      keyscan();
+  34   2                      Digbuf[0]=count4/10;
+  35   2                      Digbuf[1]=count4%10;
+  36   2                      Digbuf[6]=count5/10;
+  37   2                      Digbuf[7]=count5%10;
+  38   2              }
+  39   1      }
+  40          void keyscan()
+  41          {
+  42   1              if(P33==0)//s4
+  43   1              {
+  44   2                      Delay_ms(5);
+  45   2                      if(P33==0)//s4
+  46   2                      {
+  47   3                              s4_long_flag=1;
+  48   3                              count4++;
+  49   3                              if(count4>=50)
+  50   3                              {
+  51   4                                      count4=0;
+  52   4                              }
+  53   3                              
+  54   3                      }
+C51 COMPILER V9.54   MAIN                                                                  06/17/2022 12:59:37 PAGE 2   
+
+  55   2                      while(!P33)
+  56   2                      {
+  57   3                              if(s4_long_flag==2)
+  58   3                              {
+  59   4                                      Delay_ms(60);
+  60   4                                      count4++;
+  61   4                                      if(count4>=50)
+  62   4                                      {
+  63   5                                              count4=0;
+  64   5                                      }
+  65   4                              }
+  66   3                              Digbuf[0]=count4/10;
+  67   3                              Digbuf[1]=count4%10;
+  68   3                      }
+  69   2                      s4_long_flag=0;
+  70   2                      s4_tt=0;
+  71   2              }               
+  72   1              
+  73   1              if(P32==0)
+  74   1              {
+  75   2                      Delay_ms(5);
+  76   2                      if(P32==0)
+  77   2                      {
+  78   3                              s5_flag=1;
+  79   3                      }
+  80   2              }
+  81   1              if(P32==1)
+  82   1              {
+  83   2                      Delay_ms(5);
+  84   2                      if(P32==1)
+  85   2                      {
+  86   3                              if(s5_flag==1)
+  87   3                              {
+  88   4                                      s5_flag=0;
+  89   4                                      if(s5_tt<200)
+  90   4                                      {
+  91   5                                              s5_long_flag=0;
+  92   5                                      }
+  93   4                                      else if(s5_tt>=200)
+  94   4                                      {
+  95   5                                              s5_long_flag=1;
+  96   5                                      }
+  97   4                                      s5_tt=0;
+  98   4                              }
+  99   3                      }
+ 100   2              }
+ 101   1              if(s5_long_flag==0)
+ 102   1              {
+ 103   2                      count5++;
+ 104   2                      if(count5>70){count5=0;}
+ 105   2                      s5_long_flag=2;
+ 106   2              }
+ 107   1              else if(s5_long_flag==1)
+ 108   1              {
+ 109   2                      count5+=10;
+ 110   2                      if(count5>70){count5=0;}
+ 111   2                      s5_long_flag=2;
+ 112   2              }
+ 113   1      }
+ 114          void Timer2Init(void)           //1??@11.0592MHz
+ 115          {
+ 116   1              AUXR |= 0x04;           //?????1T??
+C51 COMPILER V9.54   MAIN                                                                  06/17/2022 12:59:37 PAGE 3   
+
+ 117   1              T2L = 0xCD;             //???????
+ 118   1              T2H = 0xD4;             //???????
+ 119   1              AUXR |= 0x10;           //???2????
+ 120   1              IE2=0x04;
+ 121   1              EA=1;
+ 122   1      }
+ 123          
+ 124          void t2_ser() interrupt 12
+ 125          {
+ 126   1              P2|=0xe0;
+ 127   1              P2&=0xff;
+ 128   1              P0=0xff;
+ 129   1              
+ 130   1              P2|=0xc0;
+ 131   1              P2&=0xdf;
+ 132   1              P0=0x01<<Digcom;
+ 133   1              
+ 134   1              P2|=0xe0;
+ 135   1              P2&=0xff;
+ 136   1              P0=tab[Digbuf[Digcom]];
+ 137   1              if(++Digcom==8){Digcom=0;}
+ 138   1              
+ 139   1              if(s4_long_flag==1)
+ 140   1              {
+ 141   2                      s4_tt++;
+ 142   2                      if(s4_tt>=1000)
+ 143   2                      {
+ 144   3                              s4_long_flag=2;
+ 145   3                      }
+ 146   2              }
+ 147   1              if(s5_flag==1)
+ 148   1              {
+ 149   2                      s5_tt++;
+ 150   2              }
+ 151   1      }
+ 152          void Delay_ms(unsigned int ms)          //@11.0592MHz
+ 153          {
+ 154   1              unsigned char i, j,k;
+ 155   1              for(k=0;k<ms;k++)
+ 156   1              {
+ 157   2                      _nop_();
+ 158   2                      _nop_();
+ 159   2                      _nop_();
+ 160   2                      i = 11;
+ 161   2                      j = 190;
+ 162   2                      do
+ 163   2                      {
+ 164   3                              while (--j);
+ 165   3                      } while (--i);
+ 166   2              }
+ 167   1      }
+ 168          void allinit()
+ 169          {
+ 170   1              P2|=0xa0;
+ 171   1              P2&=0xbf;
+ 172   1              P0=0x00;
+ 173   1      
+ 174   1              P2|=0x80;
+ 175   1              P2&=0x9f;
+ 176   1              P0=0xff;
+ 177   1      
+ 178   1              P2|=0xc0;
+C51 COMPILER V9.54   MAIN                                                                  06/17/2022 12:59:37 PAGE 4   
+
+ 179   1              P2&=0xdf;
+ 180   1              P0=0xff;
+ 181   1      
+ 182   1              P2|=0xe0;
+ 183   1              P2&=0xff;
+ 184   1              P0=0xff;
+ 185   1              
+ 186   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    425    ----
+   CONSTANT SIZE    =     22    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

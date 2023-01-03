@@ -1,0 +1,180 @@
+C51 COMPILER V9.54   MAIN                                                                  06/17/2022 14:14:03 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.
+                    -lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <stc15f2k60s2.h>
+   2          
+   3          unsigned char tab[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,
+   4                                                          0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10,
+   5                                                                                                                                  0xbf,0xff};
+   6          unsigned char Digbuf[]={21,21,21,21,21,21,21,21};
+   7          unsigned char Digcom=0;
+   8          
+   9          void allinit();
+  10          void Fre_Get();
+  11          void Timer2Init(void);          //1??@11.0592MHz
+  12          void Timer0Init(void);          //1??@11.0592MHz
+  13          
+  14          unsigned int fre=0;
+  15          bit fre_flag=0;
+  16          unsigned int fre_tt=0;
+  17          void main()
+  18          {
+  19   1              allinit();
+  20   1              Fre_Get();
+  21   1              Timer2Init();
+  22   1              Timer0Init();
+  23   1              while(1)
+  24   1              {
+  25   2                      Fre_Get();
+  26   2                  if (fre>99999)
+  27   2                  {
+  28   3                      Digbuf[2]=fre/100000;
+  29   3                      Digbuf[3]=fre%100000/10000;
+  30   3                      Digbuf[4]=fre%10000/1000;
+  31   3                      Digbuf[5]=fre%1000/100;
+  32   3                      Digbuf[6]=fre%100/10;
+  33   3                      Digbuf[7]=fre%10/1;
+  34   3                  }
+  35   2                  else if ((fre>9999)&&(fre<=99999))
+  36   2                  {
+  37   3                      Digbuf[2]=21;
+  38   3                      Digbuf[3]=fre/10000;
+  39   3                      Digbuf[4]=fre%10000/1000;
+  40   3                      Digbuf[5]=fre%1000/100;
+  41   3                      Digbuf[6]=fre%100/10;
+  42   3                      Digbuf[7]=fre%10/1;
+  43   3                  }
+  44   2                  else if((fre>999)&&(fre<=9999))
+  45   2                  {
+  46   3                      Digbuf[2]=21;
+  47   3                      Digbuf[3]=21;
+  48   3                      Digbuf[4]=fre/1000;
+  49   3                      Digbuf[5]=fre%1000/100;
+  50   3                      Digbuf[6]=fre%100/10;
+  51   3                      Digbuf[7]=fre%10/1;
+  52   3                  }
+  53   2                  else if ((fre>99)&&(fre<=999))
+  54   2                  {
+C51 COMPILER V9.54   MAIN                                                                  06/17/2022 14:14:03 PAGE 2   
+
+  55   3                      Digbuf[2]=21;
+  56   3                      Digbuf[3]=21;
+  57   3                      Digbuf[4]=21;
+  58   3                      Digbuf[5]=fre/100;
+  59   3                      Digbuf[6]=fre%100/10;
+  60   3                      Digbuf[7]=fre%10/1;
+  61   3                  }
+  62   2                  else if ((fre>9)&&(fre<=99))
+  63   2                  {
+  64   3                      Digbuf[2]=21;
+  65   3                      Digbuf[3]=21;
+  66   3                      Digbuf[4]=21;
+  67   3                      Digbuf[5]=21;
+  68   3                      Digbuf[6]=fre/10;
+  69   3                      Digbuf[7]=fre%10;
+  70   3                  }
+  71   2                  else if (fre<=9)
+  72   2                  {
+  73   3                      Digbuf[2]=21;
+  74   3                      Digbuf[3]=21;
+  75   3                      Digbuf[4]=21;
+  76   3                      Digbuf[5]=21;
+  77   3                      Digbuf[6]=21;
+  78   3                      Digbuf[7]=fre;
+  79   3                  }
+  80   2                      
+  81   2              }
+  82   1      }
+  83          void Fre_Get()
+  84          {
+  85   1              if(fre_flag==1)
+  86   1              {
+  87   2                      fre_tt=0;
+  88   2                      fre_flag=0;
+  89   2                      fre=(TH0<<8)|(TL0);
+  90   2                      TH0=0;
+  91   2                      TL0=0;
+  92   2                      TR0=1;
+  93   2              }
+  94   1      }
+  95          void Timer2Init(void)           //1??@11.0592MHz
+  96          {
+  97   1              AUXR |= 0x04;           //?????1T??
+  98   1              T2L = 0xCD;             //???????
+  99   1              T2H = 0xD4;             //???????
+ 100   1              AUXR |= 0x10;           //???2????
+ 101   1              IE2|=0x04;
+ 102   1              EA=1;
+ 103   1      }
+ 104          void t2_ser() interrupt 12
+ 105          {
+ 106   1              P2|=0xe0;
+ 107   1              P2&=0xff;
+ 108   1              P0=0xff;
+ 109   1              
+ 110   1              P2|=0xc0;
+ 111   1              P2&=0xdf;
+ 112   1              P0=0x01<<Digcom;
+ 113   1              
+ 114   1              P2|=0xe0;
+ 115   1              P2&=0xff;
+ 116   1              P0=tab[Digbuf[Digcom]];
+C51 COMPILER V9.54   MAIN                                                                  06/17/2022 14:14:03 PAGE 3   
+
+ 117   1              if(++Digcom==8){Digcom=0;}
+ 118   1              
+ 119   1              if(++fre_tt==800)
+ 120   1              {
+ 121   2                      fre_flag=1;             TR0=0;
+ 122   2      
+ 123   2              }
+ 124   1      }
+ 125          void Timer0Init(void)           //1??@11.0592MHz
+ 126          {
+ 127   1              AUXR |= 0x80;           //?????1T??
+ 128   1              TMOD &= 0xF0;           //???????
+ 129   1              TMOD |= 0x04;                    //?????0?16????????????
+ 130   1              TL0 = 0;                //???????
+ 131   1              TH0 = 0;                //???????
+ 132   1              TF0 = 0;                //??TF0??
+ 133   1              TR0 = 1;                //???0????
+ 134   1      }
+ 135          void allinit()
+ 136          {
+ 137   1              P2|=0xa0;
+ 138   1              P2&=0xbf;
+ 139   1              P0=0x00;
+ 140   1              
+ 141   1              P2|=0x80;
+ 142   1              P2&=0x9f;
+ 143   1              P0=0xff;
+ 144   1              
+ 145   1              P2|=0xc0;
+ 146   1              P2&=0xdf;
+ 147   1              P0=0xff;
+ 148   1              
+ 149   1              P2|=0xe0;
+ 150   1              P2&=0xff;
+ 151   1              P0=0xff;
+ 152   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    580    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     35    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

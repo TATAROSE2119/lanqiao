@@ -1,0 +1,178 @@
+[2022-03-08 08:20:57]	[done]
+	build successfully !
+
+[2022-03-08 08:30:23]	[done]
+	build successfully !
+
+[2022-03-08 08:33:00]	[done]
+	build successfully !
+
+[2022-03-08 08:33:44]	[done]
+	build successfully !
+
+[2022-03-08 08:44:52]	[done]
+	build successfully !
+
+[2022-03-08 08:47:56]	[done]
+	build successfully !
+
+[2022-03-08 08:54:04]	[done]
+	build successfully !
+
+[2022-03-08 08:55:30]	[done]
+	build successfully !
+
+[2022-03-08 09:22:47]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\第四届省赛题 2.0\DS1302.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 86 OF .\DS1302.C: syntax error near 'for'
+*** ERROR C141 IN LINE 98 OF .\DS1302.C: syntax error near 'for'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+[2022-03-08 09:23:08]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\第四届省赛题 2.0\iic.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C174 IN LINE 138 OF .\IIC.C: return-expression on void-function
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-03-08 09:23:25]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\kEILPROJECT\第四届省赛题 2.0\build\Target 1\第四届省赛题 2.0.lnp" 
+".\build\Target 1\DS1302.o",".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第四届省赛题 2.0"
+PRINT(".\build\Target 1\第四届省赛题 2.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 1000181H
+Program Size: data=48.0 xdata=0 const=0 code=389
+LX51 RUN COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+
+[2022-03-08 09:23:39]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\kEILPROJECT\第四届省赛题 2.0\build\Target 1\第四届省赛题 2.0.lnp" 
+".\build\Target 1\DS1302.o",".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第四届省赛题 2.0"
+PRINT(".\build\Target 1\第四届省赛题 2.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 1000181H
+Program Size: data=48.0 xdata=0 const=0 code=389
+LX51 RUN COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+
+[2022-03-08 09:23:54]	link failed !, exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+LX51 LINKER/LOCATER V4.66.41.0 - SN: K1DZC-FPDZAC
+COPYRIGHT ARM Germany GmbH 1995 - 2015
+"@c:\Users\Maxwell\Desktop\kEILPROJECT\第四届省赛题 2.0\build\Target 1\第四届省赛题 2.0.lnp" 
+".\build\Target 1\DS1302.o",".\build\Target 1\iic.o",".\build\Target 1\main.o" TO ".\build\Target 1\第四届省赛题 2.0"
+PRINT(".\build\Target 1\第四届省赛题 2.0.map") REMOVEUNUSED
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  allinit
+    MODULE:  .\build\Target 1\main.o (MAIN)
+    ADDRESS: 1000181H
+Program Size: data=48.0 xdata=0 const=0 code=389
+LX51 RUN COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+
+[2022-03-08 09:25:17]	[done]
+	build successfully !
+
+[2022-03-08 09:32:21]	[done]
+	build successfully !
+
+[2022-03-08 09:33:13]	[done]
+	build successfully !
+
+[2022-03-08 09:34:50]	[done]
+	build successfully !
+
+[2022-03-08 09:35:28]	[done]
+	build successfully !
+
+[2022-03-08 09:49:12]	[done]
+	build successfully !
+
+[2022-03-08 10:01:04]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\第四届省赛题 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 52 OF .\MAIN.C: syntax error near 'Digbuf'
+*** ERROR C141 IN LINE 63 OF .\MAIN.C: syntax error near 'Digbuf'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)
+
+[2022-03-08 10:01:15]	compilation failed at : "c:\Users\Maxwell\Desktop\kEILPROJECT\第四届省赛题 2.0\main.c", exit code: 2
+  at unify_builder.Program.Main (System.String[] args) [0x0187a] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+C51 COMPILER V9.54 - SN: K1DZC-FPDZAC
+COPYRIGHT Copyright (C) 2012 - 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+*** ERROR C141 IN LINE 63 OF .\MAIN.C: syntax error near 'Digbuf'
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
+
+[2022-03-08 10:01:23]	[done]
+	build successfully !
+
+[2022-03-08 10:01:55]	[done]
+	build successfully !
+
+[2022-03-08 10:02:45]	[done]
+	build successfully !
+
+[2022-03-08 10:07:14]	[done]
+	build successfully !
+
+[2022-03-08 10:07:48]	[done]
+	build successfully !
+
+[2022-03-08 10:11:52]	[done]
+	build successfully !
+
+[2022-03-08 10:17:54]	[done]
+	build successfully !
+
+[2022-03-08 10:20:11]	[done]
+	build successfully !
+
+[2022-03-08 10:20:28]	[done]
+	build successfully !
+
+[2022-03-09 09:07:10]	[done]
+	build successfully !
+
+[2022-03-09 09:09:40]	[done]
+	build successfully !
+
+[2022-03-09 09:17:50]	[done]
+	build successfully !
+
+[2022-03-09 09:21:40]	[done]
+	build successfully !
+
+[2022-03-09 09:31:26]	[done]
+	build successfully !
+
+[2022-04-08 21:05:13]	[done]
+	build successfully !
+

@@ -1,0 +1,81 @@
+LX51 LINKER/LOCATER V4.66.41.0                                                          01/29/2022  12:45:57  PAGE 1
+
+
+LX51 LINKER/LOCATER V4.66.41.0, INVOKED BY:
+D:\KEIL51\C51\BIN\LX51.EXE .\build\Target 1\STARTUP.o TO .\build\Target 1\VScode TEST4.0 PRINT (.\build\Target 1\VScode 
+>> TEST4.0.map) REMOVEUNUSED
+
+
+CPU MODE:     8051 MODE
+
+
+INPUT MODULES INCLUDED:
+  .\build\Target 1\STARTUP.o (?C_STARTUP)
+         COMMENT TYPE 1: A51 / ASM51 Assembler
+
+
+ACTIVE MEMORY CLASSES OF MODULE:  .\build\Target 1\VScode TEST4.0 (?C_STARTUP)
+
+BASE        START       END         USED      MEMORY CLASS
+==========================================================
+C:000000H   C:000000H   C:00FFFFH   00000FH   CODE
+I:000000H   I:000000H   I:0000FFH   000001H   IDATA
+I:000000H   I:000000H   I:00007FH   000008H   DATA
+
+
+MEMORY MAP OF MODULE:  .\build\Target 1\VScode TEST4.0 (?C_STARTUP)
+
+
+START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
+=========================================================================
+
+* * * * * * * * * * *   D A T A   M E M O R Y   * * * * * * * * * * * * *
+000000H   000007H   000008H   ---    AT..     DATA           "REG BANK 0"
+000008H   000008H   000001H   BYTE   UNIT     IDATA          ?STACK
+
+* * * * * * * * * * *   C O D E   M E M O R Y   * * * * * * * * * * * * *
+000000H   000002H   000003H   ---    OFFS..   CODE           ?CO??C_STARTUP?0
+000003H   00000EH   00000CH   BYTE   UNIT     CODE           ?C_C51STARTUP
+
+
+
+PUBLIC SYMBOLS OF MODULE:  .\build\Target 1\VScode TEST4.0 (?C_STARTUP)
+
+
+      VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
+      =================================================
+      00000000H   NUMBER   ---       ?C?CODESEG
+      00000000H   NUMBER   ---       ?C?XDATASEG
+      *EXTERN*    CODE     ---       ?C_START
+      01000000H   CODE     ---       ?C_STARTUP
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   ?C_START
+
+
+
+SYMBOL TABLE OF MODULE:  .\build\Target 1\VScode TEST4.0 (?C_STARTUP)
+
+      VALUE       REP       CLASS    TYPE      SYMBOL NAME
+      ====================================================
+      ---         MODULE    ---      ---       ?C_STARTUP
+      01000000H   PUBLIC    CODE     ---       ?C_STARTUP
+
+
+
+*** ERROR L127: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  ?C_START
+LX51 LINKER/LOCATER V4.66.41.0                                                        01/29/2022  12:45:57  PAGE 2
+
+
+    MODULE:  .\build\Target 1\STARTUP.o (?C_STARTUP)
+
+*** ERROR L128: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?C_START
+    MODULE:  .\build\Target 1\STARTUP.o (?C_STARTUP)
+    ADDRESS: 100000DH
+
+Program Size: data=9.0 xdata=0 const=0 code=15
+LX51 RUN COMPLETE.  0 WARNING(S),  2 ERROR(S)

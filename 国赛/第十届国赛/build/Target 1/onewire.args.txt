@@ -1,0 +1,1 @@
+.\onewire.c PRINT(".\build\Target 1\onewire.lst") OMF2 TABS(4) CODE NOCOND SYMBOLS OPTIMIZE(8,SPEED) COMPACT ROM(LARGE) INCDIR(D:/Keil51/C51/INC/STC;D:\Keil51\C51\INC) DEFINE(__UVISION_VERSION='526') OBJECT(".\build\Target 1\onewire.o")
